@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mobilelele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+    username: ${MYSQL_LOCAL_USER}
+    password: ${MYSQL_LOCAL_PASS}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: UNSPECIFIED
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+logging:
+  level:
+    blog: WARN
+    org: WARN
+    org.hibernate.orm.jdbc.bind: TRACE
+    sql: DEBUG
+
+server:
+  port: 8080
