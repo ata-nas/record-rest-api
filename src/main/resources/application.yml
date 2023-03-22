@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mobilelele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/medical_appointment?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
     username: ${MYSQL_LOCAL_USER}
     password: ${MYSQL_LOCAL_PASS}
   jpa:
