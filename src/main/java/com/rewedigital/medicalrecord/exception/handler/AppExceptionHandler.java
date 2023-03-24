@@ -30,18 +30,6 @@ public class AppExceptionHandler {
         );
    }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NoSuchEntityFoundException.class)
-    private GeneralExceptionDTO handleExceptionNotFound(NoSuchEntityFoundException e) {
-        return e.getData();
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(BadRequestException.class)
-    private GeneralExceptionDTO handleExceptionBadRequest(BadRequestException e) {
-        return e.getData();
-    }
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BindException.class)
     private BindExceptionDTO handleExceptionBind(BindException e) {
@@ -53,6 +41,18 @@ public class AppExceptionHandler {
                         .map(objectErrorMapper::fieldErrorToBindExceptionPropertiesDTO)
                         .toList()
         );
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    private GeneralExceptionDTO handleExceptionBadRequest(BadRequestException e) {
+        return e.getData();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchEntityFoundException.class)
+    private GeneralExceptionDTO handleExceptionNotFound(NoSuchEntityFoundException e) {
+        return e.getData();
     }
 
 }

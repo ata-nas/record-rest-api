@@ -29,3 +29,8 @@ Implement the CRUD operations of the patients, doctors, and visits, plus the fol
 8. The total income of visits, by a given diagnosis 
 9. The total income of patients who have no health insurance 
 10. The income of a concrete doctor of patients who have health insurance
+
+
+## Thoughts
+
+- Making CRUD not based on `id` but `@NatualId` because is more consistent.

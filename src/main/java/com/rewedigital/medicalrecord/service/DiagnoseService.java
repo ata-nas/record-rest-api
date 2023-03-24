@@ -9,11 +9,10 @@ import java.util.Optional;
 
 public interface DiagnoseService {
 
-    DiagnoseEntity getById(Long id);
-    DiagnoseDTO getByIdToDTO(Long id);
+    DiagnoseEntity getByName(String name);
+    DiagnoseDTO getByNameToDTO(String name);
     List<DiagnoseEntity> getAllDiagnoses();
     List<DiagnoseDTO> getAllDiagnosesToDTO();
     DiagnoseDTO createDiagnose(CreateDiagnoseDTO diagnoseDTO);
-    void deleteDiagnoseById(Long id);
-
+    void deleteDiagnoseByName(String name);
 }

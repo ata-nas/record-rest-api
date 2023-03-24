@@ -14,4 +14,8 @@ public class NoSuchDiagnoseEntityFoundException extends NoSuchEntityFoundExcepti
         super(message);
     }
 
+    public NoSuchDiagnoseEntityFoundException(String field, String value) {
+        super("Diagnose", field, value);
+    }
+
 }

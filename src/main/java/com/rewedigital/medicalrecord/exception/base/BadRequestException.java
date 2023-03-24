@@ -26,7 +26,6 @@ public class BadRequestException extends RuntimeException {
                 HttpStatus.NOT_FOUND,
                 message
         );
-
     }
 
 }

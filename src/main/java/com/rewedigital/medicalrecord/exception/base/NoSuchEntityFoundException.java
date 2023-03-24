@@ -12,21 +12,31 @@ public class NoSuchEntityFoundException extends RuntimeException {
 
     public NoSuchEntityFoundException() {
         super();
-        data = new GeneralExceptionDTO(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND,
-                "No such Entity found!"
-        );
+        data = generateDTO("No such Entity found!");
+
     }
 
     public NoSuchEntityFoundException(String message) {
         super(message);
-        data = new GeneralExceptionDTO(
+        data = generateDTO(message);
+
+
+    }
+
+    public NoSuchEntityFoundException(String entity, String field, String value) {
+        String message = String.format(
+                "%s with field: '%s' and value: '%s' was not found!",
+                entity, field, value
+                );
+        data = generateDTO(message);
+    }
+
+    private GeneralExceptionDTO generateDTO(String message) {
+        return new GeneralExceptionDTO(
                 HttpStatus.NOT_FOUND.value(),
                 HttpStatus.NOT_FOUND,
                 message
         );
-
     }
 
 }

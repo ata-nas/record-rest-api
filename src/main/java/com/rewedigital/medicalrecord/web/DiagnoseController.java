@@ -1,10 +1,10 @@
 package com.rewedigital.medicalrecord.web;
 
-import com.rewedigital.medicalrecord.exception.diagnose.NoSuchDiagnoseEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
 import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
 
+import com.rewedigital.medicalrecord.util.UriBuilderUtil;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
@@ -20,31 +20,34 @@ import java.util.List;
 public class DiagnoseController {
 
     private final DiagnoseService diagnoseService;
+    private final UriBuilderUtil uriBuilderUtil;
 
     @GetMapping
-    private ResponseEntity<List<DiagnoseDTO>> diagnoses() {
+    private ResponseEntity<List<DiagnoseDTO>> diagnose() {
         return ResponseEntity.ok(diagnoseService.getAllDiagnosesToDTO());
     }
 
-    @GetMapping("/{id}")
-    private ResponseEntity<DiagnoseDTO> diagnoses(
-            @PathVariable Long id
+    @GetMapping("/{name}")
+    private ResponseEntity<DiagnoseDTO> diagnose(
+            @PathVariable String name
     ) {
-        return ResponseEntity.ok(diagnoseService.getByIdToDTO(id));
+        return ResponseEntity.ok(diagnoseService.getByNameToDTO(name));
     }
 
     @PostMapping
     private ResponseEntity<DiagnoseDTO> createDiagnose(
-            @Valid CreateDiagnoseDTO diagnoseDTO
+            @RequestBody @Valid CreateDiagnoseDTO diagnoseDTO
     ) {
-        return ResponseEntity.ok(diagnoseService.createDiagnose(diagnoseDTO));
+        return ResponseEntity
+                .created(uriBuilderUtil.diagnoseCreatedURI(diagnoseDTO.getName()))
+                .body(diagnoseService.createDiagnose(diagnoseDTO));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{name}")
     private ResponseEntity<CreateDiagnoseDTO> deleteDiagnose(
-            @PathVariable Long id
+            @PathVariable String name
     ) {
-        diagnoseService.deleteDiagnoseById(id);
+        diagnoseService.deleteDiagnoseByName(name);
         return ResponseEntity.noContent().build();
     }
 

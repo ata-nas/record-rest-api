@@ -22,18 +22,14 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     private final DiagnoseMapper diagnoseMapper;
 
     @Override
-    public DiagnoseEntity getById(Long id) {
-        return diagnoseRepository.findById(id)
-                .orElseThrow(
-                        () -> new NoSuchDiagnoseEntityFoundException(
-                                "Diagnose with ID: '" + id + "' not found!"
-                        )
-                );
+    public DiagnoseEntity getByName(String name) {
+        return diagnoseRepository.findByName(name)
+                .orElseThrow(() -> new NoSuchDiagnoseEntityFoundException("name", name));
     }
 
     @Override
-    public DiagnoseDTO getByIdToDTO(Long id) {
-        return diagnoseMapper.diagnoseEntityToDiagnoseDTO(getById(id));
+    public DiagnoseDTO getByNameToDTO(String name) {
+        return diagnoseMapper.diagnoseEntityToDiagnoseDTO(getByName(name));
     }
 
     @Override
@@ -58,8 +54,8 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public void deleteDiagnoseById(Long id) {
-        diagnoseRepository.delete(getById(id));
+    public void deleteDiagnoseByName(String name) {
+        diagnoseRepository.delete(getByName(name));
     }
 
 }
