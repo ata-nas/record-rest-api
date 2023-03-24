@@ -42,6 +42,7 @@ public class AppointmentEntity extends BaseEntity {
     @NotNull
     @ManyToOne
     private DoctorEntity doctor;
+
     @Valid
     @NotNull
     @ManyToOne
@@ -50,6 +51,12 @@ public class AppointmentEntity extends BaseEntity {
     @NotEmpty
     @ManyToMany
     private Set<@Valid DiagnoseEntity> diagnoses;
+
+    @NotBlank
+    @Column(
+            nullable = false
+    )
+    private String description;
 
     @Valid
     @NotNull

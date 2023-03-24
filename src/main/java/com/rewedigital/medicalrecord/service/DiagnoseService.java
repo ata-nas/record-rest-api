@@ -5,7 +5,6 @@ import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface DiagnoseService {
 
@@ -15,4 +14,5 @@ public interface DiagnoseService {
     List<DiagnoseDTO> getAllDiagnosesToDTO();
     DiagnoseDTO createDiagnose(CreateDiagnoseDTO diagnoseDTO);
     void deleteDiagnoseByName(String name);
+
 }

@@ -5,7 +5,7 @@
 Create REST API to handle the processes that concern patients' visits to doctors
 and keep track of the history of diseases.
 
-The doctor has a name, birth date, a Specialty (Pediatrics, Surgery, Cardiologist),
+The doctor has a name, birthdate, a Specialty (Pediatrics, Surgery, Cardiologist),
 and can be a general practitioner.
 
 The patient has a name and pays for health insurance.
@@ -30,7 +30,23 @@ Implement the CRUD operations of the patients, doctors, and visits, plus the fol
 9. The total income of patients who have no health insurance 
 10. The income of a concrete doctor of patients who have health insurance
 
+## IMPORTANT:
+
+- Since we look at the API in the way that the healthcare system is a single instance, I have started to construct
+all parts of it modularly, since I am always expected to be in the domain of this single healthcare system. If that
+is not the case, then the `HealthcareAgencyEntity` can house a lot of info for the particular agency and to have
+connections with doctors, patients etc. and to make a `HealthcareAgencyManagerService` so that everything will be
+done through there, and the uri would be `/api/healthcare/{agency}/...` and I would manage all other entities based on that,
+because I will have one massive `HealthcareAgencyEntity` that gives me access to all it's related entities
+and a `HealthcareAgencyManagerService` that orchestrates individual smaller services if needed.
+But honestly in real life I do not think that is possible for obvious legal
+and many more reasons (if looked through the POV of healthcare agencies of different countries, maybe if there are
+many agencies in the same country it would make sense, but I still think it won't be done that way),
+so this `HealthcareAgencyEntity` acts only as a "details" table that describes all the commonalities within the system
+(i.e. fees in this case, but can of course house many more). In my case, I simply use this table for the fees, since is
+in the Task. PLEASE NOTE: I have made the root uri to be "/api/healthcare/bulgaria/..." it is not dynamic since as I
+explain, we are in the domain of a single healthcare agency!
 
 ## Thoughts
 
-- Making CRUD not based on `id` but `@NatualId` because is more consistent.
+- Making CRUD not based on `id` but `@NaturalId` because is more consistent.

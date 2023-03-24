@@ -34,11 +34,11 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
     @Override
     public List<DiagnoseEntity> getAllDiagnoses() {
-        List<DiagnoseEntity> diagnoses = diagnoseRepository.findAll();
-        if (diagnoses.isEmpty()) {
+        List<DiagnoseEntity> all = diagnoseRepository.findAll();
+        if (all.isEmpty()) {
             throw new NoSuchDiagnoseEntityFoundException("No Diagnoses found!");
         }
-        return diagnoses;
+        return all;
     }
 
     @Override

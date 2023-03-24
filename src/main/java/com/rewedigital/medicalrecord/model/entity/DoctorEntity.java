@@ -35,18 +35,20 @@ public class DoctorEntity extends BaseEntity {
     private String uic;
 
     @NotBlank
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String name;
 
     @NotNull
     @PastOrPresent
-    @Column(name = "birth_date")
+    @Column(
+            name = "birth_date",
+            nullable = false
+    )
     private LocalDate birthDate;
 
     @NotEmpty
     @ManyToMany
+    @OrderBy
     private Set<@Valid SpecialtyEntity> specialty;
 
 }

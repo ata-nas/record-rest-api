@@ -4,23 +4,22 @@ import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
 import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
 
-import com.rewedigital.medicalrecord.util.UriBuilderUtil;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/diagnoses")
+@RequestMapping("/api/healthcare/bulgaria/diagnoses")
 @RequiredArgsConstructor
 public class DiagnoseController {
 
     private final DiagnoseService diagnoseService;
-    private final UriBuilderUtil uriBuilderUtil;
 
     @GetMapping
     private ResponseEntity<List<DiagnoseDTO>> diagnose() {
@@ -36,15 +35,24 @@ public class DiagnoseController {
 
     @PostMapping
     private ResponseEntity<DiagnoseDTO> createDiagnose(
-            @RequestBody @Valid CreateDiagnoseDTO diagnoseDTO
+            @RequestBody @Valid CreateDiagnoseDTO createDiagnoseDTO,
+            UriComponentsBuilder uriComponentsBuilder
     ) {
         return ResponseEntity
-                .created(uriBuilderUtil.diagnoseCreatedURI(diagnoseDTO.getName()))
-                .body(diagnoseService.createDiagnose(diagnoseDTO));
+                .created(
+                        uriComponentsBuilder
+                                .path("/api")
+                                .path("/healthcare")
+                                .path("/bulgaria")
+                                .path("/diagnoses")
+                                .path("/" + createDiagnoseDTO.getName().toLowerCase())
+                                .build().toUri()
+                )
+                .body(diagnoseService.createDiagnose(createDiagnoseDTO));
     }
 
     @DeleteMapping("/{name}")
-    private ResponseEntity<CreateDiagnoseDTO> deleteDiagnose(
+    private ResponseEntity<DiagnoseDTO> deleteDiagnose(
             @PathVariable String name
     ) {
         diagnoseService.deleteDiagnoseByName(name);

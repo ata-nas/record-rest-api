@@ -3,11 +3,13 @@ package com.rewedigital.medicalrecord.model.entity;
 import jakarta.persistence.*;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -18,9 +20,20 @@ import java.util.Set;
 @Table(name = "healthcare_agencies")
 public class HealthcareAgencyEntity extends BaseEntity {
 
+    @NotBlank
+    @NaturalId
+    @Column(
+            unique = true,
+            nullable = false
+    )
+    private String country;
+
     @NotNull
     @PositiveOrZero
-    @Column(name = "appointment_fee")
+    @Column(
+            name = "appointment_fee",
+            nullable = false
+    )
     private BigDecimal appointmentFee;
 
     @OneToMany(
