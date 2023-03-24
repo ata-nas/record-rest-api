@@ -15,9 +15,9 @@ import org.hibernate.annotations.NaturalId;
 @Getter
 @Setter
 @Entity
-@Table(name = "diagnoses")
+@Table(name = "specialties")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class DiagnoseEntity extends BaseEntity {
+public class SpecialtyEntity extends BaseEntity {
 
     @NotBlank
     @NaturalId

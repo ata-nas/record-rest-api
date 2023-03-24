@@ -1,11 +1,15 @@
 package com.rewedigital.medicalrecord.service.impl;
 
-import com.rewedigital.medicalrecord.model.dto.DiagnoseDTO;
+import com.rewedigital.medicalrecord.exception.diagnose.NoSuchDiagnoseEntityFoundException;
+import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
+import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
-import com.rewedigital.medicalrecord.model.mapper.DiagnoseMapper;
+import com.rewedigital.medicalrecord.model.mapper.diagnose.DiagnoseMapper;
 import com.rewedigital.medicalrecord.repository.DiagnoseRepository;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +22,27 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     private final DiagnoseMapper diagnoseMapper;
 
     @Override
+    public DiagnoseEntity getById(Long id) {
+        return diagnoseRepository.findById(id)
+                .orElseThrow(
+                        () -> new NoSuchDiagnoseEntityFoundException(
+                                "Diagnose with ID: '" + id + "' not found!"
+                        )
+                );
+    }
+
+    @Override
+    public DiagnoseDTO getByIdToDTO(Long id) {
+        return diagnoseMapper.diagnoseEntityToDiagnoseDTO(getById(id));
+    }
+
+    @Override
     public List<DiagnoseEntity> getAllDiagnoses() {
-        return diagnoseRepository.findAll();
+        List<DiagnoseEntity> diagnoses = diagnoseRepository.findAll();
+        if (diagnoses.isEmpty()) {
+            throw new NoSuchDiagnoseEntityFoundException("No Diagnoses found!");
+        }
+        return diagnoses;
     }
 
     @Override
@@ -28,9 +51,15 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public DiagnoseDTO createDiagnose(DiagnoseDTO diagnoseDTO) {
+    public DiagnoseDTO createDiagnose(CreateDiagnoseDTO diagnoseDTO) {
         return diagnoseMapper.diagnoseEntityToDiagnoseDTO(
-                diagnoseRepository.save(diagnoseMapper.diagnoseDTOToDiagnoseEntity(diagnoseDTO)));
+                diagnoseRepository.save(diagnoseMapper.createDiagnoseDTOToDiagnoseEntity(diagnoseDTO))
+        );
+    }
+
+    @Override
+    public void deleteDiagnoseById(Long id) {
+        diagnoseRepository.delete(getById(id));
     }
 
 }
