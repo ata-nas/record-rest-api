@@ -18,6 +18,11 @@ VALUES (1, '1974-01-01', 'Georgiev', '0001'),
        (4, '1991-01-01', 'Ivanov', '0004'),
        (5, '1984-01-01', 'Yordanov', '0005');
 
+-- gp
+INSERT INTO gps(id)
+VALUES (1),
+       (3);
+
 -- specialties
 INSERT INTO specialties(id, name)
 VALUES (1, 'PEDIATRICS'),
