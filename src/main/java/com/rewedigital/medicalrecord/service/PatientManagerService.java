@@ -7,14 +7,14 @@ import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 
 import java.util.List;
 
-public interface PatientService {
+public interface PatientManagerService {
 
     PatientEntity findByUic(String uic);
     PatientDTO findByUicToDTO(String uic);
     List<PatientEntity> getAllPatients();
     List<PatientDTO> getAllPatientsToDTO();
     PatientDTO createPatient(CreatePatientDTO createPatientDTO);
-    PatientDTO updatePatient(PatientEntity patientEntity);
+    PatientDTO updatePatient(String uic, UpdatePatientDTO updatePatientDTO);
     void deletePatientByUic(String uic);
 
 }
