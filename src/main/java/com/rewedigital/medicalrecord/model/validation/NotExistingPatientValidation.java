@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.model.validation;
 
-import com.rewedigital.medicalrecord.model.validation.validator.UniqueDiagnoseValidator;
+import com.rewedigital.medicalrecord.model.validation.validator.NotExistingPatientValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -11,10 +11,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = UniqueDiagnoseValidator.class)
-public @interface UniqueDiagnoseValidation {
+@Constraint(validatedBy = NotExistingPatientValidator.class)
+public @interface NotExistingPatientValidation {
 
-    String message() default "Diagnose already exists!";
+    String message() default "Patient already exists!";
 
     Class<?>[] groups() default {};
 

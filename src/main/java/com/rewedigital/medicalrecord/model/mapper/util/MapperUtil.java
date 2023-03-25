@@ -28,7 +28,7 @@ public class MapperUtil {
     }
 
     @Named("findGpByUicCreateUpdate")
-    public GpEntity findGpByUicCreate(String uic) {
+    public GpEntity findGpByUicCreateUpdate(String uic) {
         return uic != null ?
                 gpRepository.findByUic(uic).orElseThrow(() -> new NoSuchGpEntityFoundException("uic", uic)) : null;
     }

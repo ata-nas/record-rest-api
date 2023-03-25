@@ -39,6 +39,7 @@ VALUES (1, 1),
        (4, 1),
        (5, 2);
 
+-- diagnoses
 INSERT INTO diagnoses(id, name)
 VALUES (1, 'HEALTHY'),
        (2, 'FLU'),

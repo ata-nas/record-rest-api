@@ -77,6 +77,12 @@ count on the methods in the repo to be static, and moreover, I handle null value
 I will allow null to be passed on gp uic, because is optional. If however not null is passed, then I go to repo and throw exception
 if not found. This is very different from the service error handling where null is not allowed.
 
+- I have made the decision to combine the base service of `DoctorEntity` and `GpEntity` since they are basically the same thing,
+`GpEntity` exists only with `@MapsId` to note if a given doctor is a GP or not. This happens with the very simple check, going to the
+`GpRepository` and seeing if a particular id is there. Creating and Updating are sometimes interchangeable. I do think they belong
+in the same service that has access to both `DoctrorRepository` and `GpRepository` to use freely. Moreover, `GpEntity` is a
+descendent of `DoctorEntity`.
+
 ## Thoughts
 
 - Making CRUD not based on `id` but `@NaturalId` because is more consistent.

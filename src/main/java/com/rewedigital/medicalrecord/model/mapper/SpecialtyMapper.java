@@ -20,16 +20,10 @@ public interface SpecialtyMapper {
 
     List<SpecialtyDTO> allSpecialtyEntityToSpecialtyDTO(List<SpecialtyEntity> specialtyEntity);
 
-    List<SpecialtyEntity> allSpecialtyDTOToSpecialtyEntity(List<SpecialtyDTO> specialtyDTOS);
-
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     CreateSpecialtyDTO specialtyEntityToCreateSpecialtyDTO(SpecialtyEntity specialtyEntity);
 
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     SpecialtyEntity createSpecialtyDTOToSpecialtyEntity(CreateSpecialtyDTO createSpecialtyDTO);
-
-    List<CreateSpecialtyDTO> allSpecialtyEntityToCreateSpecialtyDTO(List<SpecialtyEntity> specialtyEntity);
-
-    List<SpecialtyEntity> allCreateSpecialtyDTOToSpecialtyEntity(List<CreateSpecialtyDTO> createSpecialtyDTOS);
 
 }

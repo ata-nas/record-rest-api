@@ -19,10 +19,6 @@ public interface DiagnoseMapper {
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     DiagnoseEntity createDiagnoseDTOToDiagnoseEntity(CreateDiagnoseDTO diagnoseDTO);
 
-    List<CreateDiagnoseDTO> allDiagnoseEntityToCreateDiagnoseDTO(List<DiagnoseEntity> diagnoseEntities);
-
-    List<DiagnoseEntity> allCreateDiagnoseDTOToDiagnoseEntity(List<CreateDiagnoseDTO> diagnoseDTOs);
-
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     DiagnoseDTO diagnoseEntityToDiagnoseDTO(DiagnoseEntity diagnoseEntity);
 
@@ -30,7 +26,5 @@ public interface DiagnoseMapper {
     DiagnoseEntity diagnoseDTOToDiagnoseEntity(DiagnoseDTO diagnoseDTO);
 
     List<DiagnoseDTO> allDiagnoseEntityToDiagnoseDTO(List<DiagnoseEntity> diagnoseEntities);
-
-    List<DiagnoseEntity> allDiagnoseDTOToDiagnoseEntity(List<DiagnoseDTO> diagnoseDTOs);
 
 }
