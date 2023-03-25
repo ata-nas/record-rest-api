@@ -7,8 +7,10 @@ import jakarta.validation.constraints.*;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.NaturalId;
 
 import java.time.LocalDateTime;
@@ -16,6 +18,8 @@ import java.util.Set;
 
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
 @Entity
 @Table(name = "appointments")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)

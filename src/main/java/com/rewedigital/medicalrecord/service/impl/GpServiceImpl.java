@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.service.impl;
 
-import com.rewedigital.medicalrecord.exception.gp.NoSuchGpEntityFoundException;
+import com.rewedigital.medicalrecord.exception.NoSuchGpEntityFoundException;
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.repository.GpRepository;
 import com.rewedigital.medicalrecord.service.GpService;

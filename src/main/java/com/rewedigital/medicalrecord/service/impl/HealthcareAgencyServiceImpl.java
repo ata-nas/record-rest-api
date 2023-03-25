@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.service.impl;
 
-import com.rewedigital.medicalrecord.exception.healthcare.NoSuchHealthcareAgencyEntityFoundException;
+import com.rewedigital.medicalrecord.exception.NoSuchHealthcareAgencyEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.healthcare.HealthcareAgencyDTO;
 import com.rewedigital.medicalrecord.model.entity.HealthcareAgencyEntity;
 import com.rewedigital.medicalrecord.model.mapper.HealthcareAgencyMapper;

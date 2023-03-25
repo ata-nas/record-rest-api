@@ -4,8 +4,8 @@ import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PercentNotInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
-import com.rewedigital.medicalrecord.service.PatientManagerService;
 
+import com.rewedigital.medicalrecord.service.PatientService;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
@@ -21,16 +21,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientController {
 
-    private final PatientManagerService patientManagerService;
+    private final PatientService patientService;
 
     @GetMapping("/{uic}")
     public ResponseEntity<PatientDTO> patient(@PathVariable String uic) {
-        return ResponseEntity.ok(patientManagerService.findByUicToDTO(uic));
+        return ResponseEntity.ok(patientService.getPatientByUicToDTO(uic));
     }
 
     @GetMapping
     public ResponseEntity<List<PatientDTO>> patients() {
-        return ResponseEntity.ok(patientManagerService.getAllPatientsToDTO());
+        return ResponseEntity.ok(patientService.getAllPatientsToDTO());
     }
 
     @PostMapping
@@ -48,7 +48,7 @@ public class PatientController {
                                 .path("/" + createPatientDTO.getUic().toLowerCase())
                                 .build().toUri()
                 )
-                .body(patientManagerService.createPatient(createPatientDTO));
+                .body(patientService.createPatient(createPatientDTO));
     }
 
     @PutMapping("/{uic}")
@@ -56,37 +56,37 @@ public class PatientController {
             @PathVariable String uic,
             @RequestBody @Valid UpdatePatientDTO updatePatientDTO
     ) {
-        return ResponseEntity.ok(patientManagerService.updatePatient(uic, updatePatientDTO));
+        return ResponseEntity.ok(patientService.updatePatient(uic, updatePatientDTO));
     }
 
     @DeleteMapping("/{uic}")
     public ResponseEntity<PatientDTO> deletePatient(
             @PathVariable String uic
     ) {
-        patientManagerService.deletePatientByUic(uic);
+        patientService.deletePatientByUic(uic);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/not-insured")
     public ResponseEntity<List<PatientDTO>> patientsNotInsured() {
-        return ResponseEntity.ok(patientManagerService.getAllPatientsInsuredFalseToDTO());
+        return ResponseEntity.ok(patientService.getAllPatientsInsuredFalseToDTO());
 
     }
 
     @GetMapping("/insured")
     public ResponseEntity<List<PatientDTO>> patientsInsured() {
-        return ResponseEntity.ok(patientManagerService.getAllPatientsInsuredTrueToDTO());
+        return ResponseEntity.ok(patientService.getAllPatientsInsuredTrueToDTO());
 
     }
 
     @GetMapping("/percent/not-insured")
     public ResponseEntity<PercentNotInsuredPatientDTO> percentPatientsNotInsured() {
-        return ResponseEntity.ok(patientManagerService.totalPercentNotInsuredPatients());
+        return ResponseEntity.ok(patientService.totalPercentNotInsuredPatients());
     }
 
     @GetMapping("/percent/insured")
     public ResponseEntity<PercentNotInsuredPatientDTO> percentPatientsInsured() {
-        return ResponseEntity.ok(patientManagerService.totalPercentInsuredPatients());
+        return ResponseEntity.ok(patientService.totalPercentInsuredPatients());
     }
 
 }

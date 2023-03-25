@@ -48,8 +48,8 @@ in the Task. PLEASE NOTE: I have made the root uri to be "/api/healthcare/bulgar
 explain, we are in the domain of a single healthcare agency!
 
 - The base services: `AppointmentService`, `DiagnoseService`, `DoctorService`, `GpService`, `PatientService`, `HealthcareAgencyService`, `SpecialtyService`
-are created for the only purpose to manage the persistence layer. They are responsible only for queries and persisting entities, CRUD operations.
-Where is needed more than one of these services, like in the patient functionality or the appointment functionality, I make
+are created for the only purpose to manage the persistence layer. They are responsible only for queries and persisting entities, CRUD operations, of course also filtering and calculating something if need be.
+Where is needed more than one of these services, like in the appointment functionality, I make
 another abstraction (manager) that composes of these dependencies on lower lever. This way is much cleaner, decoupled and I separate
 the concerns. The controllers interact with these higher level composed abstractions if the base services are not sufficient in functionality.
 This way I achieve very easy to maintain base layer, and puzzle-like plug-in pieces that could be used in any way, shape or form
@@ -70,6 +70,12 @@ and I use the repo directly and not the base service, because repo methods are m
 The reason I do this operation is, although it might seem taxing, for such small project we cannot see the benefits,
 but if the data needs to travel through a lot of places and will activate a lot of processes (mind you with the risk of security since it will be incorrect if not checked that way)
 and that in turn can be infinitely more taxing than 1 query beforehand. Not to mention again the security benefits...
+
+- MapStruct is used very extensively, it has direct access to repositories in order to automate mapping process. I restrain
+from using services there that technically have error handling in them, because services are prone to change, while I can
+count on the methods in the repo to be static, and moreover, I handle null values differently sometimes, like in creating new patient,
+I will allow null to be passed on gp uic, because is optional. If however not null is passed, then I go to repo and throw exception
+if not found. This is very different from the service error handling where null is not allowed.
 
 ## Thoughts
 

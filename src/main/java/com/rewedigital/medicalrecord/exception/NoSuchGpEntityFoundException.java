@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.exception.gp;
+package com.rewedigital.medicalrecord.exception;
 
 import com.rewedigital.medicalrecord.exception.base.NoSuchEntityFoundException;
 

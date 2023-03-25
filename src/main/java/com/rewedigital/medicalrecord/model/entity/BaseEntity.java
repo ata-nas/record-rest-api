@@ -7,11 +7,15 @@ import jakarta.persistence.MappedSuperclass;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 
 @Getter
 @Setter(AccessLevel.NONE)
+@SuperBuilder
+@NoArgsConstructor
 @MappedSuperclass
 public class BaseEntity {
 

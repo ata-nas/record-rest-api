@@ -1,15 +1,21 @@
 package com.rewedigital.medicalrecord.service.impl;
 
-import com.rewedigital.medicalrecord.exception.patient.NoSuchPatientEntityFoundException;
+import com.rewedigital.medicalrecord.exception.NoSuchPatientEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
+import com.rewedigital.medicalrecord.model.dto.patient.PercentNotInsuredPatientDTO;
+import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 import com.rewedigital.medicalrecord.model.mapper.PatientMapper;
 import com.rewedigital.medicalrecord.repository.PatientRepository;
 import com.rewedigital.medicalrecord.service.PatientService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -82,10 +88,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public PatientDTO updatePatient(PatientEntity patientEntity) {
-        return patientMapper.patientEntityToPatientDTO(patientRepository.save(patientEntity));
+    public PatientDTO updatePatient(String uic, UpdatePatientDTO updatePatientDTO) {
+        return patientMapper.patientEntityToPatientDTO(
+                patientRepository.save(patientMapper.updatePatientDTOToPatientEntity(uic, updatePatientDTO))
+        );
     }
-
 
     @Override
     public void deletePatientByUic(String uic) {
@@ -100,6 +107,34 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Integer countDistinctByInsuredTrue() {
         return patientRepository.countDistinctByInsuredTrue();
+    }
+
+    @Override
+    public PercentNotInsuredPatientDTO totalPercentNotInsuredPatients() {
+        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageNotInsured());
+    }
+
+    private BigDecimal calculatePercentageNotInsured() {
+        int totalPeople = getAllPatients().size();
+        int targetPeople = countDistinctByInsuredFalse();
+        return BigDecimal.valueOf(targetPeople)
+                .multiply(BigDecimal.valueOf(100.00)
+                        .setScale(4, RoundingMode.HALF_EVEN)
+                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
+    }
+
+    @Override
+    public PercentNotInsuredPatientDTO totalPercentInsuredPatients() {
+        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageInsured());
+    }
+
+    private BigDecimal calculatePercentageInsured() {
+        int totalPeople = getAllPatients().size();
+        int targetPeople = countDistinctByInsuredTrue();
+        return BigDecimal.valueOf(targetPeople)
+                .multiply(BigDecimal.valueOf(100.00)
+                        .setScale(4, RoundingMode.HALF_EVEN)
+                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.exception.diagnose;
+package com.rewedigital.medicalrecord.exception;
 
 import com.rewedigital.medicalrecord.exception.base.NoSuchEntityFoundException;
 import lombok.Getter;
