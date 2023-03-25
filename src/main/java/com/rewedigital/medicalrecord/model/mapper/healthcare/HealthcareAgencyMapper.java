@@ -8,6 +8,5 @@ import org.mapstruct.Mapper;
 public interface HealthcareAgencyMapper {
 
     HealthcareAgencyDTO healthcareAgencyToHealthcareAgencyDTO(HealthcareAgencyEntity healthcareAgency);
-    HealthcareAgencyEntity healthcareAgencyDTOToHealthcareAgencyEntity(HealthcareAgencyDTO healthcareAgencyDTO);
 
 }

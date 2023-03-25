@@ -2,9 +2,9 @@ package com.rewedigital.medicalrecord.web;
 
 import com.rewedigital.medicalrecord.model.dto.healthcare.HealthcareAgencyDTO;
 import com.rewedigital.medicalrecord.service.HealthcareAgencyService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,8 +22,7 @@ public class HealthcareAgencyController {
     @PutMapping("/{country}")
     public ResponseEntity<HealthcareAgencyDTO> healthcareUpdateFees(
             @PathVariable String country,
-            @RequestBody HealthcareAgencyDTO healthcareAgencyDTO,
-            BindingResult bindingResult
+            @RequestBody @Valid HealthcareAgencyDTO healthcareAgencyDTO
     ) {
         return ResponseEntity.ok(healthcareAgencyService.updateFees(country, healthcareAgencyDTO));
     }

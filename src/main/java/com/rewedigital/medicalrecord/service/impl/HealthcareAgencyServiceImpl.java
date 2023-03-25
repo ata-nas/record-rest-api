@@ -31,11 +31,12 @@ public class HealthcareAgencyServiceImpl implements HealthcareAgencyService {
 
     @Override
     public HealthcareAgencyDTO updateFees(String country, HealthcareAgencyDTO healthcareAgencyDTO) {
-        return healthcareAgencyMapper.healthcareAgencyToHealthcareAgencyDTO(
-                healthcareAgencyRepository.save(
-                        getHealthcareAgency(country).setAppointmentFees(healthcareAgencyDTO.getAppointmentFees())
-                )
-        );
+        return healthcareAgencyMapper.healthcareAgencyToHealthcareAgencyDTO(updateEntity(country, healthcareAgencyDTO));
+    }
+
+    private HealthcareAgencyEntity updateEntity(String country, HealthcareAgencyDTO healthcareAgencyDTO) {
+        return getHealthcareAgency(country)
+                .setAppointmentFees(healthcareAgencyDTO.getAppointmentFees());
     }
 
 }
