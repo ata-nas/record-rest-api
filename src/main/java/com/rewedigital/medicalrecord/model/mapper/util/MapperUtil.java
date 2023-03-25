@@ -2,9 +2,12 @@ package com.rewedigital.medicalrecord.model.mapper.util;
 
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.repository.GpRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.mapstruct.MapperConfig;
 import org.mapstruct.Named;
+
 import org.springframework.stereotype.Component;
 
 
@@ -22,7 +25,7 @@ public class MapperUtil {
 
     @Named("findGpByUicCreate")
     public GpEntity findGpByUicCreate(String uic) {
-        return gpRepository.findByUic(uic).orElse(null);
+        return uic != null ? gpRepository.findByUic(uic).orElse(null) : null;
     }
 
 }
