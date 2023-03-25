@@ -31,10 +31,10 @@ public class HealthcareAgencyEntity extends BaseEntity {
     @NotNull
     @PositiveOrZero
     @Column(
-            name = "appointment_fee",
+            name = "appointment_fees",
             nullable = false
     )
-    private BigDecimal appointmentFee;
+    private BigDecimal appointmentFees;
 
     @OneToMany(
             mappedBy = "healthcareAgency",
