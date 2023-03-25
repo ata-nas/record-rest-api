@@ -19,8 +19,8 @@ This fee is the same for all patients and all doctors.
 
 Implement the CRUD operations of the patients, doctors, and visits, plus the following functionalities:
 
-1. List of all the patients, who have health insurance 
-2. The percentage of patients who have no insurance (in accordance of the total number of patients)
+1. DONE - List of all the patients, who have health insurance 
+2. DONE - The percentage of patients who have no insurance (in accordance of the total number of patients)
 3. The total income of all the visits of all patients to all doctors 
 4. The income from visits fees of a particular doctor 
 5. The number of visits of a given patient 

@@ -20,14 +20,14 @@ public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
 
     @Override
-    public PatientEntity findByUic(String uic) {
+    public PatientEntity getPatientByUic(String uic) {
         return patientRepository.findByUic(uic)
                 .orElseThrow(() -> new NoSuchPatientEntityFoundException("uic", uic));
     }
 
     @Override
-    public PatientDTO findByUicToDTO(String uic) {
-        return patientMapper.patientEntityToPatientDTO(findByUic(uic));
+    public PatientDTO getPatientByUicToDTO(String uic) {
+        return patientMapper.patientEntityToPatientDTO(getPatientByUic(uic));
     }
 
     @Override
@@ -37,6 +37,34 @@ public class PatientServiceImpl implements PatientService {
             throw new NoSuchPatientEntityFoundException("No Patients found!");
         }
         return all;
+    }
+
+    @Override
+    public List<PatientEntity> getAllPatientsInsuredFalse() {
+        List<PatientEntity> all = patientRepository.findAllByInsuredFalse();
+        if (all.isEmpty()) {
+            throw new NoSuchPatientEntityFoundException("No Patients found!");
+        }
+        return all;
+    }
+
+    @Override
+    public List<PatientDTO> getAllPatientsInsuredFalseToDTO() {
+        return patientMapper.allPatientEntityToPatientDTO(getAllPatientsInsuredFalse());
+    }
+
+    @Override
+    public List<PatientEntity> getAllPatientsInsuredTrue() {
+        List<PatientEntity> all = patientRepository.findAllByInsuredTrue();
+        if (all.isEmpty()) {
+            throw new NoSuchPatientEntityFoundException("No Patients found!");
+        }
+        return all;
+    }
+
+    @Override
+    public List<PatientDTO> getAllPatientsInsuredTrueToDTO() {
+        return patientMapper.allPatientEntityToPatientDTO(getAllPatientsInsuredTrue());
     }
 
     @Override
@@ -61,7 +89,17 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void deletePatientByUic(String uic) {
-        patientRepository.delete(findByUic(uic));
+        patientRepository.delete(getPatientByUic(uic));
+    }
+
+    @Override
+    public Integer countDistinctByInsuredFalse() {
+        return patientRepository.countDistinctByInsuredFalse();
+    }
+
+    @Override
+    public Integer countDistinctByInsuredTrue() {
+        return patientRepository.countDistinctByInsuredTrue();
     }
 
 }

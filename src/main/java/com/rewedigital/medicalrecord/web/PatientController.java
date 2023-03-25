@@ -2,6 +2,7 @@ package com.rewedigital.medicalrecord.web;
 
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
+import com.rewedigital.medicalrecord.model.dto.patient.PercentNotInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.service.PatientManagerService;
 
@@ -64,6 +65,28 @@ public class PatientController {
     ) {
         patientManagerService.deletePatientByUic(uic);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/not-insured")
+    public ResponseEntity<List<PatientDTO>> patientsNotInsured() {
+        return ResponseEntity.ok(patientManagerService.getAllPatientsInsuredFalseToDTO());
+
+    }
+
+    @GetMapping("/insured")
+    public ResponseEntity<List<PatientDTO>> patientsInsured() {
+        return ResponseEntity.ok(patientManagerService.getAllPatientsInsuredTrueToDTO());
+
+    }
+
+    @GetMapping("/percent/not-insured")
+    public ResponseEntity<PercentNotInsuredPatientDTO> percentPatientsNotInsured() {
+        return ResponseEntity.ok(patientManagerService.totalPercentNotInsuredPatients());
+    }
+
+    @GetMapping("/percent/insured")
+    public ResponseEntity<PercentNotInsuredPatientDTO> percentPatientsInsured() {
+        return ResponseEntity.ok(patientManagerService.totalPercentInsuredPatients());
     }
 
 }
