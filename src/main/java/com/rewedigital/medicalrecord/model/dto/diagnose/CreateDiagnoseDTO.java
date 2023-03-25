@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.model.dto.diagnose;
 
-import com.rewedigital.medicalrecord.model.validation.diagnose.UniqueDiagnoseValidation;
+import com.rewedigital.medicalrecord.model.validation.UniqueDiagnoseValidation;
 
 import jakarta.validation.constraints.NotBlank;
 

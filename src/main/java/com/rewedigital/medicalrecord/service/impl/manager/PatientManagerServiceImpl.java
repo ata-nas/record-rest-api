@@ -53,8 +53,6 @@ public class PatientManagerServiceImpl implements PatientManagerService {
                         .setInsured(updatePatientDTO.getInsured())
                         .setGp(updatePatientDTO.getGpUic() != null ?
                                 gpService.findByUic(updatePatientDTO.getGpUic()) : null)
-                // FIXME refactor this to be done with @GpUicValidation if null then ok if not then see if in db
-                // and get rid of this service as a whole.
         );
     }
 

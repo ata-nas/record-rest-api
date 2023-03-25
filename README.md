@@ -47,11 +47,35 @@ so this `HealthcareAgencyEntity` acts only as a "details" table that describes a
 in the Task. PLEASE NOTE: I have made the root uri to be "/api/healthcare/bulgaria/..." it is not dynamic since as I
 explain, we are in the domain of a single healthcare agency!
 
+- The base services: `AppointmentService`, `DiagnoseService`, `DoctorService`, `GpService`, `PatientService`, `HealthcareAgencyService`, `SpecialtyService`
+are created for the only purpose to manage the persistence layer. They are responsible only for queries and persisting entities, CRUD operations.
+Where is needed more than one of these services, like in the patient functionality or the appointment functionality, I make
+another abstraction (manager) that composes of these dependencies on lower lever. This way is much cleaner, decoupled and I separate
+the concerns. The controllers interact with these higher level composed abstractions if the base services are not sufficient in functionality.
+This way I achieve very easy to maintain base layer, and puzzle-like plug-in pieces that could be used in any way, shape or form
+based on any need currently or in the future.
+
+- Error handling is global, managed by `AppExceptionHandler` abstraction. I throw exceptions in the service directly. They are intercepted and managed.
+Also, there is a fallback in case an unanticipated error occurs, then to the REST client is returned status 500 internal server error, so not to expose internal details.
+
+- Validations are done through the binding result using jakarta validations and custom validations. Everytime there is not a valid state,
+it gets returned as error dto through my `AppExceptionHandler` that intercepts binding errors.
+
+- To make things with Exceptions cleaner, I have implemented a hierarchical structure with inheritance, for easier management
+in the `AppExceptionHandler`. The returning dto is constructed dynamically inside the exception entity.
+
+- I have made my custom validations to be able to have access to the repository to check if entity exists or others.
+This design decision is motivated for the reasons that, if the outside world hands me incorrect data, I want to stop it immediately
+and I use the repo directly and not the base service, because repo methods are more static and not prone to change.
+The reason I do this operation is, although it might seem taxing, for such small project we cannot see the benefits,
+but if the data needs to travel through a lot of places and will activate a lot of processes (mind you with the risk of security since it will be incorrect if not checked that way)
+and that in turn can be infinitely more taxing than 1 query beforehand. Not to mention again the security benefits...
+
 ## Thoughts
 
 - Making CRUD not based on `id` but `@NaturalId` because is more consistent.
 - Decided to not make update functionality on `SpecialtyEntity` and `DiagnoseEntity`, do not see the point here as these
 things are static in nature and would probably not be used by end user. If mistake is made, we can delete and create again.
-- HealthcareAgency is initialized with the data.sql script to be id - 1 and fee 100.00, country - 'BULGARIA', there is no
+- HealthcareAgency is initialized with the `data.sql`script to be id - 1 and fee 100.00, country - `BULGARIA`, there is no
 functionality to add or delete this , since we consider that this entity is only one and will always exist to keep
 info for our domain.

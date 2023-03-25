@@ -1,5 +1,6 @@
 package com.rewedigital.medicalrecord.model.dto.patient;
 
+import com.rewedigital.medicalrecord.model.validation.ExistingGpUicValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public class UpdatePatientDTO {
     @NotNull
     private Boolean insured;
 
+    @ExistingGpUicValidation
     private String gpUic;
 
 }

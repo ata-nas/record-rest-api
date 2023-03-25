@@ -11,4 +11,6 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
 
     Optional<PatientEntity> findByUic(String uic);
 
+    Integer countDistinctByInsuredFalse();
+
 }

@@ -4,7 +4,7 @@ import com.rewedigital.medicalrecord.exception.specialty.NoSuchSpecialtyEntityFo
 import com.rewedigital.medicalrecord.model.dto.specialty.CreateSpecialtyDTO;
 import com.rewedigital.medicalrecord.model.dto.specialty.SpecialtyDTO;
 import com.rewedigital.medicalrecord.model.entity.SpecialtyEntity;
-import com.rewedigital.medicalrecord.model.mapper.specialty.SpecialtyMapper;
+import com.rewedigital.medicalrecord.model.mapper.SpecialtyMapper;
 import com.rewedigital.medicalrecord.repository.SpecialtyRepository;
 import com.rewedigital.medicalrecord.service.SpecialtyService;
 

@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.model.mapper.healthcare;
+package com.rewedigital.medicalrecord.model.mapper;
 
 import com.rewedigital.medicalrecord.model.dto.healthcare.HealthcareAgencyDTO;
 import com.rewedigital.medicalrecord.model.entity.HealthcareAgencyEntity;

@@ -3,13 +3,11 @@ package com.rewedigital.medicalrecord.service.impl;
 import com.rewedigital.medicalrecord.exception.healthcare.NoSuchHealthcareAgencyEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.healthcare.HealthcareAgencyDTO;
 import com.rewedigital.medicalrecord.model.entity.HealthcareAgencyEntity;
-import com.rewedigital.medicalrecord.model.mapper.healthcare.HealthcareAgencyMapper;
+import com.rewedigital.medicalrecord.model.mapper.HealthcareAgencyMapper;
 import com.rewedigital.medicalrecord.repository.HealthcareAgencyRepository;
 import com.rewedigital.medicalrecord.service.HealthcareAgencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor

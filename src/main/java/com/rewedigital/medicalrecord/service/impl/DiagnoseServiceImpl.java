@@ -4,7 +4,7 @@ import com.rewedigital.medicalrecord.exception.diagnose.NoSuchDiagnoseEntityFoun
 import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
 import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
-import com.rewedigital.medicalrecord.model.mapper.diagnose.DiagnoseMapper;
+import com.rewedigital.medicalrecord.model.mapper.DiagnoseMapper;
 import com.rewedigital.medicalrecord.repository.DiagnoseRepository;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
 

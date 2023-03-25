@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.model.mapper.specialty;
+package com.rewedigital.medicalrecord.model.mapper;
 
 import com.rewedigital.medicalrecord.model.dto.specialty.CreateSpecialtyDTO;
 import com.rewedigital.medicalrecord.model.dto.specialty.SpecialtyDTO;

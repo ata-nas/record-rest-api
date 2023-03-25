@@ -1,5 +1,6 @@
-package com.rewedigital.medicalrecord.model.validation.diagnose;
+package com.rewedigital.medicalrecord.model.validation.validator;
 
+import com.rewedigital.medicalrecord.model.validation.UniqueDiagnoseValidation;
 import com.rewedigital.medicalrecord.repository.DiagnoseRepository;
 
 import jakarta.validation.ConstraintValidator;

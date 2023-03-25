@@ -1,6 +1,6 @@
-package com.rewedigital.medicalrecord.model.mapper.exception;
+package com.rewedigital.medicalrecord.model.mapper;
 
-import com.rewedigital.medicalrecord.model.dto.exception.bind.BindExceptionPropertiesDTO;
+import com.rewedigital.medicalrecord.model.dto.exception.BindExceptionPropertiesDTO;
 
 import org.mapstruct.Mapper;
 

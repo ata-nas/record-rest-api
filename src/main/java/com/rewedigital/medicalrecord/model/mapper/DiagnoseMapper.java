@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.model.mapper.diagnose;
+package com.rewedigital.medicalrecord.model.mapper;
 
 import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
 import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;

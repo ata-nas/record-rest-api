@@ -1,6 +1,7 @@
 package com.rewedigital.medicalrecord.model.dto.patient;
 
-import com.rewedigital.medicalrecord.model.validation.patient.UniquePatientValidation;
+import com.rewedigital.medicalrecord.model.validation.ExistingGpUicValidation;
+import com.rewedigital.medicalrecord.model.validation.UniquePatientValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class CreatePatientDTO {
     @NotNull
     private Boolean insured;
 
+    @ExistingGpUicValidation
     private String gpUic;
     // TODO make custom validation that checks: if null then return null, if not null,
     // check in gp repo if exist, if not throw exception, instead of doing it in PatientMapper
