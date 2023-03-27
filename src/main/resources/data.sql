@@ -3,12 +3,16 @@ INSERT INTO healthcare_agencies (id, country,  appointment_fees)
 VALUES (1, 'BULGARIA', 100.00);
 
 -- patients
-INSERT INTO patients (id, insured, name, uic, gp_id)
-VALUES (1, true, 'Petar', '000001', null),
-       (2, true, 'Georgi', '000002', null),
-       (3, false, 'Dimitar', '000003', null),
-       (4, false, 'Stefan', '000004', null),
-       (5, true, 'Ivan', '000005', null);
+INSERT INTO patients (id, name, uic, gp_id)
+VALUES (1, 'Petar', '000001', null),
+       (2, 'Georgi', '000002', null),
+       (3, 'Dimitar', '000003', null),
+       (4, 'Stefan', '000004', null),
+       (5, 'Ivan', '000005', null);
+
+-- insurance history
+INSERT INTO insurances(id, end_date_time, start_date_time)
+VALUES (1, '2023-01-02 00:00:00', '2023-01-01 00:00:00');
 
 -- doctors
 INSERT INTO doctors (id, birth_date, name, uic)

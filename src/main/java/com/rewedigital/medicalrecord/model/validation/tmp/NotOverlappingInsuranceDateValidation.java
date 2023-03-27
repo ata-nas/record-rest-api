@@ -1,6 +1,5 @@
-package com.rewedigital.medicalrecord.model.validation;
+package com.rewedigital.medicalrecord.model.validation.tmp;
 
-import com.rewedigital.medicalrecord.model.validation.validator.ExistingSpecialtyNameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -14,11 +13,11 @@ import java.lang.annotation.Target;
  * Null values are considered valid!
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE_USE, ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(validatedBy = ExistingSpecialtyNameValidator.class)
-public @interface ExistingSpecialtyNameValidation {
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Constraint(validatedBy = NotOverlappingInsuranceDateValidator.class)
+public @interface NotOverlappingInsuranceDateValidation {
 
-    String message() default "Specialty with given {name} does not exist!";
+    String message() default "Current Insurance Start Date overlaps an already existing one!";
 
     Class<?>[] groups() default {};
 

@@ -2,6 +2,7 @@ package com.rewedigital.medicalrecord.model.dto.doctor;
 
 import com.rewedigital.medicalrecord.model.dto.specialty.SpecialtyDTO;
 
+import com.rewedigital.medicalrecord.model.validation.ExistingSpecialtyNameValidation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -25,7 +26,6 @@ public class UpdateDoctorDTO {
     @PastOrPresent
     private LocalDate birthDate;
 
-    @NotEmpty
-    private Set<@Valid SpecialtyDTO> specialties; // TODO Try with Set?!
+    private Set<@ExistingSpecialtyNameValidation String> specialtiesNames;
 
 }

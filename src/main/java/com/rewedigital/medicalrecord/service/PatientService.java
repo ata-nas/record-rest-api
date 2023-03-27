@@ -18,13 +18,13 @@ public interface PatientService {
 
     List<PatientDTO> getAllPatientsToDTO();
 
-    List<PatientEntity> getAllPatientsInsuredFalse();
-
-    List<PatientDTO> getAllPatientsInsuredFalseToDTO();
-
-    List<PatientEntity> getAllPatientsInsuredTrue();
-
-    List<PatientDTO> getAllPatientsInsuredTrueToDTO();
+//    List<PatientEntity> getAllPatientsInsuredFalse();
+//
+//    List<PatientDTO> getAllPatientsInsuredFalseToDTO();
+//
+//    List<PatientEntity> getAllPatientsInsuredTrue();
+//
+//    List<PatientDTO> getAllPatientsInsuredTrueToDTO();
 
     PatientDTO createPatient(CreatePatientDTO createPatientDTO);
 
@@ -32,12 +32,12 @@ public interface PatientService {
 
     void deletePatientByUic(String uic);
 
-    Integer countDistinctByInsuredFalse();
-
-    Integer countDistinctByInsuredTrue();
-
-    PercentNotInsuredPatientDTO totalPercentNotInsuredPatients();
-
-    PercentNotInsuredPatientDTO totalPercentInsuredPatients();
+//    Integer countDistinctByInsuredFalse();
+//
+//    Integer countDistinctByInsuredTrue();
+//
+//    PercentNotInsuredPatientDTO totalPercentNotInsuredPatients();
+//
+//    PercentNotInsuredPatientDTO totalPercentInsuredPatients();
 
 }

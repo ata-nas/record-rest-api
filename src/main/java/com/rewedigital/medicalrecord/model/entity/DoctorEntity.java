@@ -48,7 +48,7 @@ public class DoctorEntity extends BaseEntity {
     )
     private LocalDate birthDate;
 
-    @NotEmpty
+//    @NotEmpty // TODO make sure to do this correctly.
     @ManyToMany
     @OrderBy
     @JoinTable(

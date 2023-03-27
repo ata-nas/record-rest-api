@@ -1,8 +1,13 @@
 package com.rewedigital.medicalrecord.web;
 
+import com.rewedigital.medicalrecord.exception.NoSuchSpecialtyEntityFoundException;
+import com.rewedigital.medicalrecord.exception.base.NoSuchEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
+import com.rewedigital.medicalrecord.model.dto.exception.BindExceptionDTO;
+import com.rewedigital.medicalrecord.model.dto.exception.GeneralExceptionDTO;
+import com.rewedigital.medicalrecord.model.mapper.FieldErrorMapper;
 import com.rewedigital.medicalrecord.model.validation.ExistingDoctorUicValidation;
 
 import jakarta.validation.Valid;
@@ -10,8 +15,11 @@ import jakarta.validation.constraints.NotBlank;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +35,8 @@ public class DoctorController {
     // I will control all doctor and gp from here, they are connected through inheritance I will use path variable
     // to differentiate which I want to access. I will have a Doctor manager orchestration to handle operations.
 
+    // TODO make custom exception handler here when creating a doctor, for NoSuchSpecialtyEntityFoundException (or Binding, need to check), to return 409 conflict!
+
     @GetMapping("/{uic}")
     public ResponseEntity<DoctorDTO> doctor(
             @PathVariable
@@ -35,6 +45,19 @@ public class DoctorController {
             String uic
     ) {
         return null;
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public BindExceptionDTO handleNotFoundSpecialty(FieldErrorMapper objectErrorMapper, MethodArgumentNotValidException e) {
+        return new BindExceptionDTO(
+                409,
+                HttpStatus.CONFLICT,
+                e.getFieldErrors()
+                        .stream()
+                        .map(objectErrorMapper::toDTO)
+                        .toList()
+        );
     }
 
     @GetMapping()

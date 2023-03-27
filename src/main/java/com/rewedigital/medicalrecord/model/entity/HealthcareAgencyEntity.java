@@ -37,13 +37,13 @@ public class HealthcareAgencyEntity extends BaseEntity {
             nullable = false
     )
     private BigDecimal appointmentFees;
-
+// TODO Create history table with current fee for current appointment. naive approach!
     @OneToMany(
             mappedBy = "healthcareAgency",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
     @OrderBy
-    private Set<@Valid AppointmentEntity> appointmentsRecord;
+    private Set<@Valid AppointmentEntity> appointmentsRecord; // TODO Remove ?
 
 }

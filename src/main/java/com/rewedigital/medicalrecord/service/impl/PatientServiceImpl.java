@@ -10,6 +10,7 @@ import com.rewedigital.medicalrecord.model.mapper.PatientMapper;
 import com.rewedigital.medicalrecord.repository.PatientRepository;
 import com.rewedigital.medicalrecord.service.PatientService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.math.RoundingMode;
 import java.util.List;
 
 @Service
+@Transactional // TODO check which to use, this or spring package one!
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
 
@@ -45,38 +47,6 @@ public class PatientServiceImpl implements PatientService {
         return all;
     }
 
-    @Override
-    public List<PatientEntity> getAllPatientsInsuredFalse() {
-        List<PatientEntity> all = patientRepository.findAllByInsuredFalse();
-        if (all.isEmpty()) {
-            throw new NoSuchPatientEntityFoundException("No Patients found!");
-        }
-        return all;
-    }
-
-    @Override
-    public List<PatientDTO> getAllPatientsInsuredFalseToDTO() {
-        return patientMapper.allToDTO(getAllPatientsInsuredFalse());
-    }
-
-    @Override
-    public List<PatientEntity> getAllPatientsInsuredTrue() {
-        List<PatientEntity> all = patientRepository.findAllByInsuredTrue();
-        if (all.isEmpty()) {
-            throw new NoSuchPatientEntityFoundException("No Patients found!");
-        }
-        return all;
-    }
-
-    @Override
-    public List<PatientDTO> getAllPatientsInsuredTrueToDTO() {
-        return patientMapper.allToDTO(getAllPatientsInsuredTrue());
-    }
-
-    @Override
-    public List<PatientDTO> getAllPatientsToDTO() {
-        return patientMapper.allToDTO(getAllPatients());
-    }
 
     @Override
     public PatientDTO createPatient(CreatePatientDTO createPatientDTO) {
@@ -100,41 +70,73 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Integer countDistinctByInsuredFalse() {
-        return patientRepository.countDistinctByInsuredFalse();
+    public List<PatientDTO> getAllPatientsToDTO() {
+        return patientMapper.allToDTO(getAllPatients());
     }
 
-    @Override
-    public Integer countDistinctByInsuredTrue() {
-        return patientRepository.countDistinctByInsuredTrue();
-    }
-
-    @Override
-    public PercentNotInsuredPatientDTO totalPercentNotInsuredPatients() {
-        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageNotInsured());
-    }
-
-    private BigDecimal calculatePercentageNotInsured() {
-        int totalPeople = getAllPatients().size();
-        int targetPeople = countDistinctByInsuredFalse();
-        return BigDecimal.valueOf(targetPeople)
-                .multiply(BigDecimal.valueOf(100.00)
-                        .setScale(4, RoundingMode.HALF_EVEN)
-                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
-    }
-
-    @Override
-    public PercentNotInsuredPatientDTO totalPercentInsuredPatients() {
-        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageInsured());
-    }
-
-    private BigDecimal calculatePercentageInsured() {
-        int totalPeople = getAllPatients().size();
-        int targetPeople = countDistinctByInsuredTrue();
-        return BigDecimal.valueOf(targetPeople)
-                .multiply(BigDecimal.valueOf(100.00)
-                        .setScale(4, RoundingMode.HALF_EVEN)
-                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
-    }
+//    public Integer countDistinctByInsuredFalse() {
+//    @Override
+//    @Override
+//    public List<PatientEntity> getAllPatientsInsuredFalse() {
+//        List<PatientEntity> all = patientRepository.findAllByInsuredFalse();
+//        if (all.isEmpty()) {
+//            throw new NoSuchPatientEntityFoundException("No Patients found!");
+//        }
+//        return all;
+//    }
+//
+//    @Override
+//    public List<PatientDTO> getAllPatientsInsuredFalseToDTO() {
+//        return patientMapper.allToDTO(getAllPatientsInsuredFalse());
+//    }
+//
+//    @Override
+//    public List<PatientEntity> getAllPatientsInsuredTrue() {
+//        List<PatientEntity> all = patientRepository.findAllByInsuredTrue();
+//        if (all.isEmpty()) {
+//            throw new NoSuchPatientEntityFoundException("No Patients found!");
+//        }
+//        return all;
+//    }
+//
+//    @Override
+//    public List<PatientDTO> getAllPatientsInsuredTrueToDTO() {
+//        return patientMapper.allToDTO(getAllPatientsInsuredTrue());
+//    }
+//        return patientRepository.countDistinctByInsuredFalse();
+//    }
+//
+//    @Override
+//    public Integer countDistinctByInsuredTrue() {
+//        return patientRepository.countDistinctByInsuredTrue();
+//    }
+//
+//    @Override
+//    public PercentNotInsuredPatientDTO totalPercentNotInsuredPatients() {
+//        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageNotInsured());
+//    }
+//
+//    private BigDecimal calculatePercentageNotInsured() {
+//        int totalPeople = getAllPatients().size();
+//        int targetPeople = countDistinctByInsuredFalse();
+//        return BigDecimal.valueOf(targetPeople)
+//                .multiply(BigDecimal.valueOf(100.00)
+//                        .setScale(4, RoundingMode.HALF_EVEN)
+//                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
+//    }
+//
+//    @Override
+//    public PercentNotInsuredPatientDTO totalPercentInsuredPatients() {
+//        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageInsured());
+//    }
+//
+//    private BigDecimal calculatePercentageInsured() {
+//        int totalPeople = getAllPatients().size();
+//        int targetPeople = countDistinctByInsuredTrue();
+//        return BigDecimal.valueOf(targetPeople)
+//                .multiply(BigDecimal.valueOf(100.00)
+//                        .setScale(4, RoundingMode.HALF_EVEN)
+//                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
+//    }
 
 }

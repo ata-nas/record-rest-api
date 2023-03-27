@@ -25,7 +25,7 @@ public class DoctorDTO {
     @PastOrPresent
     private LocalDate birthDate;
 
-    @NotEmpty
+//    @NotEmpty
     private Set<SpecialtyDTO> specialties;
 
 }
