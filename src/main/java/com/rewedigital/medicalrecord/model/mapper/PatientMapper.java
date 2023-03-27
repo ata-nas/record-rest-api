@@ -5,8 +5,10 @@ import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -14,16 +16,15 @@ import java.util.List;
 public interface PatientMapper {
 
     @Mapping(source = "patientEntity.gp.uic", target = "gpUic")
-    PatientDTO patientEntityToPatientDTO(PatientEntity patientEntity);
+    PatientDTO toDTO(PatientEntity patientEntity);
 
     @Mapping(source = "gpUic", target = "gp", qualifiedByName = "findGpByUicCreateUpdate")
-    PatientEntity createPatientDTOToPatientEntity(CreatePatientDTO createPatientDTO);
+    PatientEntity toEntity(CreatePatientDTO createPatientDTO);
 
+    @Mapping(target = "uic", ignore = true)
     @Mapping(source = "updatePatientDTO.gpUic", target = "gp", qualifiedByName = "findGpByUicCreateUpdate")
-    @Mapping(target = "id", source = "uic", qualifiedByName = "findPatientIdByUic")
-    @Mapping(target = "uic", source = "uic")
-    PatientEntity updatePatientDTOToPatientEntity(String uic, UpdatePatientDTO updatePatientDTO);
+    PatientEntity toEntity(UpdatePatientDTO updatePatientDTO, @MappingTarget PatientEntity patientEntity);
 
-    List<PatientDTO> allPatientEntityToPatientDTO(List<PatientEntity> patientEntity);
+    List<PatientDTO> allToDTO(List<PatientEntity> patientEntity);
 
 }

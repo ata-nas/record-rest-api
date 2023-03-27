@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.model.validation;
 
-import com.rewedigital.medicalrecord.model.validation.validator.ExistingGpUicValidator;
+import com.rewedigital.medicalrecord.model.validation.validator.ExistingDiagnoseNameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -14,11 +14,11 @@ import java.lang.annotation.Target;
  * Null values are considered valid!
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@Constraint(validatedBy = ExistingGpUicValidator.class)
-public @interface ExistingGpUicValidation {
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Constraint(validatedBy = ExistingDiagnoseNameValidator.class)
+public @interface ExistingDiagnoseNameValidation {
 
-    String message() default "Gp with given {uic} does not exist!";
+    String message() default "Diagnose with given {name} does not exist!";
 
     Class<?>[] groups() default {};
 

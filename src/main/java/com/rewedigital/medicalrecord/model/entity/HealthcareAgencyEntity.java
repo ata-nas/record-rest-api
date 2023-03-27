@@ -18,8 +18,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@SuperBuilder
-@NoArgsConstructor
 @Entity
 @Table(name = "healthcare_agencies")
 public class HealthcareAgencyEntity extends BaseEntity {

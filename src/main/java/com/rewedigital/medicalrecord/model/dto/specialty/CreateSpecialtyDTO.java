@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.model.dto.specialty;
 
-import com.rewedigital.medicalrecord.model.validation.NotExistingSpecialtyValidation;
+import com.rewedigital.medicalrecord.model.validation.NotExistingSpecialtyNameValidation;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 public class CreateSpecialtyDTO {
 
     @NotBlank
-    @NotExistingSpecialtyValidation
+    @NotExistingSpecialtyNameValidation
     private String name;
 
 }

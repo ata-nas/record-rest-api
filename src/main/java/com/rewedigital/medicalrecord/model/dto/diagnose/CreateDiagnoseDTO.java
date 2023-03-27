@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.model.dto.diagnose;
 
-import com.rewedigital.medicalrecord.model.validation.NotExistingDiagnoseValidation;
+import com.rewedigital.medicalrecord.model.validation.NotExistingDiagnoseNameValidation;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CreateDiagnoseDTO {
 
     @NotBlank
-    @NotExistingDiagnoseValidation
+    @NotExistingDiagnoseNameValidation
     private String name;
 
 }

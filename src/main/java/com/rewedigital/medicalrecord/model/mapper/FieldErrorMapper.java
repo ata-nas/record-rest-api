@@ -9,6 +9,6 @@ import org.springframework.validation.FieldError;
 @Mapper(componentModel = "spring")
 public interface FieldErrorMapper {
 
-    BindExceptionPropertiesDTO fieldErrorToBindExceptionPropertiesDTO(FieldError objectError);
+    BindExceptionPropertiesDTO toDTO(FieldError objectError);
 
 }

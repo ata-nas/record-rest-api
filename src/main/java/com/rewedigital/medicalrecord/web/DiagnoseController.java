@@ -2,13 +2,16 @@ package com.rewedigital.medicalrecord.web;
 
 import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
 import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
+import com.rewedigital.medicalrecord.model.validation.ExistingDiagnoseNameValidation;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
 
 import jakarta.validation.Valid;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,24 +20,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/healthcare/bulgaria/diagnoses")
 @RequiredArgsConstructor
+@Validated
 public class DiagnoseController {
 
     private final DiagnoseService diagnoseService;
 
-    @GetMapping
-    private ResponseEntity<List<DiagnoseDTO>> diagnose() {
-        return ResponseEntity.ok(diagnoseService.getAllDiagnosesToDTO());
-    }
-
     @GetMapping("/{name}")
-    private ResponseEntity<DiagnoseDTO> diagnose(
-            @PathVariable String name
+    public ResponseEntity<DiagnoseDTO> diagnose(
+            @PathVariable
+            @NotBlank
+            @ExistingDiagnoseNameValidation(message = "Illegal path! Diagnose with given {name} does not exist!")
+            String name
     ) {
         return ResponseEntity.ok(diagnoseService.getByNameToDTO(name));
     }
 
+    @GetMapping
+    public ResponseEntity<List<DiagnoseDTO>> diagnoses() {
+        return ResponseEntity.ok(diagnoseService.getAllDiagnosesToDTO());
+    }
+
     @PostMapping
-    private ResponseEntity<DiagnoseDTO> createDiagnose(
+    public ResponseEntity<DiagnoseDTO> createDiagnose(
             @RequestBody @Valid CreateDiagnoseDTO createDiagnoseDTO,
             UriComponentsBuilder uriComponentsBuilder
     ) {
@@ -52,8 +59,11 @@ public class DiagnoseController {
     }
 
     @DeleteMapping("/{name}")
-    private ResponseEntity<DiagnoseDTO> deleteDiagnose(
-            @PathVariable String name
+    public ResponseEntity<DiagnoseDTO> deleteDiagnose(
+            @PathVariable
+            @NotBlank
+            @ExistingDiagnoseNameValidation(message = "Illegal path! Diagnose with given {name} does not exist!")
+            String name
     ) {
         diagnoseService.deleteDiagnoseByName(name);
         return ResponseEntity.noContent().build();

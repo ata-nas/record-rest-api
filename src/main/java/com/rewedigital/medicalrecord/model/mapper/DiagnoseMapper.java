@@ -14,17 +14,11 @@ import java.util.List;
 public interface DiagnoseMapper {
 
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    CreateDiagnoseDTO diagnoseEntityToCreateDiagnoseDTO(DiagnoseEntity diagnoseEntity);
+    DiagnoseDTO toDTO(DiagnoseEntity diagnoseEntity);
 
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    DiagnoseEntity createDiagnoseDTOToDiagnoseEntity(CreateDiagnoseDTO diagnoseDTO);
+    DiagnoseEntity toEntity(CreateDiagnoseDTO diagnoseDTO);
 
-    @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    DiagnoseDTO diagnoseEntityToDiagnoseDTO(DiagnoseEntity diagnoseEntity);
-
-    @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    DiagnoseEntity diagnoseDTOToDiagnoseEntity(DiagnoseDTO diagnoseDTO);
-
-    List<DiagnoseDTO> allDiagnoseEntityToDiagnoseDTO(List<DiagnoseEntity> diagnoseEntities);
+    List<DiagnoseDTO> allToDTO(List<DiagnoseEntity> diagnoseEntities);
 
 }

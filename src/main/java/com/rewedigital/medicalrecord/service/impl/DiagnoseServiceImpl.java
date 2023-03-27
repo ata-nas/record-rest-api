@@ -29,7 +29,7 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
     @Override
     public DiagnoseDTO getByNameToDTO(String name) {
-        return diagnoseMapper.diagnoseEntityToDiagnoseDTO(getByName(name));
+        return diagnoseMapper.toDTO(getByName(name));
     }
 
     @Override
@@ -43,13 +43,13 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
     @Override
     public List<DiagnoseDTO> getAllDiagnosesToDTO() {
-        return diagnoseMapper.allDiagnoseEntityToDiagnoseDTO(getAllDiagnoses());
+        return diagnoseMapper.allToDTO(getAllDiagnoses());
     }
 
     @Override
     public DiagnoseDTO createDiagnose(CreateDiagnoseDTO diagnoseDTO) {
-        return diagnoseMapper.diagnoseEntityToDiagnoseDTO(
-                diagnoseRepository.save(diagnoseMapper.createDiagnoseDTOToDiagnoseEntity(diagnoseDTO))
+        return diagnoseMapper.toDTO(
+                diagnoseRepository.save(diagnoseMapper.toEntity(diagnoseDTO))
         );
     }
 

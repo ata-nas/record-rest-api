@@ -9,12 +9,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Valid if exist in DB, Not Valid if not exist in DB.
+ * Null values are considered valid!
+ */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Constraint(validatedBy = ExistingPatientUicValidator.class)
 public @interface ExistingPatientUicValidation {
 
-    String message() default "Patient with given 'uic' does not exist!";
+    String message() default "Patient with given {uic} does not exist!";
 
     Class<?>[] groups() default {};
 

@@ -6,9 +6,11 @@ import com.rewedigital.medicalrecord.model.dto.exception.BindExceptionDTO;
 import com.rewedigital.medicalrecord.model.dto.exception.GeneralExceptionDTO;
 import com.rewedigital.medicalrecord.model.mapper.FieldErrorMapper;
 
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,7 +40,7 @@ public class AppExceptionHandler {
                 HttpStatus.BAD_REQUEST,
                 e.getFieldErrors()
                         .stream()
-                        .map(objectErrorMapper::fieldErrorToBindExceptionPropertiesDTO)
+                        .map(objectErrorMapper::toDTO)
                         .toList()
         );
     }
@@ -54,5 +56,26 @@ public class AppExceptionHandler {
     private GeneralExceptionDTO handleExceptionNotFound(NoSuchEntityFoundException e) {
         return e.getData();
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ValidationException.class)
+    private GeneralExceptionDTO handleExceptionNotFound(ValidationException e) {
+        return new GeneralExceptionDTO(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND,
+                e.getLocalizedMessage()
+        );
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HttpMessageConversionException.class)
+    private GeneralExceptionDTO handleExceptionHttpMessageConversionException(HttpMessageConversionException e) {
+        return new GeneralExceptionDTO(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST,
+                e.getLocalizedMessage()
+        );
+    }
+
 
 }

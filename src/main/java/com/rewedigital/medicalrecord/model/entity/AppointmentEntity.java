@@ -18,8 +18,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@SuperBuilder
-@NoArgsConstructor
 @Entity
 @Table(name = "appointments")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
@@ -54,6 +52,12 @@ public class AppointmentEntity extends BaseEntity {
 
     @NotEmpty
     @ManyToMany
+    @OrderBy
+    @JoinTable(
+            name = "appointments_diagnoses",
+            joinColumns = @JoinColumn(name = "appointment_id"),
+            inverseJoinColumns = @JoinColumn(name = "diagnose_id")
+    )
     private Set<@Valid DiagnoseEntity> diagnoses;
 
     @NotBlank

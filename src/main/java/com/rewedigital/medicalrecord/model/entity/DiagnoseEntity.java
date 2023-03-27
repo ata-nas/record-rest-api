@@ -17,8 +17,6 @@ import org.hibernate.annotations.NaturalId;
 @Getter
 @Setter
 @Entity
-@SuperBuilder
-@NoArgsConstructor
 @Table(name = "diagnoses")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class DiagnoseEntity extends BaseEntity {

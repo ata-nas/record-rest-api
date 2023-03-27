@@ -33,7 +33,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDTO getPatientByUicToDTO(String uic) {
-        return patientMapper.patientEntityToPatientDTO(getPatientByUic(uic));
+        return patientMapper.toDTO(getPatientByUic(uic));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<PatientDTO> getAllPatientsInsuredFalseToDTO() {
-        return patientMapper.allPatientEntityToPatientDTO(getAllPatientsInsuredFalse());
+        return patientMapper.allToDTO(getAllPatientsInsuredFalse());
     }
 
     @Override
@@ -70,27 +70,27 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<PatientDTO> getAllPatientsInsuredTrueToDTO() {
-        return patientMapper.allPatientEntityToPatientDTO(getAllPatientsInsuredTrue());
+        return patientMapper.allToDTO(getAllPatientsInsuredTrue());
     }
 
     @Override
     public List<PatientDTO> getAllPatientsToDTO() {
-        return patientMapper.allPatientEntityToPatientDTO(getAllPatients());
+        return patientMapper.allToDTO(getAllPatients());
     }
 
     @Override
     public PatientDTO createPatient(CreatePatientDTO createPatientDTO) {
-        return patientMapper.patientEntityToPatientDTO(
+        return patientMapper.toDTO(
                 patientRepository.save(
-                        patientMapper.createPatientDTOToPatientEntity(createPatientDTO)
+                        patientMapper.toEntity(createPatientDTO)
                 )
         );
     }
 
     @Override
     public PatientDTO updatePatient(String uic, UpdatePatientDTO updatePatientDTO) {
-        return patientMapper.patientEntityToPatientDTO(
-                patientRepository.save(patientMapper.updatePatientDTOToPatientEntity(uic, updatePatientDTO))
+        return patientMapper.toDTO(
+                patientRepository.save(patientMapper.toEntity(updatePatientDTO, getPatientByUic(uic)))
         );
     }
 

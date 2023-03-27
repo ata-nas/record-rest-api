@@ -30,7 +30,7 @@ VALUES (1, 'PEDIATRICS'),
        (3, 'CARDIOLOGY');
 
 -- doctors_specialties
-INSERT INTO doctors_specialty(doctor_entity_id, specialty_id)
+INSERT INTO doctors_specialties(doctor_id, specialty_id)
 VALUES (1, 1),
        (1, 2),
        (2, 2),

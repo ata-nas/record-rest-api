@@ -11,8 +11,6 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@SuperBuilder
-@NoArgsConstructor
 @Entity
 @Table(name = "gps")
 public class GpEntity extends DoctorEntity {

@@ -29,7 +29,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
 
     @Override
     public SpecialtyDTO getByNameToDTO(String name) {
-        return specialtyMapper.specialtyEntityToSpecialtyDTO(getByName(name));
+        return specialtyMapper.toDTO(getByName(name));
     }
 
     @Override
@@ -43,13 +43,13 @@ public class SpecialtyServiceImpl implements SpecialtyService {
 
     @Override
     public List<SpecialtyDTO> getAllSpecialtiesToDTO() {
-        return specialtyMapper.allSpecialtyEntityToSpecialtyDTO(getAllSpecialties());
+        return specialtyMapper.allToDTO(getAllSpecialties());
     }
 
     @Override
     public SpecialtyDTO createSpecialty(CreateSpecialtyDTO createSpecialtyDTO) {
-        return specialtyMapper.specialtyEntityToSpecialtyDTO(
-                specialtyRepository.save(specialtyMapper.createSpecialtyDTOToSpecialtyEntity(createSpecialtyDTO))
+        return specialtyMapper.toDTO(
+                specialtyRepository.save(specialtyMapper.toEntity(createSpecialtyDTO))
         );
     }
 

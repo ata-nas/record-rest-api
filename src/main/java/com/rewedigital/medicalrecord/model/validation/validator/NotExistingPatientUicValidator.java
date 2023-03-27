@@ -1,13 +1,13 @@
 package com.rewedigital.medicalrecord.model.validation.validator;
 
-import com.rewedigital.medicalrecord.model.validation.NotExistingPatientValidation;
+import com.rewedigital.medicalrecord.model.validation.NotExistingPatientUicValidation;
 import com.rewedigital.medicalrecord.repository.PatientRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class NotExistingPatientValidator implements ConstraintValidator<NotExistingPatientValidation, String> {
+public class NotExistingPatientUicValidator implements ConstraintValidator<NotExistingPatientUicValidation, String> {
 
     private final PatientRepository patientRepository;
 

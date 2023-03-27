@@ -16,8 +16,6 @@ import org.hibernate.annotations.NaturalId;
 
 @Getter
 @Setter
-@SuperBuilder
-@NoArgsConstructor
 @Entity
 @Table(name = "specialties")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)

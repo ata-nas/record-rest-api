@@ -7,6 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface HealthcareAgencyMapper {
 
-    HealthcareAgencyDTO healthcareAgencyToHealthcareAgencyDTO(HealthcareAgencyEntity healthcareAgency);
+    HealthcareAgencyDTO toDTO(HealthcareAgencyEntity healthcareAgency);
 
 }

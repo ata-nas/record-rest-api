@@ -13,17 +13,11 @@ import java.util.List;
 public interface SpecialtyMapper {
 
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    SpecialtyDTO specialtyEntityToSpecialtyDTO(SpecialtyEntity specialtyEntity);
+    SpecialtyDTO toDTO(SpecialtyEntity specialtyEntity);
 
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    SpecialtyEntity specialtyDTOToSpecialtyEntity(SpecialtyDTO specialtyDTO);
+    SpecialtyEntity toEntity(CreateSpecialtyDTO createSpecialtyDTO);
 
-    List<SpecialtyDTO> allSpecialtyEntityToSpecialtyDTO(List<SpecialtyEntity> specialtyEntity);
-
-    @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    CreateSpecialtyDTO specialtyEntityToCreateSpecialtyDTO(SpecialtyEntity specialtyEntity);
-
-    @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    SpecialtyEntity createSpecialtyDTOToSpecialtyEntity(CreateSpecialtyDTO createSpecialtyDTO);
+    List<SpecialtyDTO> allToDTO(List<SpecialtyEntity> specialtyEntity);
 
 }

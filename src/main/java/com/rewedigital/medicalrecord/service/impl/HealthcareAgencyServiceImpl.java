@@ -24,12 +24,12 @@ public class HealthcareAgencyServiceImpl implements HealthcareAgencyService {
 
     @Override
     public HealthcareAgencyDTO getFees(String country) {
-        return healthcareAgencyMapper.healthcareAgencyToHealthcareAgencyDTO(getHealthcareAgency(country));
+        return healthcareAgencyMapper.toDTO(getHealthcareAgency(country));
     }
 
     @Override
     public HealthcareAgencyDTO updateFees(String country, HealthcareAgencyDTO healthcareAgencyDTO) {
-        return healthcareAgencyMapper.healthcareAgencyToHealthcareAgencyDTO(updateEntity(country, healthcareAgencyDTO));
+        return healthcareAgencyMapper.toDTO(updateEntity(country, healthcareAgencyDTO));
     }
 
     private HealthcareAgencyEntity updateEntity(String country, HealthcareAgencyDTO healthcareAgencyDTO) {

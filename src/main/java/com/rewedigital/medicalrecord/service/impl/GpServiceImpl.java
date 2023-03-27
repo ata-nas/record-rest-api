@@ -14,7 +14,7 @@ public class GpServiceImpl implements GpService {
     private final GpRepository gpRepository;
 
     @Override
-    public GpEntity findByUic(String uic) {
+    public GpEntity getByUic(String uic) {
         return gpRepository.findByUic(uic)
                 .orElseThrow(() -> new NoSuchGpEntityFoundException("uic", uic));
     }

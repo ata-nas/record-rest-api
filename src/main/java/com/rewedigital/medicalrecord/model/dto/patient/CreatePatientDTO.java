@@ -1,7 +1,7 @@
 package com.rewedigital.medicalrecord.model.dto.patient;
 
 import com.rewedigital.medicalrecord.model.validation.ExistingGpUicValidation;
-import com.rewedigital.medicalrecord.model.validation.NotExistingPatientValidation;
+import com.rewedigital.medicalrecord.model.validation.NotExistingPatientUicValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CreatePatientDTO {
 
     @NotBlank
-    @NotExistingPatientValidation
+    @NotExistingPatientUicValidation
     private String uic;
 
     @NotBlank

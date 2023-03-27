@@ -21,8 +21,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@SuperBuilder
-@NoArgsConstructor
 @Entity
 @Table(name = "doctors")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -53,6 +51,11 @@ public class DoctorEntity extends BaseEntity {
     @NotEmpty
     @ManyToMany
     @OrderBy
-    private Set<@Valid SpecialtyEntity> specialty;
+    @JoinTable(
+            name = "doctors_specialties",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialty_id")
+    )
+    private Set<@Valid SpecialtyEntity> specialties;
 
 }

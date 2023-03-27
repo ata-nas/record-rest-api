@@ -75,7 +75,11 @@ and that in turn can be infinitely more taxing than 1 query beforehand. Not to m
 from using services there that technically have error handling in them, because services are prone to change, while I can
 count on the methods in the repo to be static, and moreover, I handle null values differently sometimes, like in creating new patient,
 I will allow null to be passed on gp uic, because is optional. If however not null is passed, then I go to repo and throw exception
-if not found. This is very different from the service error handling where null is not allowed.
+if not found. This is very different from the service error handling where null is not allowed. Services are responsible to find
+and get desired entity in PUT request for updating it, but the mapper is responsible to correctly map it, because it has access
+to repositories, other than the service has, this is done so that the particular service has access and is responsible only to
+do CRUD with one particular entity, the entity the service is for. In this way I think I separate concerns well, also 
+I automate the mapping process, and it is being serviced from one place only!
 
 - I have made the decision to combine the base service of `DoctorEntity` and `GpEntity` since they are basically the same thing,
 `GpEntity` exists only with `@MapsId` to note if a given doctor is a GP or not. This happens with the very simple check, going to the
