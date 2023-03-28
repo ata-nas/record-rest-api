@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class PercentNotInsuredPatientDTO {
+public class PercentageInsuredPatientDTO {
 
     @NotNull
     @PositiveOrZero
-    private BigDecimal percentNotInsured;
+    private BigDecimal percentage;
 
 }

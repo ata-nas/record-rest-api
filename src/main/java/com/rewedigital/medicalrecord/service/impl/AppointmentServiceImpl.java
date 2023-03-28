@@ -72,4 +72,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepository.delete(getByUic(uic));
     }
 
+    // TODO make functionality to add other appointment fees!
+
 }

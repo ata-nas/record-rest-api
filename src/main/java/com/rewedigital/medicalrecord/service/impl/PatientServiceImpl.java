@@ -3,6 +3,7 @@ package com.rewedigital.medicalrecord.service.impl;
 import com.rewedigital.medicalrecord.exception.notfound.NoSuchPatientEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
+import com.rewedigital.medicalrecord.model.dto.patient.PercentageInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 import com.rewedigital.medicalrecord.model.mapper.PatientMapper;
@@ -15,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -71,69 +75,50 @@ public class PatientServiceImpl implements PatientService {
         patientRepository.delete(getPatientByUic(uic));
     }
 
-//    public Integer countDistinctByInsuredFalse() {
-//    @Override
-//    @Override
-//    public List<PatientEntity> getAllPatientsInsuredFalse() {
-//        List<PatientEntity> all = patientRepository.findAllByInsuredFalse();
-//        if (all.isEmpty()) {
-//            throw new NoSuchPatientEntityFoundException("No Patients found!");
-//        }
-//        return all;
-//    }
-//
-//    @Override
-//    public List<PatientDTO> getAllPatientsInsuredFalseToDTO() {
-//        return patientMapper.allToDTO(getAllPatientsInsuredFalse());
-//    }
-//
-//    @Override
-//    public List<PatientEntity> getAllPatientsInsuredTrue() {
-//        List<PatientEntity> all = patientRepository.findAllByInsuredTrue();
-//        if (all.isEmpty()) {
-//            throw new NoSuchPatientEntityFoundException("No Patients found!");
-//        }
-//        return all;
-//    }
-//
-//    @Override
-//    public List<PatientDTO> getAllPatientsInsuredTrueToDTO() {
-//        return patientMapper.allToDTO(getAllPatientsInsuredTrue());
-//    }
-//        return patientRepository.countDistinctByInsuredFalse();
-//    }
-//
-//    @Override
-//    public Integer countDistinctByInsuredTrue() {
-//        return patientRepository.countDistinctByInsuredTrue();
-//    }
-//
-//    @Override
-//    public PercentNotInsuredPatientDTO totalPercentNotInsuredPatients() {
-//        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageNotInsured());
-//    }
-//
-//    private BigDecimal calculatePercentageNotInsured() {
-//        int totalPeople = getAllPatients().size();
-//        int targetPeople = countDistinctByInsuredFalse();
-//        return BigDecimal.valueOf(targetPeople)
-//                .multiply(BigDecimal.valueOf(100.00)
-//                        .setScale(4, RoundingMode.HALF_EVEN)
-//                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
-//    }
-//
-//    @Override
-//    public PercentNotInsuredPatientDTO totalPercentInsuredPatients() {
-//        return new PercentNotInsuredPatientDTO().setPercentNotInsured(calculatePercentageInsured());
-//    }
-//
-//    private BigDecimal calculatePercentageInsured() {
-//        int totalPeople = getAllPatients().size();
-//        int targetPeople = countDistinctByInsuredTrue();
-//        return BigDecimal.valueOf(targetPeople)
-//                .multiply(BigDecimal.valueOf(100.00)
-//                        .setScale(4, RoundingMode.HALF_EVEN)
-//                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
-//    } // TODO This remain here? Prob yes and then orchestration for stats combining all services to aggregate response
+    @Override
+    public List<PatientDTO> getAllPatientsCurrentlyInsured() {
+        List<PatientDTO> all = patientMapper.allToDTO(patientRepository.findAllCurrentlyInsured(LocalDate.now()));
+        if (all.isEmpty()) {
+            throw new NoSuchPatientEntityFoundException("No Patients currently insured found!");
+        }
+        return all;
+    }
+
+    @Override
+    public List<PatientDTO> getAllPatientsCurrentlyNotInsured() {
+        List<PatientDTO> all = patientMapper.allToDTO(patientRepository.findAllCurrentlyNotInsured(LocalDate.now()));
+        if (all.isEmpty()) {
+            throw new NoSuchPatientEntityFoundException("No Patients currently not insured found!");
+        }
+        return all;
+    }
+
+    @Override
+    public PercentageInsuredPatientDTO getPercentageCurrentlyInsured() {
+        return new PercentageInsuredPatientDTO().setPercentage(calculatePercentInsured());
+    }
+
+    private BigDecimal calculatePercentInsured() {
+        long all = patientRepository.count();
+        long insured = patientRepository.countAllCurrentlyInsured(LocalDate.now());
+        return BigDecimal.valueOf(insured)
+                .multiply(BigDecimal.valueOf(100.00))
+                .setScale(4, RoundingMode.HALF_EVEN)
+                .divide(BigDecimal.valueOf(all), RoundingMode.HALF_EVEN);
+    }
+
+    @Override
+    public PercentageInsuredPatientDTO getPercentageCurrentlyNotInsured() {
+        return new PercentageInsuredPatientDTO().setPercentage(calculatePercentNotInsured());
+    }
+
+    private BigDecimal calculatePercentNotInsured() {
+        long all = patientRepository.count();
+        long insured = patientRepository.countAllCurrentlyNotInsured(LocalDate.now());
+        return BigDecimal.valueOf(insured)
+                .multiply(BigDecimal.valueOf(100.00))
+                .setScale(4, RoundingMode.HALF_EVEN)
+                .divide(BigDecimal.valueOf(all), RoundingMode.HALF_EVEN);
+    }
 
 }
