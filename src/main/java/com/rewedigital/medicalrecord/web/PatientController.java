@@ -82,26 +82,4 @@ public class PatientController {
         return ResponseEntity.noContent().build();
     }
 
-//    @GetMapping("/not-insured")
-//    public ResponseEntity<List<PatientDTO>> patientsNotInsured() {
-//        return ResponseEntity.ok(patientService.getAllPatientsInsuredFalseToDTO());
-//
-//    }
-//
-//    @GetMapping("/insured")
-//    public ResponseEntity<List<PatientDTO>> patientsInsured() {
-//        return ResponseEntity.ok(patientService.getAllPatientsInsuredTrueToDTO());
-//
-//    }
-//
-//    @GetMapping("/percent/not-insured")
-//    public ResponseEntity<PercentNotInsuredPatientDTO> percentPatientsNotInsured() {
-//        return ResponseEntity.ok(patientService.totalPercentNotInsuredPatients());
-//    }
-//
-//    @GetMapping("/percent/insured")
-//    public ResponseEntity<PercentNotInsuredPatientDTO> percentPatientsInsured() {
-//        return ResponseEntity.ok(patientService.totalPercentInsuredPatients());
-//    }
-
 }
