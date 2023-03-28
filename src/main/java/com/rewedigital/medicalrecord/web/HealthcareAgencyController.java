@@ -24,7 +24,7 @@ public class HealthcareAgencyController {
             @NotBlank
             @ExistingHealthcareAgencyCountryValidation(message = "Invalid path! HealthcareAgency with given {country} does not exist!")
             String country) {
-        return ResponseEntity.ok(healthcareAgencyService.getFees(country));
+        return ResponseEntity.ok(healthcareAgencyService.getByCountryToDTO(country));
     }
 
     @PutMapping("/{country}")
@@ -35,7 +35,7 @@ public class HealthcareAgencyController {
             String country,
             @RequestBody @Valid HealthcareAgencyDTO healthcareAgencyDTO
     ) {
-        return ResponseEntity.ok(healthcareAgencyService.updateFees(country, healthcareAgencyDTO));
+        return ResponseEntity.ok(healthcareAgencyService.update(country, healthcareAgencyDTO));
     }
 
 }

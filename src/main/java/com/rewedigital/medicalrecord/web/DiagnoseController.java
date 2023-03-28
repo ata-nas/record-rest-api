@@ -37,7 +37,7 @@ public class DiagnoseController {
 
     @GetMapping
     public ResponseEntity<List<DiagnoseDTO>> diagnoses() {
-        return ResponseEntity.ok(diagnoseService.getAllDiagnosesToDTO());
+        return ResponseEntity.ok(diagnoseService.getAllToDTO());
     }
 
     @PostMapping
@@ -55,7 +55,7 @@ public class DiagnoseController {
                                 .path("/" + createDiagnoseDTO.getName().toLowerCase())
                                 .build().toUri()
                 )
-                .body(diagnoseService.createDiagnose(createDiagnoseDTO));
+                .body(diagnoseService.create(createDiagnoseDTO));
     }
 
     @DeleteMapping("/{name}")
@@ -65,7 +65,7 @@ public class DiagnoseController {
             @ExistingDiagnoseNameValidation(message = "Illegal path! Diagnose with given {name} does not exist!")
             String name
     ) {
-        diagnoseService.deleteDiagnoseByName(name);
+        diagnoseService.delete(name);
         return ResponseEntity.noContent().build();
     }
 

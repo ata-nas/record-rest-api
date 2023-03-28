@@ -8,6 +8,7 @@ import lombok.Setter;
 public class BindExceptionPropertiesDTO {
 
     private String field;
+
     private String defaultMessage;
 
 }

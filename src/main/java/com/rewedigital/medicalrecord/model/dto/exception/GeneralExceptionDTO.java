@@ -14,8 +14,11 @@ import java.time.LocalDateTime;
 public class GeneralExceptionDTO {
 
     private final LocalDateTime timestamp = LocalDateTime.now();
+
     private final Integer status;
+
     private final HttpStatus error;
+
     private final String  message;
 
 }

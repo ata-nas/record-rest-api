@@ -1,6 +1,7 @@
 package com.rewedigital.medicalrecord.model.validation;
 
 import com.rewedigital.medicalrecord.model.validation.validator.NotExistingDoctorUicValidator;
+
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

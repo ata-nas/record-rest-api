@@ -10,11 +10,17 @@ import java.util.List;
 public interface DoctorService {
 
     DoctorEntity getByUic(String uic);
+
     DoctorDTO getByUicToDTO(String uic);
+
     List<DoctorEntity> getAll();
+
     List<DoctorDTO> getAllToDTO();
+
     DoctorDTO create(CreateDoctorDTO createDoctorDTO);
+
     DoctorDTO update(String uic, UpdateDoctorDTO updateDoctorDTO);
+
     void delete(String uic);
 
 }

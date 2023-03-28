@@ -8,10 +8,8 @@ import jakarta.validation.constraints.NotBlank;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.NaturalId;
 
 @Getter

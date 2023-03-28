@@ -16,8 +16,11 @@ import java.util.List;
 public class BindExceptionDTO {
 
     private final LocalDateTime timestamp = LocalDateTime.now();
+
     private final Integer status;
+
     private final HttpStatus error;
+
     private final List<BindExceptionPropertiesDTO> errors;
 
 }

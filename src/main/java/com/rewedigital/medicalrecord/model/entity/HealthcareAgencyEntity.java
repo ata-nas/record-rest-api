@@ -8,9 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+
 import org.hibernate.annotations.NaturalId;
 
 import java.math.BigDecimal;
@@ -37,6 +36,7 @@ public class HealthcareAgencyEntity extends BaseEntity {
             nullable = false
     )
     private BigDecimal appointmentFees;
+
 // TODO Create history table with current fee for current appointment. naive approach!
     @OneToMany(
             mappedBy = "healthcareAgency",

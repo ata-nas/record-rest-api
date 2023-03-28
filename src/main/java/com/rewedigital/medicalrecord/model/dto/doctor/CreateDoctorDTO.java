@@ -1,13 +1,12 @@
 package com.rewedigital.medicalrecord.model.dto.doctor;
 
-import com.rewedigital.medicalrecord.model.dto.specialty.SpecialtyDTO;
 import com.rewedigital.medicalrecord.model.validation.ExistingSpecialtyNameValidation;
 import com.rewedigital.medicalrecord.model.validation.NotExistingDoctorUicValidation;
-import jakarta.validation.Valid;
+
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +27,9 @@ public class CreateDoctorDTO {
     @NotNull
     @PastOrPresent
     private LocalDate birthDate;
+
+    @NotNull
+    private Boolean isGp;
 
     private Set<@ExistingSpecialtyNameValidation String> specialtiesNames;
 

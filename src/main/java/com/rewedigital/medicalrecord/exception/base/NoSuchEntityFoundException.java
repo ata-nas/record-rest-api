@@ -1,7 +1,9 @@
 package com.rewedigital.medicalrecord.exception.base;
 
 import com.rewedigital.medicalrecord.model.dto.exception.GeneralExceptionDTO;
+
 import lombok.Getter;
+
 import org.springframework.http.HttpStatus;
 
 @Getter
@@ -9,18 +11,14 @@ public class NoSuchEntityFoundException extends RuntimeException {
 
     private final GeneralExceptionDTO data;
 
-
     public NoSuchEntityFoundException() {
         super();
         data = generateDTO("No such Entity found!");
-
     }
 
     public NoSuchEntityFoundException(String message) {
         super(message);
         data = generateDTO(message);
-
-
     }
 
     public NoSuchEntityFoundException(String entity, String field, String value) {

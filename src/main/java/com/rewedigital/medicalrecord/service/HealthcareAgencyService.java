@@ -5,8 +5,8 @@ import com.rewedigital.medicalrecord.model.entity.HealthcareAgencyEntity;
 
 public interface HealthcareAgencyService {
 
-    HealthcareAgencyEntity getHealthcareAgency(String country);
-    HealthcareAgencyDTO getFees(String country);
-    HealthcareAgencyDTO updateFees(String country, HealthcareAgencyDTO healthcareAgencyDTO);
+    HealthcareAgencyEntity getByCountry(String country);
+    HealthcareAgencyDTO getByCountryToDTO(String country);
+    HealthcareAgencyDTO update(String country, HealthcareAgencyDTO healthcareAgencyDTO);
 
 }

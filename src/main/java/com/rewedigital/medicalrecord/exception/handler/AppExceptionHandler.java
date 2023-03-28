@@ -7,6 +7,7 @@ import com.rewedigital.medicalrecord.model.dto.exception.GeneralExceptionDTO;
 import com.rewedigital.medicalrecord.model.mapper.FieldErrorMapper;
 
 import jakarta.validation.ValidationException;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,7 @@ public class AppExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
     private GeneralExceptionDTO handleExceptionBadRequest(BadRequestException e) {
         return e.getData();
-    }
+    } // TODO Remove ?
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchEntityFoundException.class)
@@ -76,6 +77,5 @@ public class AppExceptionHandler {
                 e.getLocalizedMessage()
         );
     }
-
 
 }

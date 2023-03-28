@@ -8,8 +8,8 @@ import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.model.entity.SpecialtyEntity;
 import com.rewedigital.medicalrecord.repository.DiagnoseRepository;
 import com.rewedigital.medicalrecord.repository.GpRepository;
-
 import com.rewedigital.medicalrecord.repository.SpecialtyRepository;
+
 import lombok.RequiredArgsConstructor;
 
 import org.mapstruct.MapperConfig;
@@ -43,7 +43,7 @@ public class MapperUtil {
     public DiagnoseEntity findDiagnoseByNameCreateUpdate(String name) {
         return diagnoseRepository.findByName(name)
                 .orElseThrow(() -> new NoSuchDiagnoseEntityFoundException("name", name));
-    }
+    } // TODO Remove ?
 
     @Named("findAllSpecialtiesByNameCreateUpdate")
     public Set<SpecialtyEntity> findAllSpecialtiesByNameCreateUpdate(Set<String> names) {

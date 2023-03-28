@@ -3,7 +3,6 @@ package com.rewedigital.medicalrecord.service.impl;
 import com.rewedigital.medicalrecord.exception.NoSuchPatientEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
-import com.rewedigital.medicalrecord.model.dto.patient.PercentNotInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 import com.rewedigital.medicalrecord.model.mapper.PatientMapper;
@@ -11,12 +10,11 @@ import com.rewedigital.medicalrecord.repository.PatientRepository;
 import com.rewedigital.medicalrecord.service.PatientService;
 
 import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -47,6 +45,10 @@ public class PatientServiceImpl implements PatientService {
         return all;
     }
 
+    @Override
+    public List<PatientDTO> getAllPatientsToDTO() {
+        return patientMapper.allToDTO(getAllPatients());
+    }
 
     @Override
     public PatientDTO createPatient(CreatePatientDTO createPatientDTO) {
@@ -67,11 +69,6 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deletePatientByUic(String uic) {
         patientRepository.delete(getPatientByUic(uic));
-    }
-
-    @Override
-    public List<PatientDTO> getAllPatientsToDTO() {
-        return patientMapper.allToDTO(getAllPatients());
     }
 
 //    public Integer countDistinctByInsuredFalse() {
@@ -137,6 +134,6 @@ public class PatientServiceImpl implements PatientService {
 //                .multiply(BigDecimal.valueOf(100.00)
 //                        .setScale(4, RoundingMode.HALF_EVEN)
 //                        .divide(BigDecimal.valueOf(totalPeople), RoundingMode.HALF_EVEN));
-//    }
+//    } // TODO This remain here? Prob yes and then orchestration for stats combining all services to aggregate response
 
 }

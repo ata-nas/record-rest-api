@@ -9,10 +9,15 @@ import java.util.List;
 public interface DiagnoseService {
 
     DiagnoseEntity getByName(String name);
+
     DiagnoseDTO getByNameToDTO(String name);
-    List<DiagnoseEntity> getAllDiagnoses();
-    List<DiagnoseDTO> getAllDiagnosesToDTO();
-    DiagnoseDTO createDiagnose(CreateDiagnoseDTO diagnoseDTO);
-    void deleteDiagnoseByName(String name);
+
+    List<DiagnoseEntity> getAll();
+
+    List<DiagnoseDTO> getAllToDTO();
+
+    DiagnoseDTO create(CreateDiagnoseDTO diagnoseDTO);
+
+    void delete(String name);
 
 }

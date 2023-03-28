@@ -6,8 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
-
 
 @Getter
 @Setter(AccessLevel.NONE)

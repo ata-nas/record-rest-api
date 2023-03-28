@@ -1,12 +1,9 @@
 package com.rewedigital.medicalrecord.web;
 
-import com.rewedigital.medicalrecord.exception.NoSuchSpecialtyEntityFoundException;
-import com.rewedigital.medicalrecord.exception.base.NoSuchEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.exception.BindExceptionDTO;
-import com.rewedigital.medicalrecord.model.dto.exception.GeneralExceptionDTO;
 import com.rewedigital.medicalrecord.model.mapper.FieldErrorMapper;
 import com.rewedigital.medicalrecord.model.validation.ExistingDoctorUicValidation;
 
@@ -17,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
+import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -45,19 +42,6 @@ public class DoctorController {
             String uic
     ) {
         return null;
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public BindExceptionDTO handleNotFoundSpecialty(FieldErrorMapper objectErrorMapper, MethodArgumentNotValidException e) {
-        return new BindExceptionDTO(
-                409,
-                HttpStatus.CONFLICT,
-                e.getFieldErrors()
-                        .stream()
-                        .map(objectErrorMapper::toDTO)
-                        .toList()
-        );
     }
 
     @GetMapping()
@@ -90,14 +74,6 @@ public class DoctorController {
             @ExistingDoctorUicValidation(message = "Invalid path! Doctor with given {uic} does not exist!")
             String uic,
             @RequestBody @Valid CreateDoctorDTO createDoctorDTO
-    ) {
-        return null;
-    }
-
-
-    @GetMapping("/gp/{uic}")
-    public ResponseEntity<DoctorDTO> doctorGp(
-            @PathVariable String uic
     ) {
         return null;
     }

@@ -6,7 +6,9 @@ import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.repository.DoctorRepository;
 import com.rewedigital.medicalrecord.service.DoctorService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

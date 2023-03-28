@@ -33,7 +33,7 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public List<DiagnoseEntity> getAllDiagnoses() {
+    public List<DiagnoseEntity> getAll() {
         List<DiagnoseEntity> all = diagnoseRepository.findAll();
         if (all.isEmpty()) {
             throw new NoSuchDiagnoseEntityFoundException("No Diagnoses found!");
@@ -42,19 +42,19 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public List<DiagnoseDTO> getAllDiagnosesToDTO() {
-        return diagnoseMapper.allToDTO(getAllDiagnoses());
+    public List<DiagnoseDTO> getAllToDTO() {
+        return diagnoseMapper.allToDTO(getAll());
     }
 
     @Override
-    public DiagnoseDTO createDiagnose(CreateDiagnoseDTO diagnoseDTO) {
+    public DiagnoseDTO create(CreateDiagnoseDTO diagnoseDTO) {
         return diagnoseMapper.toDTO(
                 diagnoseRepository.save(diagnoseMapper.toEntity(diagnoseDTO))
         );
     }
 
     @Override
-    public void deleteDiagnoseByName(String name) {
+    public void delete(String name) {
         diagnoseRepository.delete(getByName(name));
     }
 

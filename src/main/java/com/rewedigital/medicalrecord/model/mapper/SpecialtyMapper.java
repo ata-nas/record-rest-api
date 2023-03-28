@@ -4,6 +4,7 @@ import com.rewedigital.medicalrecord.model.dto.specialty.CreateSpecialtyDTO;
 import com.rewedigital.medicalrecord.model.dto.specialty.SpecialtyDTO;
 import com.rewedigital.medicalrecord.model.entity.SpecialtyEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

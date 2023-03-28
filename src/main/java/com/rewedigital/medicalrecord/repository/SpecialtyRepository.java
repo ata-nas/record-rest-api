@@ -12,6 +12,7 @@ import java.util.Set;
 public interface SpecialtyRepository extends JpaRepository<SpecialtyEntity, Long> {
 
     Optional<SpecialtyEntity> findByName(String name);
+
     Set<SpecialtyEntity> findAllByNameIn(Set<String> names);
 
 }
