@@ -18,4 +18,10 @@ public interface PricingHistoryRepository extends JpaRepository<PricingHistoryEn
     )
     Optional<PricingHistoryEntity> findConflictingDates(LocalDate startDate, LocalDate endDate);
 
+    @Query(
+            "SELECT DISTINCT h from PricingHistoryEntity h " +
+                    "WHERE :dateTime BETWEEN h.startDate AND h.endDate"
+    )
+    Optional<PricingHistoryEntity> findExistingForDateTime(LocalDate dateTime);
+
 }

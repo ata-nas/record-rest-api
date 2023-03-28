@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.service.impl;
 
-import com.rewedigital.medicalrecord.exception.NoSuchSpecialtyEntityFoundException;
+import com.rewedigital.medicalrecord.exception.notfound.NoSuchSpecialtyEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.specialty.CreateSpecialtyDTO;
 import com.rewedigital.medicalrecord.model.dto.specialty.SpecialtyDTO;
 import com.rewedigital.medicalrecord.model.entity.SpecialtyEntity;

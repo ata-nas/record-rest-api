@@ -16,6 +16,7 @@ public interface PatientMapper {
     @Mapping(source = "patientEntity.gp.uic", target = "gpUic")
     PatientDTO toDTO(PatientEntity patientEntity);
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(source = "gpUic", target = "gp", qualifiedByName = "findGpByUicCreateUpdate")
     PatientEntity toEntity(CreatePatientDTO createPatientDTO);
 

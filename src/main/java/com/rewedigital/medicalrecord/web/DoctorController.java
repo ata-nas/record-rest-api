@@ -26,11 +26,6 @@ public class DoctorController {
 
     private final DoctorService doctorService;
 
-    // post mapping /doctors/gp/{uic} will make the existing doctor (if exist) into gp
-    // delete mapping /doctors/gp/{uic} will remove the existing gp entry from gp table (if exist)
-    // I will control all doctor and gp from here, they are connected through inheritance I will use path variable
-    // to differentiate which I want to access. I will have a Doctor manager orchestration to handle operations.
-
     @GetMapping("/{uic}")
     public ResponseEntity<DoctorDTO> doctor(
             @PathVariable
@@ -72,7 +67,7 @@ public class DoctorController {
             String uic,
             @RequestBody @Valid UpdateDoctorDTO updateDoctorDTO
     ) {
-        return null;
+        return ResponseEntity.ok(doctorService.update(uic, updateDoctorDTO));
     }
 
     @DeleteMapping("/{uic}")

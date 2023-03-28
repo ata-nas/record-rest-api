@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.service.impl;
 
-import com.rewedigital.medicalrecord.exception.NoSuchPatientEntityFoundException;
+import com.rewedigital.medicalrecord.exception.notfound.NoSuchPatientEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;

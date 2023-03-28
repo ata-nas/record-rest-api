@@ -11,7 +11,7 @@ import lombok.Setter;
 
 import org.hibernate.annotations.NaturalId;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -33,10 +33,10 @@ public class AppointmentEntity extends BaseEntity {
     @NotNull
     @PastOrPresent
     @Column(
-            name = "date_time",
+            name = "date",
             nullable = false
     )
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
     @Valid
     @NotNull
@@ -48,6 +48,12 @@ public class AppointmentEntity extends BaseEntity {
     @ManyToOne
     private PatientEntity patient;
 
+    @NotBlank
+    @Column(
+            nullable = false
+    )
+    private String description;
+
     @NotEmpty
     @ManyToMany
     @OrderBy
@@ -57,12 +63,6 @@ public class AppointmentEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "diagnose_id")
     )
     private Set<@Valid DiagnoseEntity> diagnoses;
-
-    @NotBlank
-    @Column(
-            nullable = false
-    )
-    private String description;
 
     @Valid
     @NotNull

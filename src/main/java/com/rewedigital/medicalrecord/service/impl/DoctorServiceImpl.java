@@ -1,10 +1,12 @@
 package com.rewedigital.medicalrecord.service.impl;
 
-import com.rewedigital.medicalrecord.exception.NoSuchDoctorEntityFoundException;
+import com.rewedigital.medicalrecord.exception.notfound.NoSuchDoctorEntityFoundException;
+import com.rewedigital.medicalrecord.exception.notfound.NoSuchGpEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
+import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.model.mapper.DoctorMapper;
 import com.rewedigital.medicalrecord.repository.DoctorRepository;
 import com.rewedigital.medicalrecord.repository.GpRepository;
@@ -31,6 +33,12 @@ public class DoctorServiceImpl implements DoctorService {
     public DoctorEntity getByUic(String uic) {
         return doctorRepository.findByUic(uic)
                 .orElseThrow(() -> new NoSuchDoctorEntityFoundException("uic", uic));
+    }
+
+    @Override
+    public GpEntity getByUicGp(String uic) {
+        return gpRepository.findByUic(uic)
+                .orElseThrow(() -> new NoSuchGpEntityFoundException("uic", uic));
     }
 
     @Override
@@ -72,12 +80,33 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorDTO update(String uic, UpdateDoctorDTO updateDoctorDTO) {
-        return null;
+        return doctorIsGp(uic) ?
+                updateDoctorGp(uic, updateDoctorDTO) : updateDoctor(uic, updateDoctorDTO);
+    }
+
+    private DoctorDTO updateDoctor(String uic, UpdateDoctorDTO updateDoctorDTO) {
+        return doctorMapper.toDTO(
+                doctorRepository.save(
+                        doctorMapper.toEntity(updateDoctorDTO, getByUic(uic))
+                )
+        );
+    }
+
+    private DoctorDTO updateDoctorGp(String uic, UpdateDoctorDTO updateDoctorDTO) {
+        return doctorMapper.toDTO(
+                doctorRepository.save(
+                        doctorMapper.toEntityGp(updateDoctorDTO, getByUicGp(uic))
+                )
+        );
     }
 
     @Override
     public void delete(String uic) {
         doctorRepository.delete(getByUic(uic));
+    }
+
+    private boolean doctorIsGp(String uic) {
+        return gpRepository.findByUic(uic).isPresent();
     }
 
 }

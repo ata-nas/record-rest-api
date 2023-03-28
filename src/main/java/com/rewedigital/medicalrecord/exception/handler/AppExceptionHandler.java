@@ -1,7 +1,7 @@
 package com.rewedigital.medicalrecord.exception.handler;
 
-import com.rewedigital.medicalrecord.exception.base.BadRequestException;
-import com.rewedigital.medicalrecord.exception.base.NoSuchEntityFoundException;
+import com.rewedigital.medicalrecord.exception.BadRequestException;
+import com.rewedigital.medicalrecord.exception.NoSuchEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.exception.BindExceptionDTO;
 import com.rewedigital.medicalrecord.model.dto.exception.GeneralExceptionDTO;
 import com.rewedigital.medicalrecord.model.mapper.FieldErrorMapper;

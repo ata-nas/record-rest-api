@@ -1,6 +1,6 @@
-package com.rewedigital.medicalrecord.exception;
+package com.rewedigital.medicalrecord.exception.notfound;
 
-import com.rewedigital.medicalrecord.exception.base.NoSuchEntityFoundException;
+import com.rewedigital.medicalrecord.exception.NoSuchEntityFoundException;
 
 public class NoSuchDoctorEntityFoundException extends NoSuchEntityFoundException {
 

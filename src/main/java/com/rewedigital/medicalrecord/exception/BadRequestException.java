@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.exception.base;
+package com.rewedigital.medicalrecord.exception;
 
 import com.rewedigital.medicalrecord.model.dto.exception.GeneralExceptionDTO;
 

@@ -4,12 +4,15 @@ import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
+import com.rewedigital.medicalrecord.model.entity.GpEntity;
 
 import java.util.List;
 
 public interface DoctorService {
 
     DoctorEntity getByUic(String uic);
+
+    GpEntity getByUicGp(String uic);
 
     DoctorDTO getByUicToDTO(String uic);
 
