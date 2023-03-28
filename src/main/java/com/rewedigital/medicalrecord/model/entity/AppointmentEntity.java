@@ -67,7 +67,7 @@ public class AppointmentEntity extends BaseEntity {
     @Valid
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "health_care_agency_id")
-    private HealthcareAgencyEntity healthcareAgency;
+    @JoinColumn(name = "price_history_id")
+    private PricingHistoryEntity price;
 
 }

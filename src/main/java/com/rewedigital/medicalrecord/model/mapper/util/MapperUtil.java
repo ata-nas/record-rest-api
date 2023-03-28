@@ -33,6 +33,11 @@ public class MapperUtil {
         return s.toUpperCase();
     }
 
+    @Named("findGpByIdCheckTrue")
+    public boolean findGpByIdCheckTrue(Long id) {
+        return id != null && gpRepository.findById(id).isPresent();
+    }
+
     @Named("findGpByUicCreateUpdate")
     public GpEntity findGpByUicCreateUpdate(String uic) {
         return uic != null ?

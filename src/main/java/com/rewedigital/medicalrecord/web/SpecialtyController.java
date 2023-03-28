@@ -6,8 +6,8 @@ import com.rewedigital.medicalrecord.model.validation.ExistingSpecialtyNameValid
 import com.rewedigital.medicalrecord.service.SpecialtyService;
 
 import jakarta.validation.Valid;
-
 import jakarta.validation.constraints.NotBlank;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;

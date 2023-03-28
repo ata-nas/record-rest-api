@@ -1,5 +1,6 @@
 package com.rewedigital.medicalrecord.model.dto.doctor;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rewedigital.medicalrecord.model.validation.ExistingSpecialtyNameValidation;
 import com.rewedigital.medicalrecord.model.validation.NotExistingDoctorUicValidation;
 
@@ -29,7 +30,8 @@ public class CreateDoctorDTO {
     private LocalDate birthDate;
 
     @NotNull
-    private Boolean isGp;
+    @JsonProperty
+    private boolean isGp;
 
     private Set<@ExistingSpecialtyNameValidation String> specialtiesNames;
 

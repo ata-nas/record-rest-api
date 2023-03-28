@@ -1,22 +1,27 @@
-package com.rewedigital.medicalrecord.model.validation.validator;
+package com.rewedigital.medicalrecord.model.validation.tmp;
 
-import com.rewedigital.medicalrecord.model.validation.StartDateBeforeEndDateValidation;
+import com.rewedigital.medicalrecord.repository.PricingHistoryRepository;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 
 import java.time.LocalDate;
 
-public class StartDateBeforeEndDateValidator implements ConstraintValidator<StartDateBeforeEndDateValidation, Object> {
+@RequiredArgsConstructor
+public class NotConflictingPricingHistoryDatesValidator implements ConstraintValidator<NotConflictingPricingHistoryDatesValidation, Object> {
 
     private String first;
     private String second;
+    private final PricingHistoryRepository pricingHistoryRepository;
+
 
     @Override
-    public void initialize(StartDateBeforeEndDateValidation constraintAnnotation) {
+    public void initialize(NotConflictingPricingHistoryDatesValidation constraintAnnotation) {
         first = constraintAnnotation.first();
         second = constraintAnnotation.second();
     }
@@ -33,7 +38,7 @@ public class StartDateBeforeEndDateValidator implements ConstraintValidator<Star
         ) {
             return false;
         }
-        return toCheckFistValue.isBefore(toCheckSecondValue);
+        return pricingHistoryRepository.findConflictingDates(toCheckFistValue, toCheckFistValue).isEmpty();
     }
 
 }

@@ -1,26 +1,32 @@
 package com.rewedigital.medicalrecord.model.entity;
 
 import com.rewedigital.medicalrecord.model.validation.StartDateBeforeEndDateValidation;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "insurances")
-@EqualsAndHashCode(callSuper = false)
+@Table(name = "pricing_hisotry")
 @StartDateBeforeEndDateValidation(first = "startDate", second = "endDate")
-public class PatientInsuranceHistoryEntity extends BaseEntity {
+public class PricingHistoryEntity extends BaseEntity {
+
+    @NotNull
+    @PositiveOrZero
+    @Column(
+            name = "appointment_fees",
+            nullable = false
+    )
+    private BigDecimal appointmentFees;
 
     @NotNull
     @Column(name = "start_date", nullable = false)

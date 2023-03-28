@@ -2,14 +2,14 @@ package com.rewedigital.medicalrecord.web;
 
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
-import com.rewedigital.medicalrecord.model.dto.patient.PercentNotInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 
 import com.rewedigital.medicalrecord.model.validation.ExistingPatientUicValidation;
 import com.rewedigital.medicalrecord.service.PatientService;
-import jakarta.validation.Valid;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;

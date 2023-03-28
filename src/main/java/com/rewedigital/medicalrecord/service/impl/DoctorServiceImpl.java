@@ -1,12 +1,16 @@
 package com.rewedigital.medicalrecord.service.impl;
 
+import com.rewedigital.medicalrecord.exception.NoSuchDoctorEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
+import com.rewedigital.medicalrecord.model.mapper.DoctorMapper;
 import com.rewedigital.medicalrecord.repository.DoctorRepository;
+import com.rewedigital.medicalrecord.repository.GpRepository;
 import com.rewedigital.medicalrecord.service.DoctorService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -14,34 +18,56 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
+    private final DoctorMapper doctorMapper;
     private final DoctorRepository doctorRepository;
+    private final GpRepository gpRepository; // TODO Remove?? Redundant??
+    // This is here because GpEntity inherits DoctorEntity and GpEntity exists only as a flag and DB constraint. So I manage from here.
 
     @Override
     public DoctorEntity getByUic(String uic) {
-        return null;
+        return doctorRepository.findByUic(uic)
+                .orElseThrow(() -> new NoSuchDoctorEntityFoundException("uic", uic));
     }
 
     @Override
     public DoctorDTO getByUicToDTO(String uic) {
-        return null;
+        return doctorMapper.toDTO(getByUic(uic));
     }
 
     @Override
     public List<DoctorEntity> getAll() {
-        return null;
+        List<DoctorEntity> all = doctorRepository.findAll();
+        if (all.isEmpty()) {
+            throw new NoSuchDoctorEntityFoundException("No Doctors found!");
+        }
+        return all;
     }
 
     @Override
     public List<DoctorDTO> getAllToDTO() {
-        return null;
+        return doctorMapper.allToDTO(getAll());
     }
 
     @Override
     public DoctorDTO create(CreateDoctorDTO createDoctorDTO) {
-        return null;
+        return createDoctorDTO.isGp() ?
+                createNewDoctorGp(createDoctorDTO) : createNewDoctor(createDoctorDTO);
+    }
+
+    private DoctorDTO createNewDoctor(CreateDoctorDTO createDoctorDTO) {
+        return doctorMapper.toDTO(
+                doctorRepository.save(doctorMapper.toEntity(createDoctorDTO))
+        );
+    }
+
+    private DoctorDTO createNewDoctorGp(CreateDoctorDTO createDoctorDTO) {
+        return doctorMapper.toDTO(
+                doctorRepository.save(doctorMapper.toEntityGp(createDoctorDTO))
+        );
     }
 
     @Override
@@ -51,7 +77,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void delete(String uic) {
-
+        doctorRepository.delete(getByUic(uic));
     }
 
 }

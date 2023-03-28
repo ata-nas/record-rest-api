@@ -7,17 +7,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
-@StartDateBeforeEndDateValidation(first = "startDateTime", second = "endDateTime")
+@StartDateBeforeEndDateValidation(first = "startDate", second = "endDate")
 public class PatientInsuranceHistoryDTO {
 
     @NotNull
-    private LocalDateTime startDateTime;
+    private LocalDate startDate;
 
     @NotNull
-    private LocalDateTime endDateTime;
+    private LocalDate endDate;
 
 }

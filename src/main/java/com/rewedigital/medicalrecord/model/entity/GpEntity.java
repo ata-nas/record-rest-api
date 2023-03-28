@@ -13,7 +13,6 @@ import lombok.Setter;
 @Table(name = "gps")
 public class GpEntity extends DoctorEntity {
 
-    @NotNull
     @MapsId
     private Long id;
 

@@ -13,7 +13,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentEntity, 
 
     @Query(
             "SELECT DISTINCT a FROM AppointmentEntity a JOIN a.patient p JOIN p.insurances ih " +
-                    "WHERE a.dateTime BETWEEN ih.startDateTime AND ih.endDateTime"
+                    "WHERE a.dateTime BETWEEN ih.startDate AND ih.endDate"
     )
     Set<AppointmentEntity> findAllWherePatientInsured(); // TODO Example how to aggregate data for stats later!
 
