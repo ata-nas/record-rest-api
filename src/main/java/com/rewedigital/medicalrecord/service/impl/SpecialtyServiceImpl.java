@@ -9,12 +9,12 @@ import com.rewedigital.medicalrecord.repository.SpecialtyRepository;
 import com.rewedigital.medicalrecord.service.SpecialtyService;
 
 import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional

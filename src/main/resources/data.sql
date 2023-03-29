@@ -1,6 +1,6 @@
 -- healthcare agency
-INSERT INTO pricing_hisotry (id, issue_no, appointment_fees, start_date, end_date)
-VALUES (1, '1', 10.00, '2020-01-01', '2022-12-31');
+INSERT INTO pricing_hisotry (id, issue_no, appointment_fees, from_date)
+VALUES (1, '1', 10.00, '2020-01-01');
 
 -- patients
 INSERT INTO patients (id, name, uic, gp_id, deleted)
@@ -55,11 +55,11 @@ VALUES (1, 'HEALTHY', false),
 
 
 INSERT INTO appointments(id, date, description, uic, doctor_id, patient_id, price_history_id)
-VALUES (1, '2023-01-01', 'Generic description', '2301010001', 1, 1, 1),
-       (2, '2023-01-04', 'Generic description', '2301040001', 3, 2, 1),
-       (3, '2023-01-03', 'Generic description', '2301030001', 5, 4, 1),
-       (4, '2023-01-02', 'Generic description', '2301020001', 2, 3, 1),
-       (5, '2023-01-07', 'Generic description', '2301070001', 4, 5, 1);
+VALUES (1, '2022-01-01', 'Generic description', '2301010001', 1, 1, 1),
+       (2, '2022-01-04', 'Generic description', '2301040001', 3, 2, 1),
+       (3, '2022-01-03', 'Generic description', '2301030001', 5, 4, 1),
+       (4, '2022-01-02', 'Generic description', '2301020001', 2, 3, 1),
+       (5, '2022-01-07', 'Generic description', '2301070001', 4, 5, 1);
 
 INSERT INTO appointments_diagnoses(appointment_id, diagnose_id)
 VALUES (1, 1),

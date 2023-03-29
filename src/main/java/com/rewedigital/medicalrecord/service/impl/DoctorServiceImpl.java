@@ -13,6 +13,7 @@ import com.rewedigital.medicalrecord.repository.GpRepository;
 import com.rewedigital.medicalrecord.service.DoctorService;
 
 import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -26,8 +27,10 @@ public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorMapper doctorMapper;
     private final DoctorRepository doctorRepository;
-    private final GpRepository gpRepository; // TODO Remove?? Redundant??
-    // This is here because GpEntity inherits DoctorEntity and GpEntity exists only as a flag and DB constraint. So I manage from here.
+    /**
+     * This is here because GpEntity inherits DoctorEntity and GpEntity exists only as a flag and DB constraint. So I manage from here.
+     */
+    private final GpRepository gpRepository;
 
     @Override
     public DoctorEntity getByUic(String uic) {
@@ -108,13 +111,13 @@ public class DoctorServiceImpl implements DoctorService {
         );
     }
 
+    private boolean doctorIsGp(String uic) {
+        return gpRepository.findByUicAndDeletedFalse(uic).isPresent();
+    }
+
     @Override
     public void delete(String uic) {
         doctorRepository.softDelete(uic);
-    }
-
-    private boolean doctorIsGp(String uic) {
-        return gpRepository.findByUicAndDeletedFalse(uic).isPresent();
     }
 
 }

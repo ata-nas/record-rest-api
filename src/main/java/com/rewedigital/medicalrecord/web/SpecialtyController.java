@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/healthcare/bulgaria/specialties")
 @RequiredArgsConstructor
-@Validated // Note: if methods in this controller are private it does not inject the @Service!!!
+@Validated
 public class SpecialtyController {
 
     private final SpecialtyService specialtyService;

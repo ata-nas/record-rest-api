@@ -1,6 +1,5 @@
 package com.rewedigital.medicalrecord.repository;
 
-import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;

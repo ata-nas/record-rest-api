@@ -1,10 +1,7 @@
 package com.rewedigital.medicalrecord.repository;
 
-import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
-import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
 
-import com.rewedigital.medicalrecord.model.entity.SpecialtyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

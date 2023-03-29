@@ -56,6 +56,10 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDTO createPatient(CreatePatientDTO createPatientDTO) {
+        if (patientRepository.findByUic(createPatientDTO.getUic()).isPresent()) {
+            patientRepository.softCreate(createPatientDTO.getUic());
+            return updatePatient(createPatientDTO.getUic(), patientMapper.toDTO(createPatientDTO));
+        }
         return patientMapper.toDTO(
                 patientRepository.save(
                         patientMapper.toEntity(createPatientDTO)
@@ -72,7 +76,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void deletePatientByUic(String uic) {
-        patientRepository.delete(getPatientByUic(uic));
+        patientRepository.softDelete(uic);
     }
 
     @Override

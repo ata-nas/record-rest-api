@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.model.validation;
 
-import com.rewedigital.medicalrecord.model.validation.validator.NotExistingAppointmentUicValidator;
+import com.rewedigital.medicalrecord.model.validation.validator.NotConflictingPricingHistoryDateValidator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -11,14 +11,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Valid if not exist or soft deleted in DB, Not Valid if exist in DB.
+ * Valid if not exist in DB, Not Valid if exist in DB.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = NotExistingAppointmentUicValidator.class)
-public @interface NotExistingAppointmentUicValidation {
+@Constraint(validatedBy = NotConflictingPricingHistoryDateValidator.class)
+public @interface NotConflictingPricingHistoryDateValidation {
 
-    String message() default "Appointment already exists!";
+    String message() default "Exists a Date that is after given input Date!";
 
     Class<?>[] groups() default {};
 

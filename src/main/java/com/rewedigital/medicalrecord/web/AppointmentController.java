@@ -2,10 +2,7 @@ package com.rewedigital.medicalrecord.web;
 
 import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.CreatePricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.PricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.UpdatePricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.validation.ExistingAppointmentUicValidation;
 import com.rewedigital.medicalrecord.service.AppointmentService;
 
@@ -14,7 +11,6 @@ import jakarta.validation.constraints.NotBlank;
 
 import lombok.RequiredArgsConstructor;
 
-import org.hibernate.sql.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

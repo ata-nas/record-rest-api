@@ -45,7 +45,6 @@ public class DoctorEntity extends BaseEntity {
     )
     private LocalDate birthDate;
 
-    // TODO Use MapperUtil to get valid specialties from db, otherwise will blow, cause im trying to create new ones!
     @ManyToMany
     @OrderBy
     @JoinTable(

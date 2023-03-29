@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.model.dto.appointment.pricing;
+package com.rewedigital.medicalrecord.model.dto.pricing;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,9 +22,6 @@ public class PricingHistoryDTO {
     private BigDecimal appointmentFees;
 
     @NotNull
-    private LocalDate startDate;
-
-    @NotNull
-    private LocalDate endDate;
+    private LocalDate fromDate;
 
 }

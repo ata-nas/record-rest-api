@@ -11,11 +11,6 @@ public class NoSuchEntityFoundException extends RuntimeException {
 
     private final GeneralExceptionDTO data;
 
-    public NoSuchEntityFoundException() {
-        super();
-        data = generateDTO("No such Entity found!");
-    }
-
     public NoSuchEntityFoundException(String message) {
         super(message);
         data = generateDTO(message);

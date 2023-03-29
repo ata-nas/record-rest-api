@@ -1,8 +1,8 @@
 package com.rewedigital.medicalrecord.model.mapper;
 
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.CreatePricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.PricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.UpdatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.CreatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.PricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.UpdatePricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.entity.PricingHistoryEntity;
 
 import org.mapstruct.Mapper;

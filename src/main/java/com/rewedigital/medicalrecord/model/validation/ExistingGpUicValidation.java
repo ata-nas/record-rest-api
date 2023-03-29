@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Valid if exist in DB, Not Valid if not exist in DB.
+ * Valid if exist in DB, Not Valid if not exist or soft deleted in DB.
  * Null values are considered valid!
  */
 @Retention(RetentionPolicy.RUNTIME)

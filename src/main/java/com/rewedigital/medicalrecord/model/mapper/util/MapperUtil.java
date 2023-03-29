@@ -12,9 +12,13 @@ import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
+/**
+ * Utility for MapStruct. Here are methods that define what a validly mapped Entity means in my domain.
+ * Most of the methods (defined - "...CreateUpdate") that pull from repositories are pulling Entities that are
+ * not soft-deleted since that constitutes the current state of the application.
+ */
 @Component
 @MapperConfig
 @RequiredArgsConstructor
@@ -37,17 +41,17 @@ public class MapperUtil {
         return id != null && gpRepository.findById(id).isPresent();
     }
 
+    @Named("findPricingHistoryInDate")
+    public PricingHistoryEntity findPricingHistoryInDate(LocalDate date) {
+        return pricingHistoryRepository.findExistingForDate(date)
+                .orElseThrow(() -> new NoSuchPricingHistoryEntityFoundException("date", date.toString()));
+    }
+
     @Named("findGpByUicCreateUpdate")
     public GpEntity findGpByUicCreateUpdate(String uic) {
         return uic != null ?
                 gpRepository.findByUicAndDeletedFalse(uic).orElseThrow(() -> new NoSuchGpEntityFoundException("uic", uic)) : null;
     }
-
-    @Named("findDiagnoseByNameCreateUpdate")
-    public DiagnoseEntity findDiagnoseByNameCreateUpdate(String name) {
-        return diagnoseRepository.findByNameAndDeletedFalse(name)
-                .orElseThrow(() -> new NoSuchDiagnoseEntityFoundException("name", name));
-    } // TODO Remove ?
 
     @Named("findDoctorByUicCreateUpdate")
     public DoctorEntity findDoctorByUicCreateUpdate(String uic) {
@@ -77,12 +81,6 @@ public class MapperUtil {
             throw new NoSuchSpecialtyEntityFoundException("No Specialties by given {name} found!");
         }
         return result;
-    }
-
-    @Named("findPricingHistoryInDate")
-    public PricingHistoryEntity findPricingHistoryInDate(LocalDate date) {
-        return pricingHistoryRepository.findExistingForDateTime(date)
-                .orElseThrow(() -> new NoSuchPricingHistoryEntityFoundException("date", date.toString()));
     }
 
 }

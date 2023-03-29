@@ -4,10 +4,6 @@ import com.rewedigital.medicalrecord.exception.NoSuchEntityFoundException;
 
 public class NoSuchAppointmentEntityFoundException extends NoSuchEntityFoundException {
 
-    public NoSuchAppointmentEntityFoundException() {
-        super();
-    }
-
     public NoSuchAppointmentEntityFoundException(String message) {
         super(message);
     }
@@ -15,4 +11,5 @@ public class NoSuchAppointmentEntityFoundException extends NoSuchEntityFoundExce
     public NoSuchAppointmentEntityFoundException(String field, String value) {
         super("Appointment", field, value);
     }
+
 }

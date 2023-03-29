@@ -1,22 +1,16 @@
 package com.rewedigital.medicalrecord.service.impl;
 
 import com.rewedigital.medicalrecord.exception.notfound.NoSuchAppointmentEntityFoundException;
-import com.rewedigital.medicalrecord.exception.notfound.NoSuchPricingHistoryEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.CreatePricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.PricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.UpdatePricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
-import com.rewedigital.medicalrecord.model.entity.PricingHistoryEntity;
 import com.rewedigital.medicalrecord.model.mapper.AppointmentMapper;
-import com.rewedigital.medicalrecord.model.mapper.PricingHistoryMapper;
 import com.rewedigital.medicalrecord.repository.AppointmentRepository;
-import com.rewedigital.medicalrecord.repository.PricingHistoryRepository;
 import com.rewedigital.medicalrecord.service.AppointmentService;
 
 import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -78,9 +72,5 @@ public class AppointmentServiceImpl implements AppointmentService {
     public void delete(String uic) {
         appointmentRepository.delete(getByUic(uic));
     }
-
-
-
-    // TODO make functionality to add other appointment fees!
 
 }

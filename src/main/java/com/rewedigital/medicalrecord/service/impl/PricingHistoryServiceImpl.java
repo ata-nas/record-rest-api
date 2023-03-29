@@ -1,15 +1,18 @@
 package com.rewedigital.medicalrecord.service.impl;
 
 import com.rewedigital.medicalrecord.exception.notfound.NoSuchPricingHistoryEntityFoundException;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.CreatePricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.PricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.UpdatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.CreatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.PricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.UpdatePricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.entity.PricingHistoryEntity;
 import com.rewedigital.medicalrecord.model.mapper.PricingHistoryMapper;
 import com.rewedigital.medicalrecord.repository.PricingHistoryRepository;
 import com.rewedigital.medicalrecord.service.PricingHistoryService;
+
 import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

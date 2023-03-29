@@ -3,7 +3,9 @@ package com.rewedigital.medicalrecord.web;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PercentageInsuredPatientDTO;
 import com.rewedigital.medicalrecord.service.StatsService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

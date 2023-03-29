@@ -36,11 +36,9 @@ public class PatientEntity extends BaseEntity {
     )
     private String name;
 
-    @Valid // TODO Check if is allowed null value here if used @Valid, I need to have this nullable if no GP!
+    @Valid
     @ManyToOne //(fetch = FetchType.LAZY) //TODO make @Transactional service and optimise all queries
     private GpEntity gp;
-
-    // TODO Create history table for if insured on current date!
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @OrderBy
@@ -51,8 +49,12 @@ public class PatientEntity extends BaseEntity {
     )
     private Set<@Valid PatientInsuranceHistoryEntity> insurances;
 
+    /**
+     *  Adder method for Mapstruct Strategy, otherwise it rewrites the whole collection and the behavior is not desired.
+     * @param toAdd - the PatientInsuranceHistoryEntity to be added
+     * @return this - PatientEntity
+     */
     public PatientEntity addInsurance(PatientInsuranceHistoryEntity toAdd) {
-        // adder method for Mapstruct Strategy, otherwise it rewrites the whole collection and the behavior is not desired
         if (insurances == null) {
             insurances = new LinkedHashSet<>();
         }

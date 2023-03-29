@@ -1,6 +1,5 @@
 package com.rewedigital.medicalrecord.model.entity;
 
-import com.rewedigital.medicalrecord.model.validation.StartDateBeforeEndDateValidation;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
@@ -13,13 +12,11 @@ import org.hibernate.annotations.NaturalId;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "pricing_hisotry")
-@StartDateBeforeEndDateValidation(first = "startDate", second = "endDate")
 public class PricingHistoryEntity extends BaseEntity {
 
     @NotBlank
@@ -39,11 +36,7 @@ public class PricingHistoryEntity extends BaseEntity {
     private BigDecimal appointmentFees;
 
     @NotNull
-    @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
-
-    @NotNull
-    @Column(name = "end_date", nullable = false)
-    private LocalDate endDate;
+    @Column(name = "from_date", nullable = false)
+    private LocalDate fromDate;
 
 }

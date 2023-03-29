@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,14 +16,17 @@ public interface PricingHistoryRepository extends JpaRepository<PricingHistoryEn
 
     @Query(
             "SELECT DISTINCT h FROM PricingHistoryEntity h " +
-                    "WHERE :startDate BETWEEN h.startDate AND h.endDate OR h.startDate BETWEEN :startDate AND :endDate"
+                    "ORDER BY h.fromDate DESC " +
+                    "LIMIT 1"
     )
-    Optional<PricingHistoryEntity> findConflictingDates(LocalDate startDate, LocalDate endDate);
+    Optional<PricingHistoryEntity> findLatestPricing();
 
     @Query(
             "SELECT DISTINCT h from PricingHistoryEntity h " +
-                    "WHERE :dateTime BETWEEN h.startDate AND h.endDate"
+                    "WHERE :date > h.fromDate " +
+                    "ORDER BY h.fromDate DESC " +
+                    "LIMIT 1"
     )
-    Optional<PricingHistoryEntity> findExistingForDateTime(LocalDate dateTime);
+    Optional<PricingHistoryEntity> findExistingForDate(LocalDate date);
 
 }

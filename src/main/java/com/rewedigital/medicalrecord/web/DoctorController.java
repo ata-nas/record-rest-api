@@ -6,6 +6,7 @@ import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.validation.ExistingDoctorUicValidation;
 
 import com.rewedigital.medicalrecord.service.DoctorService;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 

@@ -4,10 +4,6 @@ import com.rewedigital.medicalrecord.exception.NoSuchEntityFoundException;
 
 public class NoSuchDoctorEntityFoundException extends NoSuchEntityFoundException {
 
-    public NoSuchDoctorEntityFoundException() {
-        super();
-    }
-
     public NoSuchDoctorEntityFoundException(String message) {
         super(message);
     }

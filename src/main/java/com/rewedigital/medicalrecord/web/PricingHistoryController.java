@@ -1,11 +1,16 @@
 package com.rewedigital.medicalrecord.web;
 
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.CreatePricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.PricingHistoryDTO;
-import com.rewedigital.medicalrecord.model.dto.appointment.pricing.UpdatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.CreatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.PricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.pricing.UpdatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.validation.ExistingPricingHistoryIssueNoValidation;
 import com.rewedigital.medicalrecord.service.PricingHistoryService;
+
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/healthcare/bulgaria/appointments/pricing")
+@RequestMapping("/api/healthcare/bulgaria/pricing")
 @RequiredArgsConstructor
 @Validated
 public class PricingHistoryController {
@@ -38,7 +43,6 @@ public class PricingHistoryController {
                                 .path("/api")
                                 .path("/healthcare")
                                 .path("/bulgaria")
-                                .path("/appointments")
                                 .path("/pricing")
                                 .path("/" + createPricingHistoryDTO.getIssueNo())
                                 .build().toUri()
@@ -48,8 +52,11 @@ public class PricingHistoryController {
 
     @PutMapping("/{issueNo}")
     public ResponseEntity<PricingHistoryDTO> updatePricing(
-            @PathVariable String issueNo,
-            @RequestBody UpdatePricingHistoryDTO updatePricingHistoryDTO
+            @NotBlank
+            @ExistingPricingHistoryIssueNoValidation
+            @PathVariable
+            String issueNo,
+            @RequestBody @Valid UpdatePricingHistoryDTO updatePricingHistoryDTO
     ) {
         return ResponseEntity.ok(pricingHistoryService.updatePricing(issueNo, updatePricingHistoryDTO));
     }

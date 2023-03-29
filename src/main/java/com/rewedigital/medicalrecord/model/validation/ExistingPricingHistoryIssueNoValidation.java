@@ -1,6 +1,6 @@
 package com.rewedigital.medicalrecord.model.validation;
 
-import com.rewedigital.medicalrecord.model.validation.validator.ExistingDoctorUicValidator;
+import com.rewedigital.medicalrecord.model.validation.validator.ExistingPricingHistoryIssueNoValidator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -15,11 +15,11 @@ import java.lang.annotation.Target;
  * Null values are considered valid!
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(validatedBy = ExistingDoctorUicValidator.class)
-public @interface ExistingDoctorUicValidation {
+@Target({ElementType.TYPE_USE, ElementType.FIELD, ElementType.PARAMETER})
+@Constraint(validatedBy = ExistingPricingHistoryIssueNoValidator.class)
+public @interface ExistingPricingHistoryIssueNoValidation {
 
-    String message() default "Doctor with given {uic} does not exist!";
+    String message() default "Pricing History with given {issueNo} does not exist!";
 
     Class<?>[] groups() default {};
 

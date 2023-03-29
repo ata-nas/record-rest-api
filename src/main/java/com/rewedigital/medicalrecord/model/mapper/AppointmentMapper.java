@@ -5,6 +5,7 @@ import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -33,4 +34,5 @@ public interface AppointmentMapper {
     AppointmentEntity toEntity(UpdateAppointmentDTO updateAppointmentDTO, @MappingTarget AppointmentEntity appointmentEntity);
 
     List<AppointmentDTO> allToDTO(List<AppointmentEntity> appointments);
+
 }
