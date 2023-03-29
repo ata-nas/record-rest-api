@@ -27,13 +27,4 @@ public interface AppointmentService {
 
     void delete(String uic);
 
-    PricingHistoryEntity getPricingByIssueNo(String issueNo);
-
-    List<PricingHistoryEntity> getAllPricing();
-
-    List<PricingHistoryDTO> getAllPricingToDTO();
-
-    PricingHistoryDTO createPricing(CreatePricingHistoryDTO createPricingHistoryDTO);
-
-    PricingHistoryDTO updatePricing(String issueNo, UpdatePricingHistoryDTO updatePricingHistoryDTO);
 }

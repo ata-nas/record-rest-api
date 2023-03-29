@@ -85,36 +85,4 @@ public class AppointmentController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/pricing")
-    public ResponseEntity<List<PricingHistoryDTO>> pricingHistory() {
-        return ResponseEntity.ok(appointmentService.getAllPricingToDTO());
-    }
-
-    @PostMapping("/pricing")
-    public ResponseEntity<PricingHistoryDTO> createPricing(
-            @RequestBody @Valid CreatePricingHistoryDTO createPricingHistoryDTO,
-            UriComponentsBuilder uriComponentsBuilder
-    ) {
-        return ResponseEntity
-                .created(
-                        uriComponentsBuilder
-                                .path("/api")
-                                .path("/healthcare")
-                                .path("/bulgaria")
-                                .path("/appointments")
-                                .path("/pricing")
-                                .path("/" + createPricingHistoryDTO.getIssueNo())
-                                .build().toUri()
-                )
-                .body(appointmentService.createPricing(createPricingHistoryDTO));
-    }
-
-    @PutMapping("/pricing/{issueNo}")
-    public ResponseEntity<PricingHistoryDTO> updatePricing(
-            @PathVariable String issueNo,
-            @RequestBody UpdatePricingHistoryDTO updatePricingHistoryDTO
-    ) {
-        return ResponseEntity.ok(appointmentService.updatePricing(issueNo, updatePricingHistoryDTO));
-    }
-
 }

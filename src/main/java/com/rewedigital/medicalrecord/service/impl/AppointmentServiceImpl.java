@@ -29,16 +29,7 @@ import java.util.List;
 public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
-    /**
-     * This PricingHistoryRepository is here because in this context it is tightly coupled to Appointments.
-     * I removed Healthcare agency since not needed for context of app.
-     * This pricing history only supports adding and deleting. I prefer to not be able to update but to delete and enter
-     * data again since this is very static data and is used to preserve state of price overtime.
-     */
-    private final PricingHistoryRepository pricingHistoryRepository;
-    // TODO make functionality for this! Already have annotations for overlapping.
     private final AppointmentMapper appointmentMapper;
-    private final PricingHistoryMapper pricingHistoryMapper;
 
     @Override
     public AppointmentEntity getByUic(String uic) {
@@ -88,43 +79,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepository.delete(getByUic(uic));
     }
 
-    @Override
-    public PricingHistoryEntity getPricingByIssueNo(String issueNo) {
-        return pricingHistoryRepository.findByIssueNo(issueNo)
-                .orElseThrow(() -> new NoSuchPricingHistoryEntityFoundException("issueNo", issueNo));
-    }
 
-    @Override
-    public List<PricingHistoryEntity> getAllPricing() {
-        List<PricingHistoryEntity> all = pricingHistoryRepository.findAll();
-        if (all.isEmpty()) {
-            throw new NoSuchPricingHistoryEntityFoundException("No Pricing History found!");
-        }
-        return all;
-    }
-
-    @Override
-    public List<PricingHistoryDTO> getAllPricingToDTO() {
-        return pricingHistoryMapper.allToDTO(getAllPricing());
-    }
-
-    @Override
-    public PricingHistoryDTO createPricing(CreatePricingHistoryDTO createPricingHistoryDTO) {
-        return pricingHistoryMapper.toDTO(
-                pricingHistoryRepository.save(
-                        pricingHistoryMapper.toEntity(createPricingHistoryDTO)
-                )
-        );
-    }
-
-    @Override
-    public PricingHistoryDTO updatePricing(String issueNo, UpdatePricingHistoryDTO updatePricingHistoryDTO) {
-        return pricingHistoryMapper.toDTO(
-                pricingHistoryRepository.save(
-                        pricingHistoryMapper.update(updatePricingHistoryDTO, getPricingByIssueNo(issueNo))
-                )
-        );
-    }
 
     // TODO make functionality to add other appointment fees!
 
