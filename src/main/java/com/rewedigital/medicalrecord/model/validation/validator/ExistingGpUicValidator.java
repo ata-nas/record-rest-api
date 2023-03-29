@@ -15,7 +15,7 @@ public class ExistingGpUicValidator implements ConstraintValidator<ExistingGpUic
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value == null || gpRepository.findByUic(value).isPresent();
+        return value == null || gpRepository.findByUicAndDeletedFalse(value).isPresent();
     }
 
 }

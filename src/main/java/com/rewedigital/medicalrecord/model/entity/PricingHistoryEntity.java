@@ -3,11 +3,13 @@ package com.rewedigital.medicalrecord.model.entity;
 import com.rewedigital.medicalrecord.model.validation.StartDateBeforeEndDateValidation;
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,6 +21,14 @@ import java.time.LocalDateTime;
 @Table(name = "pricing_hisotry")
 @StartDateBeforeEndDateValidation(first = "startDate", second = "endDate")
 public class PricingHistoryEntity extends BaseEntity {
+
+    @NotBlank
+    @NaturalId
+    @Column(
+            name = "issue_no",
+            nullable = false
+    )
+    private String issueNo;
 
     @NotNull
     @PositiveOrZero

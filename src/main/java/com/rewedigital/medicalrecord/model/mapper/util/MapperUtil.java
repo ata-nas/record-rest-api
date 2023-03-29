@@ -40,31 +40,25 @@ public class MapperUtil {
     @Named("findGpByUicCreateUpdate")
     public GpEntity findGpByUicCreateUpdate(String uic) {
         return uic != null ?
-                gpRepository.findByUic(uic).orElseThrow(() -> new NoSuchGpEntityFoundException("uic", uic)) : null;
+                gpRepository.findByUicAndDeletedFalse(uic).orElseThrow(() -> new NoSuchGpEntityFoundException("uic", uic)) : null;
     }
 
     @Named("findDiagnoseByNameCreateUpdate")
     public DiagnoseEntity findDiagnoseByNameCreateUpdate(String name) {
-        return diagnoseRepository.findByName(name)
+        return diagnoseRepository.findByNameAndDeletedFalse(name)
                 .orElseThrow(() -> new NoSuchDiagnoseEntityFoundException("name", name));
     } // TODO Remove ?
 
-    @Named("findDoctorByUic")
-    public DoctorEntity findDoctorByUic(String uic) {
-        return doctorRepository.findByUic(uic)
+    @Named("findDoctorByUicCreateUpdate")
+    public DoctorEntity findDoctorByUicCreateUpdate(String uic) {
+        return doctorRepository.findByUicAndDeletedFalse(uic)
                 .orElseThrow(() -> new NoSuchDoctorEntityFoundException("uic", uic));
     }
 
-    @Named("findPatientByUic")
-    public PatientEntity findPatientByUic(String uic) {
-        return patientRepository.findByUic(uic)
+    @Named("findPatientByUicCreateUpdate")
+    public PatientEntity findPatientByUicCreateUpdate(String uic) {
+        return patientRepository.findByUicAndDeletedFalse(uic)
                 .orElseThrow(() -> new NoSuchPatientEntityFoundException("uic", uic));
-    }
-
-    @Named("findPricingHistoryInDate")
-    public PricingHistoryEntity findPricingHistoryInDate(LocalDate date) {
-        return pricingHistoryRepository.findExistingForDateTime(date)
-                .orElseThrow(() -> new NoSuchPricingHistoryEntityFoundException("date", date.toString()));
     }
 
     @Named("findAllDiagnosesByNameCreateUpdate")
@@ -78,11 +72,17 @@ public class MapperUtil {
 
     @Named("findAllSpecialtiesByNameCreateUpdate")
     public Set<SpecialtyEntity> findAllSpecialtiesByNameCreateUpdate(Set<String> names) {
-        Set<SpecialtyEntity> result = specialtyRepository.findAllByNameIn(names);
+        Set<SpecialtyEntity> result = specialtyRepository.findAllByNameInAndDeletedFalse(names);
         if (result.isEmpty()) {
             throw new NoSuchSpecialtyEntityFoundException("No Specialties by given {name} found!");
         }
         return result;
+    }
+
+    @Named("findPricingHistoryInDate")
+    public PricingHistoryEntity findPricingHistoryInDate(LocalDate date) {
+        return pricingHistoryRepository.findExistingForDateTime(date)
+                .orElseThrow(() -> new NoSuchPricingHistoryEntityFoundException("date", date.toString()));
     }
 
 }

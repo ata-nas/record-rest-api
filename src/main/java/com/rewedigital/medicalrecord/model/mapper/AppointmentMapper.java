@@ -19,15 +19,15 @@ public interface AppointmentMapper {
     AppointmentDTO toDTO(AppointmentEntity appointmentEntity);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "patient", source = "patientUic", qualifiedByName = "findPatientByUic")
-    @Mapping(target = "doctor", source = "doctorUic", qualifiedByName = "findDoctorByUic")
+    @Mapping(target = "patient", source = "patientUic", qualifiedByName = "findPatientByUicCreateUpdate")
+    @Mapping(target = "doctor", source = "doctorUic", qualifiedByName = "findDoctorByUicCreateUpdate")
     @Mapping(target = "price", source = "date", qualifiedByName = "findPricingHistoryInDate")
     @Mapping(target = "diagnoses", source = "diagnoses", qualifiedByName = "findAllDiagnosesByNameCreateUpdate")
     AppointmentEntity toEntity(CreateAppointmentDTO createAppointmentDTO);
 
     @Mapping(target = "uic", ignore = true)
-    @Mapping(target = "patient", source = "patientUic", qualifiedByName = "findPatientByUic")
-    @Mapping(target = "doctor", source = "doctorUic", qualifiedByName = "findDoctorByUic")
+    @Mapping(target = "patient", source = "patientUic", qualifiedByName = "findPatientByUicCreateUpdate")
+    @Mapping(target = "doctor", source = "doctorUic", qualifiedByName = "findDoctorByUicCreateUpdate")
     @Mapping(target = "price", source = "date", qualifiedByName = "findPricingHistoryInDate")
     @Mapping(target = "diagnoses", source = "diagnoses", qualifiedByName = "findAllDiagnosesByNameCreateUpdate")
     AppointmentEntity toEntity(UpdateAppointmentDTO updateAppointmentDTO, @MappingTarget AppointmentEntity appointmentEntity);

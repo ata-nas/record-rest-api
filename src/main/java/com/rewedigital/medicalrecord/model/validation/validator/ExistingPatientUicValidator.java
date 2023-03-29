@@ -15,7 +15,7 @@ public class ExistingPatientUicValidator implements ConstraintValidator<Existing
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value == null || patientRepository.findByUic(value).isPresent();
+        return value == null || patientRepository.findByUicAndDeletedFalse(value).isPresent();
     }
 
 }

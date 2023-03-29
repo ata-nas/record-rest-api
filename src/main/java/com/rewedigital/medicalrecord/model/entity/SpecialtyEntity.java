@@ -28,7 +28,7 @@ public class SpecialtyEntity extends BaseEntity {
     @EqualsAndHashCode.Include
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private boolean deleted;
 
 }

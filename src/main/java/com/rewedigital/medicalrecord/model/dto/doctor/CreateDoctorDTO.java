@@ -2,8 +2,8 @@ package com.rewedigital.medicalrecord.model.dto.doctor;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rewedigital.medicalrecord.model.validation.ExistingSpecialtyNameValidation;
-import com.rewedigital.medicalrecord.model.validation.NotExistingAppointmentUicValidation;
 
+import com.rewedigital.medicalrecord.model.validation.NotExistingDoctorUicValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class CreateDoctorDTO {
 
     @NotBlank
-    @NotExistingAppointmentUicValidation
+    @NotExistingDoctorUicValidation
     private String uic;
 
     @NotBlank

@@ -12,4 +12,6 @@ public interface GpRepository extends JpaRepository<GpEntity, Long> {
 
     Optional<GpEntity> findByUic(String uic);
 
+    Optional<GpEntity> findByUicAndDeletedFalse(String uic);
+
 }

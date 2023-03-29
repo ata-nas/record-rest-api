@@ -18,11 +18,11 @@ public interface DiagnoseMapper {
     DiagnoseDTO toDTO(DiagnoseEntity diagnoseEntity);
 
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    DiagnoseDTO toDTO(CreateDiagnoseDTO diagnoseEntity);
+    DiagnoseDTO toDTO(CreateDiagnoseDTO createDiagnoseDTO);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
-    DiagnoseEntity toEntity(CreateDiagnoseDTO diagnoseDTO);
+    DiagnoseEntity toEntity(CreateDiagnoseDTO createDiagnoseDTO);
 
     List<DiagnoseDTO> allToDTO(List<DiagnoseEntity> diagnoseEntities);
 

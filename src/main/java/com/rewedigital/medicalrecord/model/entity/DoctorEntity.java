@@ -55,4 +55,7 @@ public class DoctorEntity extends BaseEntity {
     )
     private Set<@Valid SpecialtyEntity> specialties;
 
+    @Column(nullable = false)
+    private boolean deleted;
+
 }

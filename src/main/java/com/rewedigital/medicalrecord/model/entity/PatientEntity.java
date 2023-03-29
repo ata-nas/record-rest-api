@@ -60,4 +60,7 @@ public class PatientEntity extends BaseEntity {
         return this;
     }
 
+    @Column(nullable = false)
+    private boolean deleted;
+
 }

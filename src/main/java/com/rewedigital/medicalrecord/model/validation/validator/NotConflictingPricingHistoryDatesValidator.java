@@ -1,5 +1,6 @@
-package com.rewedigital.medicalrecord.model.validation.tmp;
+package com.rewedigital.medicalrecord.model.validation.validator;
 
+import com.rewedigital.medicalrecord.model.validation.NotConflictingPricingHistoryDatesValidation;
 import com.rewedigital.medicalrecord.repository.PricingHistoryRepository;
 
 import jakarta.validation.ConstraintValidator;

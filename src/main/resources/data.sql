@@ -1,14 +1,14 @@
 -- healthcare agency
-INSERT INTO pricing_hisotry (id, appointment_fees, start_date, end_date)
-VALUES (1, 10.00, '1990-01-01', '2023-03-01');
+INSERT INTO pricing_hisotry (id, issue_no, appointment_fees, start_date, end_date)
+VALUES (1, '1', 10.00, '2020-01-01', '2022-12-31');
 
 -- patients
-INSERT INTO patients (id, name, uic, gp_id)
-VALUES (1, 'Petar', '000001', null),
-       (2, 'Georgi', '000002', null),
-       (3, 'Dimitar', '000003', null),
-       (4, 'Stefan', '000004', null),
-       (5, 'Ivan', '000005', null);
+INSERT INTO patients (id, name, uic, gp_id, deleted)
+VALUES (1, 'Petar', '000001', null, false),
+       (2, 'Georgi', '000002', null, false),
+       (3, 'Dimitar', '000003', null, false),
+       (4, 'Stefan', '000004', null, false),
+       (5, 'Ivan', '000005', null, false);
 
 -- insurance history
 INSERT INTO insurances(id, end_date, start_date)
@@ -18,12 +18,12 @@ INSERT INTO patients_insurances(patient_id, insurance_id)
 VALUES (1, 1);
 
 -- doctors
-INSERT INTO doctors (id, birth_date, name, uic)
-VALUES (1, '1974-01-01', 'Georgiev', '0001'),
-       (2, '1973-01-01', 'Petrov', '0002'),
-       (3, '1990-01-01', 'Dimitrov', '0003'),
-       (4, '1991-01-01', 'Ivanov', '0004'),
-       (5, '1984-01-01', 'Yordanov', '0005');
+INSERT INTO doctors (id, birth_date, name, uic, deleted)
+VALUES (1, '1974-01-01', 'Georgiev', '0001', false),
+       (2, '1973-01-01', 'Petrov', '0002', false),
+       (3, '1990-01-01', 'Dimitrov', '0003', false),
+       (4, '1991-01-01', 'Ivanov', '0004', false),
+       (5, '1984-01-01', 'Yordanov', '0005', false);
 
 -- gp
 INSERT INTO gps(id)

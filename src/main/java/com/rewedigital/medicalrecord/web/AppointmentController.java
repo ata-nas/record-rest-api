@@ -2,9 +2,11 @@ package com.rewedigital.medicalrecord.web;
 
 import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
+import com.rewedigital.medicalrecord.model.dto.appointment.pricing.CreatePricingHistoryDTO;
+import com.rewedigital.medicalrecord.model.dto.appointment.pricing.PricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
+import com.rewedigital.medicalrecord.model.dto.appointment.pricing.UpdatePricingHistoryDTO;
 import com.rewedigital.medicalrecord.model.validation.ExistingAppointmentUicValidation;
-import com.rewedigital.medicalrecord.model.validation.ExistingDoctorUicValidation;
 import com.rewedigital.medicalrecord.service.AppointmentService;
 
 import jakarta.validation.Valid;
@@ -12,6 +14,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import lombok.RequiredArgsConstructor;
 
+import org.hibernate.sql.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -80,6 +83,38 @@ public class AppointmentController {
     ) {
         appointmentService.delete(uic);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pricing")
+    public ResponseEntity<List<PricingHistoryDTO>> pricingHistory() {
+        return ResponseEntity.ok(appointmentService.getAllPricingToDTO());
+    }
+
+    @PostMapping("/pricing")
+    public ResponseEntity<PricingHistoryDTO> createPricing(
+            @RequestBody @Valid CreatePricingHistoryDTO createPricingHistoryDTO,
+            UriComponentsBuilder uriComponentsBuilder
+    ) {
+        return ResponseEntity
+                .created(
+                        uriComponentsBuilder
+                                .path("/api")
+                                .path("/healthcare")
+                                .path("/bulgaria")
+                                .path("/appointments")
+                                .path("/pricing")
+                                .path("/" + createPricingHistoryDTO.getIssueNo())
+                                .build().toUri()
+                )
+                .body(appointmentService.createPricing(createPricingHistoryDTO));
+    }
+
+    @PutMapping("/pricing/{issueNo}")
+    public ResponseEntity<PricingHistoryDTO> updatePricing(
+            @PathVariable String issueNo,
+            @RequestBody UpdatePricingHistoryDTO updatePricingHistoryDTO
+    ) {
+        return ResponseEntity.ok(appointmentService.updatePricing(issueNo, updatePricingHistoryDTO));
     }
 
 }

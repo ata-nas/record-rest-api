@@ -31,13 +31,13 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorEntity getByUic(String uic) {
-        return doctorRepository.findByUic(uic)
+        return doctorRepository.findByUicAndDeletedFalse(uic)
                 .orElseThrow(() -> new NoSuchDoctorEntityFoundException("uic", uic));
     }
 
     @Override
     public GpEntity getByUicGp(String uic) {
-        return gpRepository.findByUic(uic)
+        return gpRepository.findByUicAndDeletedFalse(uic)
                 .orElseThrow(() -> new NoSuchGpEntityFoundException("uic", uic));
     }
 
@@ -48,7 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<DoctorEntity> getAll() {
-        List<DoctorEntity> all = doctorRepository.findAll();
+        List<DoctorEntity> all = doctorRepository.findAllDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchDoctorEntityFoundException("No Doctors found!");
         }
@@ -67,12 +67,20 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     private DoctorDTO createNewDoctor(CreateDoctorDTO createDoctorDTO) {
+        if (doctorRepository.findByUic(createDoctorDTO.getUic()).isPresent()) {
+            doctorRepository.softCreate(createDoctorDTO.getUic());
+            return updateDoctor(createDoctorDTO.getUic(), doctorMapper.toDTO(createDoctorDTO));
+        }
         return doctorMapper.toDTO(
                 doctorRepository.save(doctorMapper.toEntity(createDoctorDTO))
         );
     }
 
     private DoctorDTO createNewDoctorGp(CreateDoctorDTO createDoctorDTO) {
+        if (gpRepository.findByUic(createDoctorDTO.getUic()).isPresent()) {
+            doctorRepository.softCreate(createDoctorDTO.getUic());
+            return updateDoctorGp(createDoctorDTO.getUic(), doctorMapper.toDTO(createDoctorDTO));
+        }
         return doctorMapper.toDTO(
                 doctorRepository.save(doctorMapper.toEntityGp(createDoctorDTO))
         );
@@ -102,11 +110,11 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void delete(String uic) {
-        doctorRepository.delete(getByUic(uic));
+        doctorRepository.softDelete(uic);
     }
 
     private boolean doctorIsGp(String uic) {
-        return gpRepository.findByUic(uic).isPresent();
+        return gpRepository.findByUicAndDeletedFalse(uic).isPresent();
     }
 
 }

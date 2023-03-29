@@ -15,7 +15,7 @@ public class NotExistingPatientUicValidator implements ConstraintValidator<NotEx
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return patientRepository.findByUic(value).isEmpty();
+        return patientRepository.findByUicAndDeletedFalse(value).isEmpty();
     }
 
 }

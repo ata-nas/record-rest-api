@@ -19,6 +19,8 @@ public interface DoctorMapper {
     @Mapping(target = "isGp", source = "doctorEntity.id", qualifiedByName = "findGpByIdCheckTrue")
     DoctorDTO toDTO(DoctorEntity doctorEntity);
 
+    UpdateDoctorDTO toDTO(CreateDoctorDTO createDoctorDTO);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")
     DoctorEntity toEntity(CreateDoctorDTO createDoctorDTO);

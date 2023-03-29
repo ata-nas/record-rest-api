@@ -24,7 +24,7 @@ public interface SpecialtyRepository extends JpaRepository<SpecialtyEntity, Long
     )
     List<SpecialtyEntity> findAllDeletedFalse();
 
-    Set<SpecialtyEntity> findAllByNameIn(Set<String> names);
+    Set<SpecialtyEntity> findAllByNameInAndDeletedFalse(Set<String> names);
 
     @Query("UPDATE SpecialtyEntity s SET s.deleted = true WHERE s.name = :name")
     @Modifying
