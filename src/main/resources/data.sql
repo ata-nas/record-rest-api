@@ -31,10 +31,10 @@ VALUES (1),
        (3);
 
 -- specialties
-INSERT INTO specialties(id, name)
-VALUES (1, 'PEDIATRICS'),
-       (2, 'SURGERY'),
-       (3, 'CARDIOLOGY');
+INSERT INTO specialties(id, name, deleted)
+VALUES (1, 'PEDIATRICS', false),
+       (2, 'SURGERY', false),
+       (3, 'CARDIOLOGY', false);
 
 -- doctors_specialties
 INSERT INTO doctors_specialties(doctor_id, specialty_id)
@@ -47,11 +47,11 @@ VALUES (1, 1),
        (5, 2);
 
 -- diagnoses
-INSERT INTO diagnoses(id, name)
-VALUES (1, 'HEALTHY'),
-       (2, 'FLU'),
-       (3, 'PNEUMONIA'),
-       (4, 'COLD');
+INSERT INTO diagnoses(id, name, deleted)
+VALUES (1, 'HEALTHY', false),
+       (2, 'FLU', false),
+       (3, 'PNEUMONIA', false),
+       (4, 'COLD', false);
 
 
 INSERT INTO appointments(id, date, description, uic, doctor_id, patient_id, price_history_id)

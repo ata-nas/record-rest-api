@@ -15,7 +15,7 @@ public class ExistingDiagnoseNameValidator implements ConstraintValidator<Existi
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value == null || diagnoseRepository.findByName(value.toUpperCase()).isPresent();
+        return value == null || diagnoseRepository.findByNameAndDeletedFalse(value.toUpperCase()).isPresent();
     }
 
 }

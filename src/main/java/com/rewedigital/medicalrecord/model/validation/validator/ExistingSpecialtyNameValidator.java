@@ -15,7 +15,7 @@ public class ExistingSpecialtyNameValidator implements ConstraintValidator<Exist
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value == null || specialtyRepository.findByName(value.toUpperCase()).isPresent();
+        return value == null || specialtyRepository.findByNameAndDeletedFalse(value.toUpperCase()).isPresent();
     }
 
 }

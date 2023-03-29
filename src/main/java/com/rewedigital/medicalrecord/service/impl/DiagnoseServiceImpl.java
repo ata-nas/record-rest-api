@@ -8,6 +8,7 @@ import com.rewedigital.medicalrecord.model.mapper.DiagnoseMapper;
 import com.rewedigital.medicalrecord.repository.DiagnoseRepository;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DiagnoseServiceImpl implements DiagnoseService {
 
@@ -23,7 +25,7 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
     @Override
     public DiagnoseEntity getByName(String name) {
-        return diagnoseRepository.findByName(name)
+        return diagnoseRepository.findByNameAndDeletedFalse(name)
                 .orElseThrow(() -> new NoSuchDiagnoseEntityFoundException("name", name));
     }
 
@@ -34,7 +36,7 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
     @Override
     public List<DiagnoseEntity> getAll() {
-        List<DiagnoseEntity> all = diagnoseRepository.findAll();
+        List<DiagnoseEntity> all = diagnoseRepository.findAllDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchDiagnoseEntityFoundException("No Diagnoses found!");
         }
@@ -47,15 +49,19 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public DiagnoseDTO create(CreateDiagnoseDTO diagnoseDTO) {
+    public DiagnoseDTO create(CreateDiagnoseDTO createDiagnoseDTO) {
+        if (diagnoseRepository.findByName(createDiagnoseDTO.getName()).isPresent()) {
+            diagnoseRepository.softCreate(createDiagnoseDTO.getName());
+            return diagnoseMapper.toDTO(createDiagnoseDTO);
+        }
         return diagnoseMapper.toDTO(
-                diagnoseRepository.save(diagnoseMapper.toEntity(diagnoseDTO))
+                diagnoseRepository.save(diagnoseMapper.toEntity(createDiagnoseDTO))
         );
     }
 
     @Override
     public void delete(String name) {
-        diagnoseRepository.delete(getByName(name));
+        diagnoseRepository.softDelete(name);
     }
 
 }

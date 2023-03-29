@@ -28,4 +28,7 @@ public class DiagnoseEntity extends BaseEntity {
     @EqualsAndHashCode.Include
     private String name;
 
+    @Column
+    private boolean deleted;
+
 }

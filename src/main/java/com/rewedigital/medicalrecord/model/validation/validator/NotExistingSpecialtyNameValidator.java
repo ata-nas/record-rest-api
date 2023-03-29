@@ -15,7 +15,7 @@ public class NotExistingSpecialtyNameValidator implements ConstraintValidator<No
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return specialtyRepository.findByName(value).isEmpty();
+        return specialtyRepository.findByNameAndDeletedFalse(value).isEmpty();
     }
 
 }

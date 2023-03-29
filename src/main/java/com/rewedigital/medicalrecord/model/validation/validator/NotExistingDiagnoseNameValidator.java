@@ -15,7 +15,7 @@ public class NotExistingDiagnoseNameValidator implements ConstraintValidator<Not
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return diagnoseRepository.findByName(value).isEmpty();
+        return diagnoseRepository.findByNameAndDeletedFalse(value).isEmpty();
     }
 
 }
