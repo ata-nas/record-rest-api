@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -42,5 +43,25 @@ public interface DoctorRepository extends JpaRepository<DoctorEntity, Long> {
             "SELECT DISTINCT d from AppointmentEntity a JOIN a.doctor d "
     )
     Set<DoctorEntity> findAllDoctorsWhoHaveMadeAppointments();
+
+    /**
+     * Total income generated from patients who were insured at time of appointment, soft-deleted patients are included!
+     * @return total income generated from patients who were insured at time of appointment, soft-deleted patients are included!
+     */
+    @Query(
+            "SELECT SUM(a.price.appointmentFees) FROM AppointmentEntity a LEFT JOIN a.price p LEFT JOIN a.patient pa LEFT JOIN pa.insurances i " +
+                    "WHERE a.date BETWEEN i.startDate AND i.endDate AND a.doctor.uic = :uic"
+    )
+    BigDecimal totalIncomeFromInsured(String uic);
+
+    /**
+     * Total income generated from patients who were not insured at time of appointment, soft-deleted patients are included!
+     * @return total income generated from patients who were not insured at time of appointment, soft-deleted patients are included!
+     */
+    @Query(
+            "SELECT SUM(a.price.appointmentFees) FROM AppointmentEntity a LEFT JOIN a.price p LEFT JOIN a.patient pa LEFT JOIN pa.insurances i " +
+                    "WHERE (a.doctor.uic = :uic AND a.date NOT BETWEEN i.startDate AND i.endDate) OR (a.doctor.uic = :uic AND i.startDate IS NULL) OR (a.doctor.uic = :uic AND i.endDate IS NULL)"
+    )
+    BigDecimal totalIncomeFromNotInsured(String uic);
 
 }

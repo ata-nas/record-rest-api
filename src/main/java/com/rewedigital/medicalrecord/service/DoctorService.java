@@ -32,4 +32,8 @@ public interface DoctorService {
 
     DoctorIncomeDTO getDoctorIncomeByUic(String uic);
 
+    DoctorIncomeDTO getDoctorIncomeByUicFromInsuredPatients(String uic);
+
+    DoctorIncomeDTO getDoctorIncomeByUicFromNotInsuredPatients(String uic);
+
 }

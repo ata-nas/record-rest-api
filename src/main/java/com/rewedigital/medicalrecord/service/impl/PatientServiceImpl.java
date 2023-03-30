@@ -136,16 +136,14 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientIncomeDTO getPatientsIncomeFromInsured() {
-        return patientMapper.toDTO(
-            patientRepository.totalIncomeFromInsured()
-        );
+        BigDecimal total = patientRepository.totalIncomeFromInsured();
+        return total == null ? patientMapper.toDTO(BigDecimal.ZERO) : patientMapper.toDTO(total);
     }
 
     @Override
     public PatientIncomeDTO getPatientsIncomeFromNotInsured() {
-        return patientMapper.toDTO(
-                patientRepository.totalIncomeFromNotInsured()
-        );
+        BigDecimal total = patientRepository.totalIncomeFromNotInsured();
+        return total == null ? patientMapper.toDTO(BigDecimal.ZERO) : patientMapper.toDTO(total);
     }
 
 }

@@ -84,4 +84,14 @@ public class StatsServiceImpl implements StatsService {
         return patientService.getPatientsIncomeFromNotInsured();
     }
 
+    @Override
+    public DoctorIncomeDTO getDoctorIncomeByUicFromInsuredPatients(String uic) {
+        return doctorService.getDoctorIncomeByUicFromInsuredPatients(uic);
+    }
+
+    @Override
+    public DoctorIncomeDTO getDoctorIncomeByUicFromNotInsuredPatients(String uic) {
+        return doctorService.getDoctorIncomeByUicFromNotInsuredPatients(uic);
+    }
+
 }

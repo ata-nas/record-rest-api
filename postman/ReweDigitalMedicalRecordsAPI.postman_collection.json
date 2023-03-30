@@ -1,0 +1,1553 @@
+{
+	"info": {
+		"_postman_id": "30742a84-7d79-439c-af91-de5b413ee0d4",
+		"name": "ReweDigital MedicalRecordsAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25921418"
+	},
+	"item": [
+		{
+			"name": "/api",
+			"item": [
+				{
+					"name": "/healthcare",
+					"item": [
+						{
+							"name": "/bulgaria",
+							"item": [
+								{
+									"name": "/diagnoses",
+									"item": [
+										{
+											"name": "GET",
+											"item": [
+												{
+													"name": "Get All Diagnoses",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Diagnose By Name",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses/flu",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses",
+																"flu"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "POST",
+											"item": [
+												{
+													"name": "Create Diagnose HEALTHY",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"HEALTHY\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Create Diagnose FLU",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"FLU\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Create Diagnose COLD",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"COLD\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "BAD REQUEST",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "DELETE",
+											"item": [
+												{
+													"name": "Delete Diagnose By Name",
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses/cold",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses",
+																"cold"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/specialties",
+									"item": [
+										{
+											"name": "GET",
+											"item": [
+												{
+													"name": "Get All Specialties",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/specialties",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"specialties"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Specialties By Name",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/specialties/surgery",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"specialties",
+																"surgery"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "POST",
+											"item": [
+												{
+													"name": "Create Specialty SURGERY",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"surgery\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/specialties",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"specialties"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Create Specialty CARDIOLOGY",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"cardiology\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/specialties",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"specialties"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Create Specialty PEDIATRICS",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"pediatrics\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/specialties",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"specialties"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "BAD REQUEST",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/diagnoses",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"diagnoses"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "DELETE",
+											"item": [
+												{
+													"name": "Delete Specialty By Name",
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/specialties/surgery",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"specialties",
+																"surgery"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/patients",
+									"item": [
+										{
+											"name": "GET",
+											"item": [
+												{
+													"name": "Get All Patients",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/patients",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"patients"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Patient By Uic",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/patients/0006",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"patients",
+																"0006"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "POST",
+											"item": [
+												{
+													"name": "BAD REQUEST",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/patients",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"patients"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Create Patient 000006",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"uic\": \"000006\",\n    \"name\": \"Peter\",\n    \"gpUic\": \"0003\",\n    \"insurances\" : [\n        {\n            \"startDate\": \"2023-01-01\",\n            \"endDate\": \"2023-12-31\"\n        }\n    ]\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/patients",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"patients"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "PUT",
+											"item": [
+												{
+													"name": "Update Patient 000006",
+													"request": {
+														"method": "PUT",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"Dimitar\",\n    \"gpUic\": null,\n        \"insurances\" : [\n        {\n            \"startDate\": \"2023-12-02\",\n            \"endDate\": \"2023-12-03\"\n        }\n    ]\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/patients/000006",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"patients",
+																"000006"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "DELETE",
+											"item": [
+												{
+													"name": "Delete PatientByUic",
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/patients/0006",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"patients",
+																"0006"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/doctors",
+									"item": [
+										{
+											"name": "GET",
+											"item": [
+												{
+													"name": "Get All Doctors",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/doctors",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"doctors"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Doctor By Uic",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/doctors/000006",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"doctors",
+																"000006"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "POST",
+											"item": [
+												{
+													"name": "Create Doctor 0006",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"uic\": \"0006\",\n    \"name\": \"Spasov\",\n    \"birthDate\": \"1977-01-01\",\n    \"isGp\": true,\n    \"specialtiesNames\": [\n        \"SURGERY\",\n        \"PEDIATRICS\"\n    ]\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/doctors",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"doctors"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "PUT",
+											"item": [
+												{
+													"name": "Update Doctor 0006",
+													"request": {
+														"method": "PUT",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"Spasov\",\n    \"birthDate\": \"1967-01-01\",\n    \"specialtiesNames\": [\n        \"SURGERY\"\n    ]\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/doctors/0006",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"doctors",
+																"0006"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "DELETE",
+											"item": [
+												{
+													"name": "Delete Doctor",
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/doctors/0006",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"doctors",
+																"0006"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/appointments",
+									"item": [
+										{
+											"name": "GET",
+											"item": [
+												{
+													"name": "Get All Appointments",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/appointments",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"appointments"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Appointment",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/appointments/2301040002",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"appointments",
+																"2301040002"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "POST",
+											"item": [
+												{
+													"name": "Create Appointment",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"uic\": \"2303010021\",\n    \"date\": \"2023-03-01\",\n    \"doctorUic\": \"0001\",\n    \"patientUic\": \"000006\",\n    \"description\": \"Generic description\",\n    \"diagnoses\": [\n            \"COLD\"\n    ]\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/appointments",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"appointments"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "PUT",
+											"item": [
+												{
+													"name": "Update Appointment",
+													"request": {
+														"method": "PUT",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"date\": \"2023-02-01\",\n    \"doctorUic\": \"0001\",\n    \"patientUic\": \"000002\",\n    \"description\": \"Generic description another\",\n    \"diagnoses\": [\n            \"FLU\"\n    ]\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/appointments/2301040002",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"appointments",
+																"2301040002"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "DELETE",
+											"item": [
+												{
+													"name": "Delete Appointment",
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/appointments/2301040002",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"appointments",
+																"2301040002"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "/pricing",
+											"item": [
+												{
+													"name": "GET",
+													"item": [
+														{
+															"name": "Get Pricing History",
+															"request": {
+																"method": "GET",
+																"header": [],
+																"url": {
+																	"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/pricing",
+																	"protocol": "http",
+																	"host": [
+																		"127",
+																		"0",
+																		"0",
+																		"1"
+																	],
+																	"port": "8080",
+																	"path": [
+																		"api",
+																		"healthcare",
+																		"bulgaria",
+																		"pricing"
+																	]
+																}
+															},
+															"response": []
+														}
+													]
+												},
+												{
+													"name": "POST",
+													"item": [
+														{
+															"name": "Create Pricing History",
+															"request": {
+																"method": "POST",
+																"header": [],
+																"body": {
+																	"mode": "raw",
+																	"raw": "{\n    \"issueNo\": \"2\",\n    \"appointmentFees\": 30.00,\n    \"fromDate\": \"2023-01-01\"\n}",
+																	"options": {
+																		"raw": {
+																			"language": "json"
+																		}
+																	}
+																},
+																"url": {
+																	"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/pricing",
+																	"protocol": "http",
+																	"host": [
+																		"127",
+																		"0",
+																		"0",
+																		"1"
+																	],
+																	"port": "8080",
+																	"path": [
+																		"api",
+																		"healthcare",
+																		"bulgaria",
+																		"pricing"
+																	]
+																}
+															},
+															"response": []
+														}
+													]
+												},
+												{
+													"name": "PUT",
+													"item": [
+														{
+															"name": "Update Pricing History",
+															"request": {
+																"method": "PUT",
+																"header": [],
+																"body": {
+																	"mode": "raw",
+																	"raw": "{\n    \"appointmentFees\": 50.00\n}",
+																	"options": {
+																		"raw": {
+																			"language": "json"
+																		}
+																	}
+																},
+																"url": {
+																	"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/pricing/2",
+																	"protocol": "http",
+																	"host": [
+																		"127",
+																		"0",
+																		"0",
+																		"1"
+																	],
+																	"port": "8080",
+																	"path": [
+																		"api",
+																		"healthcare",
+																		"bulgaria",
+																		"pricing",
+																		"2"
+																	]
+																}
+															},
+															"response": []
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/stats",
+									"item": [
+										{
+											"name": "GET",
+											"item": [
+												{
+													"name": "Get All Patients Currently Insured",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/patients/insured",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"patients",
+																"insured"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get All Patients Currently Not Insured",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/patients/not-insured",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"patients",
+																"not-insured"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Percentage Patients Currently Insured",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/patients/percent/insured",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"patients",
+																"percent",
+																"insured"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Percentage Patients Currently Not Insured",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/patients/percent/not-insured",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"patients",
+																"percent",
+																"not-insured"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Count All Doctors With Higher Income Than",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/doctors/income/above/20",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"doctors",
+																"income",
+																"above",
+																"20"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Total Income",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/income",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"income"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Income of Doctor by UIC",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/doctors/income/0001",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"doctors",
+																"income",
+																"0001"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Count of Visits by Patient Uic",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/patients/visits/000002",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"patients",
+																"visits",
+																"000002"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Count of Visits by Diagnose Name",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/diagnoses/visits/cold",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"diagnoses",
+																"visits",
+																"cold"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Total Income from Visits by Diagnose Name",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/diagnoses/income/cold",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"diagnoses",
+																"income",
+																"cold"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Total Income from Patients With Insurance",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/patients/income/insured",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"patients",
+																"income",
+																"insured"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Total Income from Patients With No Insurance",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/patients/income/not-insured",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"patients",
+																"income",
+																"not-insured"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Total Income of Particular Doctor from Patients With Insurance",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/doctors/income/insured/0001",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"doctors",
+																"income",
+																"insured",
+																"0001"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Get Total Income of Particular Doctor from Patients With No Insurance",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://127.0.0.1:8080/api/healthcare/bulgaria/stats/doctors/income/not-insured/0001",
+															"protocol": "http",
+															"host": [
+																"127",
+																"0",
+																"0",
+																"1"
+															],
+															"port": "8080",
+															"path": [
+																"api",
+																"healthcare",
+																"bulgaria",
+																"stats",
+																"doctors",
+																"income",
+																"not-insured",
+																"0001"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

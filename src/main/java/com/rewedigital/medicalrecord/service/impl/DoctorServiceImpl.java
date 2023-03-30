@@ -148,4 +148,16 @@ public class DoctorServiceImpl implements DoctorService {
         );
     }
 
+    @Override
+    public DoctorIncomeDTO getDoctorIncomeByUicFromInsuredPatients(String uic) {
+        BigDecimal total = doctorRepository.totalIncomeFromInsured(uic);
+        return total == null ? doctorMapper.toDTO(BigDecimal.ZERO) : doctorMapper.toDTO(total);
+    }
+
+    @Override
+    public DoctorIncomeDTO getDoctorIncomeByUicFromNotInsuredPatients(String uic) {
+        BigDecimal total = doctorRepository.totalIncomeFromNotInsured(uic);
+        return total == null ? doctorMapper.toDTO(BigDecimal.ZERO) : doctorMapper.toDTO(total);
+    }
+
 }

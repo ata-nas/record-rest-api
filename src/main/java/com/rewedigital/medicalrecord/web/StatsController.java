@@ -141,6 +141,24 @@ public class StatsController {
         return ResponseEntity.ok(statsService.getDoctorIncomeByUic(uic));
     }
 
+    @GetMapping("/doctors/income/insured/{uic}")
+    public ResponseEntity<DoctorIncomeDTO> doctorsIncomeOfDoctorWithUicFromInsuredPatients(
+            @NotNull
+            @ExistingDoctorUicValidation
+            @PathVariable String uic
+    ) {
+        return ResponseEntity.ok(statsService.getDoctorIncomeByUicFromInsuredPatients(uic));
+    }
+
+    @GetMapping("/doctors/income/not-insured/{uic}")
+    public ResponseEntity<DoctorIncomeDTO> doctorsIncomeOfDoctorWithUicFromNotInsuredPatients(
+            @NotNull
+            @ExistingDoctorUicValidation
+            @PathVariable String uic
+    ) {
+        return ResponseEntity.ok(statsService.getDoctorIncomeByUicFromNotInsuredPatients(uic));
+    }
+
     /**
      * 7. The number of doctors who have income greater than a given one
      * @param income filter for the count

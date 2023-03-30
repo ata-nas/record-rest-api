@@ -32,4 +32,8 @@ public interface StatsService {
 
     PatientIncomeDTO getPatientsIncomeFromNotInsured();
 
+    DoctorIncomeDTO getDoctorIncomeByUicFromInsuredPatients(String uic);
+
+    DoctorIncomeDTO getDoctorIncomeByUicFromNotInsuredPatients(String uic);
+
 }
