@@ -1,11 +1,15 @@
 package com.rewedigital.medicalrecord.web;
 
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.DoctorIncomeDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.PercentageInsuredPatientDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.TotalIncomeDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.*;
+import com.rewedigital.medicalrecord.model.validation.ExistingDiagnoseNameValidation;
+import com.rewedigital.medicalrecord.model.validation.ExistingDoctorUicValidation;
+import com.rewedigital.medicalrecord.model.validation.ExistingPatientUicValidation;
 import com.rewedigital.medicalrecord.service.StatsService;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import lombok.RequiredArgsConstructor;
 
@@ -92,15 +96,35 @@ public class StatsController {
     }
 
     /**
-     * 7. The number of doctors who have income greater than a given one
-     * @param income filter for the count
-     * @return the number of doctors who have income greater than a given one
+     * 5. The number of visits of a given patient
+     * @param uic the uic of a patient
+     * @return the number of visits of a given patient
      */
-    @GetMapping("/doctors/income/{income}")
-    public ResponseEntity<CountDoctorIncomeHigherThanDTO> doctorsCountDoctorsWithHigherIncomeThanGiven(
-            @PathVariable Long income
+    @GetMapping("/patients/visits/{uic}")
+    public ResponseEntity<PatientVisitDTO> patientsCountAllVisitsOfPatientWithUic(
+            @NotBlank
+            @ExistingPatientUicValidation
+            @PathVariable String uic
     ) {
-        return ResponseEntity.ok(statsService.countDoctorsWithHigherIncomeThanGiven(income));
+        return ResponseEntity.ok(statsService.getPatientVisitCount(uic));
+    }
+
+    /**
+     * 9.1 The total income of patients who have health insurance (at time of appointment)
+     * @return the total income of patients who have no health insurance (at time of appointment)
+     */
+    @GetMapping("/patients/income/insured")
+    public ResponseEntity<PatientIncomeDTO> patientsIncomeFromInsured() {
+        return ResponseEntity.ok(statsService.getPatientsIncomeFromInsured());
+    }
+
+    /**
+     * 9. The total income of patients who have no health insurance (at time of appointment)
+     * @return the total income of patients who have no health insurance (at time of appointment)
+     */
+    @GetMapping("/patients/income/not-insured")
+    public ResponseEntity<PatientIncomeDTO> patientsIncomeFromNotInsured() {
+        return ResponseEntity.ok(statsService.getPatientsIncomeFromNotInsured());
     }
 
     /**
@@ -110,9 +134,53 @@ public class StatsController {
      */
     @GetMapping("/doctors/income/{uic}")
     public ResponseEntity<DoctorIncomeDTO> doctorsIncomeOfDoctorWithUic(
+            @NotNull
+            @ExistingDoctorUicValidation
             @PathVariable String uic
     ) {
-        return null;
+        return ResponseEntity.ok(statsService.getDoctorIncomeByUic(uic));
+    }
+
+    /**
+     * 7. The number of doctors who have income greater than a given one
+     * @param income filter for the count
+     * @return the number of doctors who have income greater than a given one
+     */
+    @GetMapping("/doctors/income/above/{income}")
+    public ResponseEntity<CountDoctorIncomeHigherThanDTO> doctorsCountDoctorsWithHigherIncomeThanGiven(
+            @NotNull
+            @PositiveOrZero
+            @PathVariable Long income
+    ) {
+        return ResponseEntity.ok(statsService.countDoctorsWithHigherIncomeThanGiven(income));
+    }
+
+    /**
+     * 6. The number of visits by a diagnosis
+     * @param name the name of the diagnosis to query
+     * @return the number of visits by a diagnosis
+     */
+    @GetMapping("/diagnoses/visits/{name}")
+    public ResponseEntity<DiagnoseVisitDTO> diagnosesCountAllVisitsWithDiagnoseName(
+            @NotBlank
+            @ExistingDiagnoseNameValidation
+            @PathVariable String name
+    ) {
+        return ResponseEntity.ok(statsService.getDiagnoseVisitCount(name));
+    }
+
+    /**
+     * 8. The total income of visits, by a given diagnosis
+     * @param name of the diagnosis to query
+     * @return the total income of visits, by a given diagnosis
+     */
+    @GetMapping("/diagnoses/income/{name}")
+    public ResponseEntity<DiagnoseIncomeDTO> diagnosesIncomeOfDiagnoseWithName(
+            @NotBlank
+            @ExistingDiagnoseNameValidation
+            @PathVariable String name
+    ) {
+        return ResponseEntity.ok(statsService.getDiagnoseIncomeByName(name));
     }
 
 }

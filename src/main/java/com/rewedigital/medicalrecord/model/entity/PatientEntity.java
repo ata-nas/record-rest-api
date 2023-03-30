@@ -52,6 +52,9 @@ public class PatientEntity extends BaseEntity {
     @Column(nullable = false)
     private boolean deleted;
 
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Set<AppointmentEntity> appointmentEntities;
+
     /**
      *  Adder method for Mapstruct Strategy, otherwise it rewrites the whole collection and the behavior is not desired.
      * @param toAdd - the PatientInsuranceHistoryEntity to be added

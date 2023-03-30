@@ -3,6 +3,8 @@ package com.rewedigital.medicalrecord.service.impl;
 import com.rewedigital.medicalrecord.exception.notfound.NoSuchPatientEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.PatientIncomeDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.PatientVisitDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.PercentageInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
@@ -123,6 +125,27 @@ public class PatientServiceImpl implements PatientService {
                 .multiply(BigDecimal.valueOf(100.00))
                 .setScale(4, RoundingMode.HALF_EVEN)
                 .divide(BigDecimal.valueOf(all), RoundingMode.HALF_EVEN);
+    }
+
+    @Override
+    public PatientVisitDTO getPatientVisitCount(String uic) {
+        return patientMapper.toDTO(
+                patientRepository.countVisitsByPatientUic(uic)
+        );
+    }
+
+    @Override
+    public PatientIncomeDTO getPatientsIncomeFromInsured() {
+        return patientMapper.toDTO(
+            patientRepository.totalIncomeFromInsured()
+        );
+    }
+
+    @Override
+    public PatientIncomeDTO getPatientsIncomeFromNotInsured() {
+        return patientMapper.toDTO(
+                patientRepository.totalIncomeFromNotInsured()
+        );
     }
 
 }

@@ -6,6 +6,7 @@ import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.DoctorIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.model.mapper.DoctorMapper;
@@ -135,6 +136,15 @@ public class DoctorServiceImpl implements DoctorService {
                         .map(appointmentEntity -> appointmentEntity.getPrice().getAppointmentFees())
                         .reduce(BigDecimal.ZERO, BigDecimal::add).longValue() > income)
                 .count()
+        );
+    }
+
+    @Override
+    public DoctorIncomeDTO getDoctorIncomeByUic(String uic) {
+        return doctorMapper.toDTO(getByUic(uic).getAppointmentEntities()
+                .stream()
+                .map(appointmentEntity -> appointmentEntity.getPrice().getAppointmentFees())
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
         );
     }
 

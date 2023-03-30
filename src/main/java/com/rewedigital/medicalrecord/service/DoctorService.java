@@ -4,12 +4,11 @@ import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.DoctorIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public interface DoctorService {
 
@@ -30,5 +29,7 @@ public interface DoctorService {
     void delete(String uic);
 
     CountDoctorIncomeHigherThanDTO countDoctorsWithHigherIncomeThanGiven(long income);
+
+    DoctorIncomeDTO getDoctorIncomeByUic(String uic);
 
 }

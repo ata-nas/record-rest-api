@@ -4,6 +4,7 @@ import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.DoctorIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
@@ -12,6 +13,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = MapperUtil.class)
@@ -24,6 +26,8 @@ public interface DoctorMapper {
 
     @Mapping(target = "countDoctorsHigherIncomeThanGiven", source = "result")
     CountDoctorIncomeHigherThanDTO toDTO(Long result);
+
+    DoctorIncomeDTO toDTO(BigDecimal income);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")

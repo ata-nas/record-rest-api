@@ -1,13 +1,10 @@
 package com.rewedigital.medicalrecord.service.impl;
 
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.PercentageInsuredPatientDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.TotalIncomeDTO;
-import com.rewedigital.medicalrecord.service.AppointmentService;
-import com.rewedigital.medicalrecord.service.DoctorService;
-import com.rewedigital.medicalrecord.service.PatientService;
-import com.rewedigital.medicalrecord.service.StatsService;
+import com.rewedigital.medicalrecord.model.dto.stats.*;
+import com.rewedigital.medicalrecord.service.*;
+
+import com.rewedigital.medicalrecord.model.dto.stats.DiagnoseVisitDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -25,6 +22,7 @@ public class StatsServiceImpl implements StatsService {
     private final PatientService patientService;
     private final AppointmentService appointmentService;
     private final DoctorService doctorService;
+    private final DiagnoseService diagnoseService;
 
     @Override
     public List<PatientDTO> getAllPatientsCurrentlyInsured() {
@@ -54,6 +52,36 @@ public class StatsServiceImpl implements StatsService {
     @Override
     public TotalIncomeDTO getTotalIncome() {
         return appointmentService.getTotalIncome();
+    }
+
+    @Override
+    public DoctorIncomeDTO getDoctorIncomeByUic(String uic) {
+        return doctorService.getDoctorIncomeByUic(uic);
+    }
+
+    @Override
+    public PatientVisitDTO getPatientVisitCount(String uic) {
+        return patientService.getPatientVisitCount(uic);
+    }
+
+    @Override
+    public DiagnoseVisitDTO getDiagnoseVisitCount(String name) {
+        return diagnoseService.getDiagnoseVisitCount(name);
+    }
+
+    @Override
+    public DiagnoseIncomeDTO getDiagnoseIncomeByName(String name) {
+        return diagnoseService.getDiagnoseIncomeByName(name);
+    }
+
+    @Override
+    public PatientIncomeDTO getPatientsIncomeFromInsured() {
+        return patientService.getPatientsIncomeFromInsured();
+    }
+
+    @Override
+    public PatientIncomeDTO getPatientsIncomeFromNotInsured() {
+        return patientService.getPatientsIncomeFromNotInsured();
     }
 
 }

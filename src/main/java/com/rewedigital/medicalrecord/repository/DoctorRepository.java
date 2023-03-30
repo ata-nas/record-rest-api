@@ -34,6 +34,10 @@ public interface DoctorRepository extends JpaRepository<DoctorEntity, Long> {
     @Modifying
     void softCreate(String uic);
 
+    /**
+     * Get a Set of all doctors who have ever made an appointment, soft-deleted are included!
+     * @return Set of all doctors who have ever made an appointment, soft-deleted are included!
+     */
     @Query(
             "SELECT DISTINCT d from AppointmentEntity a JOIN a.doctor d "
     )

@@ -11,8 +11,8 @@ VALUES (1, 'Petar', '000001', null, false),
        (5, 'Ivan', '000005', null, false);
 
 -- insurance history
-INSERT INTO insurances(id, end_date, start_date)
-VALUES (1, '2023-01-02 00:00:00', '2023-01-01 00:00:00');
+INSERT INTO insurances(id, start_date, end_date)
+VALUES (1, '2020-01-02 00:00:00', '2023-01-01 00:00:00');
 
 INSERT INTO patients_insurances(patient_id, insurance_id)
 VALUES (1, 1);

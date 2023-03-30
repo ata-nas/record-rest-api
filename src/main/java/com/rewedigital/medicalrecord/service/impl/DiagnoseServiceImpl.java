@@ -3,11 +3,13 @@ package com.rewedigital.medicalrecord.service.impl;
 import com.rewedigital.medicalrecord.exception.notfound.NoSuchDiagnoseEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
 import com.rewedigital.medicalrecord.model.dto.diagnose.DiagnoseDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.DiagnoseIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
 import com.rewedigital.medicalrecord.model.mapper.DiagnoseMapper;
 import com.rewedigital.medicalrecord.repository.DiagnoseRepository;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
 
+import com.rewedigital.medicalrecord.model.dto.stats.DiagnoseVisitDTO;
 import jakarta.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -63,6 +65,20 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     @Override
     public void delete(String name) {
         diagnoseRepository.softDelete(name);
+    }
+
+    @Override
+    public DiagnoseVisitDTO getDiagnoseVisitCount(String name) {
+        return diagnoseMapper.toDTO(
+                diagnoseRepository.countVisitsByDiagnoseName(name.toUpperCase())
+        );
+    }
+
+    @Override
+    public DiagnoseIncomeDTO getDiagnoseIncomeByName(String name) {
+        return diagnoseMapper.toDTO(
+                diagnoseRepository.getTotalIncomeOfDiagnoseName(name)
+        );
     }
 
 }
