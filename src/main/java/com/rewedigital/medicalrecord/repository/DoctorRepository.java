@@ -34,4 +34,9 @@ public interface DoctorRepository extends JpaRepository<DoctorEntity, Long> {
     @Modifying
     void softCreate(String uic);
 
+    @Query(
+            "SELECT DISTINCT d from AppointmentEntity a JOIN a.doctor d "
+    )
+    Set<DoctorEntity> findAllDoctorsWhoHaveMadeAppointments();
+
 }

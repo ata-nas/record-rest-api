@@ -4,9 +4,8 @@ import com.rewedigital.medicalrecord.exception.notfound.NoSuchAppointmentEntityF
 import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.TotalIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
-import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.mapper.AppointmentMapper;
 import com.rewedigital.medicalrecord.repository.AppointmentRepository;
 import com.rewedigital.medicalrecord.service.AppointmentService;
@@ -77,15 +76,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public CountDoctorIncomeHigherThanDTO countDoctorsWithHigherIncomeThanGiven(long income) {
-        return appointmentMapper.toDTO(appointmentRepository.findAllDoctorsWhoHaveMadeAppointments()
-                .stream()
-                .filter(doctorEntity -> doctorEntity.getAppointmentEntities()
-                        .stream()
-                        .map(appointmentEntity -> appointmentEntity.getPrice().getAppointmentFees())
-                        .reduce(BigDecimal.ZERO, BigDecimal::add).longValue() > income)
-                .count()
-        );
+    public TotalIncomeDTO getTotalIncome() {
+        return appointmentMapper.toDTO(appointmentRepository.getTotalIncome());
     }
 
 }

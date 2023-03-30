@@ -4,6 +4,7 @@ import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.TotalIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
 
 import java.util.List;
@@ -24,6 +25,6 @@ public interface AppointmentService {
 
     void delete(String uic);
 
-    CountDoctorIncomeHigherThanDTO countDoctorsWithHigherIncomeThanGiven(long income);
+    TotalIncomeDTO getTotalIncome();
 
 }

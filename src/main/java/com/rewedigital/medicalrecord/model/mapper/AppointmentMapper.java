@@ -4,6 +4,7 @@ import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.TotalIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
 
@@ -11,6 +12,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = MapperUtil.class)
@@ -20,8 +22,7 @@ public interface AppointmentMapper {
     @Mapping(target = "doctorUic", source = "doctor.uic")
     AppointmentDTO toDTO(AppointmentEntity appointmentEntity);
 
-    @Mapping(target = "countDoctorsHigherIncomeThanGiven", source = "result")
-    CountDoctorIncomeHigherThanDTO toDTO(Long result);
+    TotalIncomeDTO toDTO(BigDecimal totalIncome);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "patient", source = "patientUic", qualifiedByName = "findPatientByUicCreateUpdate")

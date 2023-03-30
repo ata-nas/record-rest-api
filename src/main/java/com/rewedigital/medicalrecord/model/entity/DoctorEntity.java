@@ -54,7 +54,7 @@ public class DoctorEntity extends BaseEntity {
     )
     private Set<@Valid SpecialtyEntity> specialties;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     private Set<AppointmentEntity> appointmentEntities;
 
     @Column(nullable = false)

@@ -18,12 +18,12 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
 
     Optional<PatientEntity> findByUicAndDeletedFalse(String uic);
 
-//    @Query(
-//            "SELECT p FROM PatientEntity p " +
-//                    "WHERE p.deleted = false"
-//    )
-//    List<PatientEntity> findAllDeletedFalse();
-//
+    @Query(
+            "SELECT p FROM PatientEntity p " +
+                    "WHERE p.deleted = false"
+    )
+    List<PatientEntity> findAllDeletedFalse();
+
 //    Set<PatientEntity> findAllByUicIn(Set<String> uic);
 
     @Query("UPDATE PatientEntity p SET p.deleted = true WHERE p.uic = :uic")
@@ -36,25 +36,25 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
 
     @Query(
             "SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i " +
-                    "WHERE :currDate BETWEEN i.startDate AND i.endDate"
+                    "WHERE p.deleted = FALSE AND :currDate BETWEEN i.startDate AND i.endDate"
     )
     List<PatientEntity> findAllCurrentlyInsured(LocalDate currDate);
 
     @Query(
             "SELECT p FROM PatientEntity p " +
-                    "WHERE p NOT IN (SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i WHERE :currDate BETWEEN i.startDate AND i.endDate)"
+                    "WHERE p.deleted = FALSE AND p NOT IN (SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i WHERE :currDate BETWEEN i.startDate AND i.endDate)"
     )
     List<PatientEntity> findAllCurrentlyNotInsured(LocalDate currDate);
 
     @Query(
             "SELECT COUNT(DISTINCT p) FROM PatientEntity p JOIN p.insurances i " +
-                    "WHERE :currDate BETWEEN i.startDate AND i.endDate"
+                    "WHERE p.deleted = FALSE AND :currDate BETWEEN i.startDate AND i.endDate"
     )
     long countAllCurrentlyInsured(LocalDate currDate);
 
     @Query(
             "SELECT COUNT(DISTINCT p) FROM PatientEntity p LEFT JOIN  p.insurances i " +
-                    "WHERE :currDate NOT BETWEEN i.startDate AND i.endDate OR i = null"
+                    "WHERE p.deleted = FALSE AND p NOT IN (SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i WHERE :currDate BETWEEN i.startDate AND i.endDate)"
     )
     long countAllCurrentlyNotInsured(LocalDate currDate);
 

@@ -2,11 +2,11 @@ package com.rewedigital.medicalrecord.repository;
 
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
 
-import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,14 +16,8 @@ public interface AppointmentRepository extends JpaRepository<AppointmentEntity, 
     Optional<AppointmentEntity> findByUic(String uic);
 
     @Query(
-            "SELECT DISTINCT a FROM AppointmentEntity a JOIN a.patient p JOIN p.insurances ih " +
-                    "WHERE a.date BETWEEN ih.startDate AND ih.endDate"
+            "SELECT SUM(p.appointmentFees) FROM AppointmentEntity a JOIN a.price p"
     )
-    Set<AppointmentEntity> findAllWherePatientInsured(); // TODO Example how to aggregate data for stats later!
-
-    @Query(
-            "SELECT DISTINCT d from AppointmentEntity a JOIN a.doctor d "
-    )
-    Set<DoctorEntity> findAllDoctorsWhoHaveMadeAppointments();
+    BigDecimal getTotalIncome();
 
 }

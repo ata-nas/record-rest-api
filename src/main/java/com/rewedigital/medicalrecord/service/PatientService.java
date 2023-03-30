@@ -2,7 +2,7 @@ package com.rewedigital.medicalrecord.service;
 
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
-import com.rewedigital.medicalrecord.model.dto.patient.PercentageInsuredPatientDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.PercentageInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 

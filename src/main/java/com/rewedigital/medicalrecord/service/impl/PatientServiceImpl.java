@@ -3,7 +3,7 @@ package com.rewedigital.medicalrecord.service.impl;
 import com.rewedigital.medicalrecord.exception.notfound.NoSuchPatientEntityFoundException;
 import com.rewedigital.medicalrecord.model.dto.patient.CreatePatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
-import com.rewedigital.medicalrecord.model.dto.patient.PercentageInsuredPatientDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.PercentageInsuredPatientDTO;
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 import com.rewedigital.medicalrecord.model.mapper.PatientMapper;
@@ -103,7 +103,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     private BigDecimal calculatePercentInsured() {
-        long all = patientRepository.count();
+        long all = patientRepository.findAllDeletedFalse().size();
         long insured = patientRepository.countAllCurrentlyInsured(LocalDate.now());
         return BigDecimal.valueOf(insured)
                 .multiply(BigDecimal.valueOf(100.00))
@@ -117,7 +117,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     private BigDecimal calculatePercentNotInsured() {
-        long all = patientRepository.count();
+        long all = patientRepository.findAllDeletedFalse().size();
         long insured = patientRepository.countAllCurrentlyNotInsured(LocalDate.now());
         return BigDecimal.valueOf(insured)
                 .multiply(BigDecimal.valueOf(100.00))

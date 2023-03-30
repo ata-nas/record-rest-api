@@ -5,6 +5,7 @@ import com.rewedigital.medicalrecord.exception.notfound.NoSuchGpEntityFoundExcep
 import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.model.mapper.DoctorMapper;
@@ -18,7 +19,9 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -118,6 +121,21 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public void delete(String uic) {
         doctorRepository.softDelete(uic);
+    }
+
+    @Override
+    public CountDoctorIncomeHigherThanDTO countDoctorsWithHigherIncomeThanGiven(long income) {
+        Set<DoctorEntity> doctors = doctorRepository.findAllDoctorsWhoHaveMadeAppointments();
+        if (doctors.isEmpty()) {
+            throw new NoSuchDoctorEntityFoundException("No Doctors found!");
+        }
+        return doctorMapper.toDTO(doctors.stream()
+                .filter(doctorEntity -> doctorEntity.getAppointmentEntities()
+                        .stream()
+                        .map(appointmentEntity -> appointmentEntity.getPrice().getAppointmentFees())
+                        .reduce(BigDecimal.ZERO, BigDecimal::add).longValue() > income)
+                .count()
+        );
     }
 
 }

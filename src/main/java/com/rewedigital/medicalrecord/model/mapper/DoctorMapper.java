@@ -3,6 +3,7 @@ package com.rewedigital.medicalrecord.model.mapper;
 import com.rewedigital.medicalrecord.model.dto.doctor.CreateDoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.DoctorDTO;
 import com.rewedigital.medicalrecord.model.dto.doctor.UpdateDoctorDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
@@ -20,6 +21,9 @@ public interface DoctorMapper {
     DoctorDTO toDTO(DoctorEntity doctorEntity);
 
     UpdateDoctorDTO toDTO(CreateDoctorDTO createDoctorDTO);
+
+    @Mapping(target = "countDoctorsHigherIncomeThanGiven", source = "result")
+    CountDoctorIncomeHigherThanDTO toDTO(Long result);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")

@@ -1,4 +1,4 @@
-package com.rewedigital.medicalrecord.model.dto.patient;
+package com.rewedigital.medicalrecord.model.dto.stats;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
