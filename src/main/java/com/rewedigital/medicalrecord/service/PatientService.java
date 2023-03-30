@@ -39,4 +39,5 @@ public interface PatientService {
     PatientIncomeDTO getPatientsIncomeFromInsured();
 
     PatientIncomeDTO getPatientsIncomeFromNotInsured();
+
 }

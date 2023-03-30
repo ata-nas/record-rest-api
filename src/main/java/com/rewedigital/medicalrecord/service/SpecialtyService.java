@@ -9,10 +9,15 @@ import java.util.List;
 public interface SpecialtyService {
 
     SpecialtyEntity getByName(String name);
+
     SpecialtyDTO getByNameToDTO(String name);
+
     List<SpecialtyEntity> getAllSpecialties();
+
     List<SpecialtyDTO> getAllSpecialtiesToDTO();
+
     SpecialtyDTO createSpecialty(CreateSpecialtyDTO createSpecialtyDTO);
+
     void deleteSpecialtyByName(String name);
 
 }

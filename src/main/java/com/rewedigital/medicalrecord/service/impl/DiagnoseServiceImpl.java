@@ -8,8 +8,8 @@ import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
 import com.rewedigital.medicalrecord.model.mapper.DiagnoseMapper;
 import com.rewedigital.medicalrecord.repository.DiagnoseRepository;
 import com.rewedigital.medicalrecord.service.DiagnoseService;
-
 import com.rewedigital.medicalrecord.model.dto.stats.DiagnoseVisitDTO;
+
 import jakarta.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;

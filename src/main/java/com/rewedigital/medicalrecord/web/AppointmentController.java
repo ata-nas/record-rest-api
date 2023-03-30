@@ -18,6 +18,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
+/**
+ * This @RestController handles CRUD for AppointmentEntity.
+ * There is also custom error annotations present here that stop invalid data to enter the @Service,
+ * adding additional layer of security and also stopping invalid data to make potentially very taxing operations.
+ */
 @RestController
 @RequestMapping("/api/healthcare/bulgaria/appointments")
 @RequiredArgsConstructor

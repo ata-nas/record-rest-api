@@ -141,6 +141,11 @@ public class StatsController {
         return ResponseEntity.ok(statsService.getDoctorIncomeByUic(uic));
     }
 
+    /**
+     * 10. The income of a concrete doctor of patients who have health insurance
+     * @param uic unique identifier of doctor
+     * @return the income of a concrete doctor of patients who have health insurance
+     */
     @GetMapping("/doctors/income/insured/{uic}")
     public ResponseEntity<DoctorIncomeDTO> doctorsIncomeOfDoctorWithUicFromInsuredPatients(
             @NotNull
@@ -150,6 +155,11 @@ public class StatsController {
         return ResponseEntity.ok(statsService.getDoctorIncomeByUicFromInsuredPatients(uic));
     }
 
+    /**
+     * 10.1 The income of a concrete doctor of patients who have no health insurance (at time of appointment)
+     * @param uic unique identifier of doctor
+     * @return the income of a concrete doctor of patients who have no health insurance (at time of appointment)
+     */
     @GetMapping("/doctors/income/not-insured/{uic}")
     public ResponseEntity<DoctorIncomeDTO> doctorsIncomeOfDoctorWithUicFromNotInsuredPatients(
             @NotNull

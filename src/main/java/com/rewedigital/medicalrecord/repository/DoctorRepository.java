@@ -25,8 +25,6 @@ public interface DoctorRepository extends JpaRepository<DoctorEntity, Long> {
     )
     List<DoctorEntity> findAllDeletedFalse();
 
-    Set<DoctorEntity> findAllByUicIn(Set<String> uic);
-
     @Query("UPDATE DoctorEntity d SET d.deleted = true WHERE d.uic = :uic")
     @Modifying
     void softDelete(String uic);

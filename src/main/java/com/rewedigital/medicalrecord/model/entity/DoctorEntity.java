@@ -45,7 +45,7 @@ public class DoctorEntity extends BaseEntity {
     )
     private LocalDate birthDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @OrderBy
     @JoinTable(
             name = "doctors_specialties",

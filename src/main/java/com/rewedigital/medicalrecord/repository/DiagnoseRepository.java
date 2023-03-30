@@ -1,6 +1,5 @@
 package com.rewedigital.medicalrecord.repository;
 
-import com.rewedigital.medicalrecord.model.dto.diagnose.CreateDiagnoseDTO;
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,8 +24,6 @@ public interface DiagnoseRepository extends JpaRepository<DiagnoseEntity, Long> 
                     "WHERE e.deleted = false"
     )
     List<DiagnoseEntity> findAllDeletedFalse();
-
-    Set<DiagnoseEntity> findAllByNameIn(Set<String> names);
 
     Set<DiagnoseEntity> findAllByNameInAndDeletedFalse(Set<String> names);
 
@@ -59,4 +56,5 @@ public interface DiagnoseRepository extends JpaRepository<DiagnoseEntity, Long> 
                     "WHERE d.deleted = FALSE AND d.name = :name"
     )
     BigDecimal getTotalIncomeOfDiagnoseName(String name);
+
 }

@@ -37,10 +37,10 @@ public class PatientEntity extends BaseEntity {
     private String name;
 
     @Valid
-    @ManyToOne //(fetch = FetchType.LAZY) //TODO make @Transactional service and optimise all queries
+    @ManyToOne(fetch = FetchType.LAZY)
     private GpEntity gp;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @OrderBy
     @JoinTable(
             name = "patients_insurances",
@@ -51,9 +51,6 @@ public class PatientEntity extends BaseEntity {
 
     @Column(nullable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
-    private Set<AppointmentEntity> appointmentEntities;
 
     /**
      *  Adder method for Mapstruct Strategy, otherwise it rewrites the whole collection and the behavior is not desired.

@@ -14,6 +14,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This @Service acts as a binding or orchestration of all other relevant or needed services
+ * to have all the querying functionality needed for the task so that the @RestController StatsController
+ * can interact only with this class. The actual querying and logic is delegated to the respective @Service.
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor

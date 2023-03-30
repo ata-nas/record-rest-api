@@ -3,7 +3,6 @@ package com.rewedigital.medicalrecord.model.mapper;
 import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
-import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.TotalIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;

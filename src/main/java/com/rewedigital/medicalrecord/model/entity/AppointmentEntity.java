@@ -40,12 +40,12 @@ public class AppointmentEntity extends BaseEntity {
 
     @Valid
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private DoctorEntity doctor;
 
     @Valid
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private PatientEntity patient;
 
     @NotBlank
@@ -55,7 +55,7 @@ public class AppointmentEntity extends BaseEntity {
     private String description;
 
     @NotEmpty
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @OrderBy
     @JoinTable(
             name = "appointments_diagnoses",
@@ -66,7 +66,7 @@ public class AppointmentEntity extends BaseEntity {
 
     @Valid
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_history_id")
     private PricingHistoryEntity price;
 

@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@Transactional // TODO check which to use, this or spring package one!
+@Transactional
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
 

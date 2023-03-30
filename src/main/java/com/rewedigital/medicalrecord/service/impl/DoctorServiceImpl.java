@@ -32,7 +32,8 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorMapper doctorMapper;
     private final DoctorRepository doctorRepository;
     /**
-     * This is here because GpEntity inherits DoctorEntity and GpEntity exists only as a flag and DB constraint. So I manage from here.
+     * This GpRepository here because GpEntity inherits DoctorEntity and GpEntity exists only
+     * as a flag and DB constraint. So I manage from here.
      */
     private final GpRepository gpRepository;
 

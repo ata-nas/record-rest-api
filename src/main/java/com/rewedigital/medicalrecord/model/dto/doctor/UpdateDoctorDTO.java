@@ -1,6 +1,5 @@
 package com.rewedigital.medicalrecord.model.dto.doctor;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rewedigital.medicalrecord.model.validation.ExistingSpecialtyNameValidation;
 
 import jakarta.validation.constraints.NotBlank;

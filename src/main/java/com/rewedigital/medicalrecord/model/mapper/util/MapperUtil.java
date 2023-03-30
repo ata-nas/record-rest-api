@@ -67,7 +67,7 @@ public class MapperUtil {
 
     @Named("findAllDiagnosesByNameCreateUpdate")
     public Set<DiagnoseEntity> findDiagnoseByNameCreateUpdate(Set<String> names) {
-        Set<DiagnoseEntity> all = diagnoseRepository.findAllByNameInAndDeletedFalse(names); // TODO See if need to use soft deleted only
+        Set<DiagnoseEntity> all = diagnoseRepository.findAllByNameInAndDeletedFalse(names);
         if (all.isEmpty()) {
             throw new NoSuchDiagnoseEntityFoundException("No Diagnose by given {name} found!");
         }
