@@ -49,6 +49,9 @@ public class PatientEntity extends BaseEntity {
     )
     private Set<@Valid PatientInsuranceHistoryEntity> insurances;
 
+    @Column(nullable = false)
+    private boolean deleted;
+
     /**
      *  Adder method for Mapstruct Strategy, otherwise it rewrites the whole collection and the behavior is not desired.
      * @param toAdd - the PatientInsuranceHistoryEntity to be added
@@ -61,8 +64,5 @@ public class PatientEntity extends BaseEntity {
         insurances.add(toAdd);
         return this;
     }
-
-    @Column(nullable = false)
-    private boolean deleted;
 
 }

@@ -26,6 +26,8 @@ public interface DiagnoseRepository extends JpaRepository<DiagnoseEntity, Long> 
 
     Set<DiagnoseEntity> findAllByNameIn(Set<String> names);
 
+    Set<DiagnoseEntity> findAllByNameInAndDeletedFalse(Set<String> names);
+
     @Query("UPDATE DiagnoseEntity e SET e.deleted = true WHERE e.name = :name")
     @Modifying
     void softDelete(String name);

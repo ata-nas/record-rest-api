@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
@@ -19,13 +18,13 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
 
     Optional<PatientEntity> findByUicAndDeletedFalse(String uic);
 
-    @Query(
-            "SELECT p FROM PatientEntity p " +
-                    "WHERE p.deleted = false"
-    )
-    List<PatientEntity> findAllDeletedFalse();
-
-    Set<PatientEntity> findAllByUicIn(Set<String> uic);
+//    @Query(
+//            "SELECT p FROM PatientEntity p " +
+//                    "WHERE p.deleted = false"
+//    )
+//    List<PatientEntity> findAllDeletedFalse();
+//
+//    Set<PatientEntity> findAllByUicIn(Set<String> uic);
 
     @Query("UPDATE PatientEntity p SET p.deleted = true WHERE p.uic = :uic")
     @Modifying
@@ -42,8 +41,8 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
     List<PatientEntity> findAllCurrentlyInsured(LocalDate currDate);
 
     @Query(
-            "SELECT DISTINCT p FROM PatientEntity p LEFT JOIN  p.insurances i " +
-                    "WHERE :currDate NOT BETWEEN i.startDate AND i.endDate OR i = null"
+            "SELECT p FROM PatientEntity p " +
+                    "WHERE p NOT IN (SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i WHERE :currDate BETWEEN i.startDate AND i.endDate)"
     )
     List<PatientEntity> findAllCurrentlyNotInsured(LocalDate currDate);
 
@@ -58,6 +57,5 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
                     "WHERE :currDate NOT BETWEEN i.startDate AND i.endDate OR i = null"
     )
     long countAllCurrentlyNotInsured(LocalDate currDate);
-
 
 }

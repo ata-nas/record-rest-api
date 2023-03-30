@@ -3,6 +3,7 @@ package com.rewedigital.medicalrecord.model.mapper;
 import com.rewedigital.medicalrecord.model.dto.appointment.AppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.CreateAppointmentDTO;
 import com.rewedigital.medicalrecord.model.dto.appointment.UpdateAppointmentDTO;
+import com.rewedigital.medicalrecord.model.dto.stats.CountDoctorIncomeHigherThanDTO;
 import com.rewedigital.medicalrecord.model.entity.AppointmentEntity;
 import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
 
@@ -18,6 +19,9 @@ public interface AppointmentMapper {
     @Mapping(target = "patientUic", source = "patient.uic")
     @Mapping(target = "doctorUic", source = "doctor.uic")
     AppointmentDTO toDTO(AppointmentEntity appointmentEntity);
+
+    @Mapping(target = "countDoctorsHigherIncomeThanGiven", source = "result")
+    CountDoctorIncomeHigherThanDTO toDTO(Long result);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "patient", source = "patientUic", qualifiedByName = "findPatientByUicCreateUpdate")

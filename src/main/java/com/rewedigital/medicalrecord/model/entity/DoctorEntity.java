@@ -54,6 +54,9 @@ public class DoctorEntity extends BaseEntity {
     )
     private Set<@Valid SpecialtyEntity> specialties;
 
+    @OneToMany(mappedBy = "doctor")
+    private Set<AppointmentEntity> appointmentEntities;
+
     @Column(nullable = false)
     private boolean deleted;
 
