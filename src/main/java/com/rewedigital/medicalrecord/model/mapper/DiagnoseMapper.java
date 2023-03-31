@@ -12,6 +12,7 @@ import org.mapstruct.Mapping;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = MapperUtil.class)
 public interface DiagnoseMapper {
@@ -29,6 +30,6 @@ public interface DiagnoseMapper {
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     DiagnoseEntity toEntity(CreateDiagnoseDTO createDiagnoseDTO);
 
-    List<DiagnoseDTO> allToDTO(List<DiagnoseEntity> diagnoseEntities);
+    Set<DiagnoseDTO> allToDTO(Set<DiagnoseEntity> diagnoseEntities);
 
 }

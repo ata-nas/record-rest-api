@@ -6,7 +6,7 @@ import com.rewedigital.medicalrecord.model.dto.stats.DiagnoseIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
 import com.rewedigital.medicalrecord.model.dto.stats.DiagnoseVisitDTO;
 
-import java.util.List;
+import java.util.Set;
 
 public interface DiagnoseService {
 
@@ -14,9 +14,9 @@ public interface DiagnoseService {
 
     DiagnoseDTO getByNameToDTO(String name);
 
-    List<DiagnoseEntity> getAll();
+    Set<DiagnoseEntity> getAll();
 
-    List<DiagnoseDTO> getAllToDTO();
+    Set<DiagnoseDTO> getAllToDTO();
 
     DiagnoseDTO create(CreateDiagnoseDTO diagnoseDTO);
 

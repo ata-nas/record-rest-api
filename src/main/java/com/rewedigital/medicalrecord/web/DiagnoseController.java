@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * This @RestController handles CRUD for DiagnoseEntity.
@@ -41,7 +42,7 @@ public class DiagnoseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DiagnoseDTO>> diagnoses() {
+    public ResponseEntity<Set<DiagnoseDTO>> diagnoses() {
         return ResponseEntity.ok(diagnoseService.getAllToDTO());
     }
 

@@ -57,10 +57,10 @@ class DiagnoseRepositoryTest {
         DiagnoseEntity diagnose = new DiagnoseEntity();
         ReflectionTestUtils.setField(diagnose, "name", "HEALTHY");
 
-        List<DiagnoseEntity> expected = new ArrayList<>();
+        Set<DiagnoseEntity> expected = new LinkedHashSet<>();
         expected.add(diagnose);
 
-        List<DiagnoseEntity> actual = diagnoseRepository.findAllByDeletedFalse();
+        Set<DiagnoseEntity> actual = diagnoseRepository.findAllByDeletedFalse();
         assertThat(actual.isEmpty()).isFalse();
 
         assertThatCollection(actual).isEqualTo(expected);

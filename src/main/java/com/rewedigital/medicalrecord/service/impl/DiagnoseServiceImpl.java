@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -38,8 +39,8 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public List<DiagnoseEntity> getAll() {
-        List<DiagnoseEntity> all = diagnoseRepository.findAllByDeletedFalse();
+    public Set<DiagnoseEntity> getAll() {
+        Set<DiagnoseEntity> all = diagnoseRepository.findAllByDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchDiagnoseEntityFoundException("No Diagnoses found!");
         }
@@ -47,7 +48,7 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public List<DiagnoseDTO> getAllToDTO() {
+    public Set<DiagnoseDTO> getAllToDTO() {
         return diagnoseMapper.allToDTO(getAll());
     }
 
