@@ -19,6 +19,8 @@ public interface PricingHistoryMapper {
     PricingHistoryEntity toEntity(CreatePricingHistoryDTO pricingHistoryDTO);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "issueNo", ignore = true)
+    @Mapping(target = "fromDate", ignore = true)
     PricingHistoryEntity update(UpdatePricingHistoryDTO updatePricingHistoryDTO, @MappingTarget PricingHistoryEntity pricingHistoryEntity);
 
     List<PricingHistoryDTO> allToDTO(List<PricingHistoryEntity> pricingHistoryEntities);

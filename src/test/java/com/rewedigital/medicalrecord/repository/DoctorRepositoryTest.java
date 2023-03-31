@@ -112,18 +112,22 @@ class DoctorRepositoryTest {
     @Test
     public void testTotalIncomeFromInsured_ReturnsTotalIncomeOfDoctorWithUicFromAppointmentsWherePatientWasInsuredThen() {
         double expected = 10.0;
-        double actual = doctorRepository.totalIncomeFromInsured("0001").doubleValue();
-        assertThat(actual).isEqualTo(expected);
+         BigDecimal actual = doctorRepository.totalIncomeFromInsured("0001");
+        if (actual == null) {
+            actual = BigDecimal.ZERO;
+        }
+        assertThat(actual.doubleValue()).isEqualTo(expected);
     }
 
     @Test
     public void testTotalIncomeFromNotInsured_ReturnsTotalIncomeOfDoctorWithUicFromAppointmentsWherePatientWasNotInsuredThen() {
         double expected = 0.0;
         BigDecimal actual = doctorRepository.totalIncomeFromNotInsured("0001");
-        if (actual != null) {
-            assertThat(actual.doubleValue()).isEqualTo(expected);
+        if (actual == null) {
+            actual = BigDecimal.ZERO;
         }
-        assertThat(actual).isNull();
+        assertThat(actual.doubleValue()).isEqualTo(expected);
+
     }
 
     private void initDb() {
@@ -142,7 +146,7 @@ class DoctorRepositoryTest {
         ReflectionTestUtils.setField(doctorSoftDeleted, "birthDate", LocalDate.of(1990, 1, 1));
         ReflectionTestUtils.setField(doctorSoftDeleted, "deleted", Boolean.TRUE);
 
-        DoctorEntity doctorEntitySoftDeleted = testEntityManager.persistAndFlush(doctorSoftDeleted);
+        testEntityManager.persistAndFlush(doctorSoftDeleted);
 
         // Init Patients
         PatientInsuranceHistoryEntity insurance = new PatientInsuranceHistoryEntity();
@@ -170,7 +174,7 @@ class DoctorRepositoryTest {
         ReflectionTestUtils.setField(patientSoftDeleted, "insurances", null);
         ReflectionTestUtils.setField(patientSoftDeleted, "deleted", Boolean.TRUE);
 
-        PatientEntity patientEntitySoftDeleted = testEntityManager.persistAndFlush(patientSoftDeleted);
+        testEntityManager.persistAndFlush(patientSoftDeleted);
 
         // Init Diagnoses
         DiagnoseEntity diagnose = new DiagnoseEntity();
@@ -183,7 +187,7 @@ class DoctorRepositoryTest {
         ReflectionTestUtils.setField(diagnoseSoftDeleted, "name", "FLU");
         ReflectionTestUtils.setField(diagnoseSoftDeleted, "deleted", Boolean.TRUE);
 
-        DiagnoseEntity diagnoseEntitySoftDeleted = testEntityManager.persistAndFlush(diagnoseSoftDeleted);
+        testEntityManager.persistAndFlush(diagnoseSoftDeleted);
 
         // Init PricingHistory
         PricingHistoryEntity pricing = new PricingHistoryEntity();

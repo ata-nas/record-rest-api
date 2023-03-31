@@ -62,7 +62,7 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
      */
     @Query(
             "SELECT COUNT(DISTINCT p) FROM PatientEntity p JOIN p.insurances i " +
-                    "WHERE p.deleted = FALSE AND :currDate BETWEEN i.startDate AND i.endDate"
+                    "WHERE (p.deleted = FALSE) AND (:currDate BETWEEN i.startDate AND i.endDate)"
     )
     long countAllCurrentlyInsured(LocalDate currDate);
 
@@ -73,18 +73,18 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
      */
     @Query(
             "SELECT COUNT(DISTINCT p) FROM PatientEntity p LEFT JOIN  p.insurances i " +
-                    "WHERE p.deleted = FALSE AND p NOT IN (SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i WHERE :currDate BETWEEN i.startDate AND i.endDate)"
+                    "WHERE (p.deleted = FALSE) AND (p NOT IN (SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i WHERE :currDate BETWEEN i.startDate AND i.endDate))"
     )
     long countAllCurrentlyNotInsured(LocalDate currDate);
 
     /**
-     * Count of the visits of a patient, soft-deleted are considered counted!
+     * Count of the visits of a patient, soft-deleted are considered not counted!
      * @param uic of the patient
-     * @return count of the visits of a patient, soft-deleted are considered counted!
+     * @return count of the visits of a patient, soft-deleted are considered not counted!
      */
     @Query(
             "SELECT COUNT(a.patient) FROM AppointmentEntity a " +
-                    "WHERE a.patient.deleted = FALSE AND a.patient.uic = :uic"
+                    "WHERE (a.patient.deleted = FALSE) AND (a.patient.uic = :uic)"
     )
     long countVisitsByPatientUic(String uic);
 
@@ -104,7 +104,7 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
      */
     @Query(
             "SELECT SUM(a.price.appointmentFees) FROM AppointmentEntity a LEFT JOIN a.price p LEFT JOIN a.patient pa LEFT JOIN pa.insurances i " +
-                    "WHERE i.startDate IS NULL OR i.endDate IS NULL OR a.date NOT BETWEEN i.startDate AND i.endDate"
+                    "WHERE (i.startDate IS NULL) OR (i.endDate IS NULL) OR (a.date NOT BETWEEN i.startDate AND i.endDate)"
     )
     BigDecimal totalIncomeFromNotInsured();
 

@@ -30,20 +30,28 @@ public interface DoctorMapper {
     DoctorIncomeDTO toDTO(BigDecimal income);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "appointmentEntities", ignore = true)
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")
     DoctorEntity toEntity(CreateDoctorDTO createDoctorDTO);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uic", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "appointmentEntities", ignore = true)
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")
     DoctorEntity toEntity(UpdateDoctorDTO updateDoctorDTO, @MappingTarget DoctorEntity doctorEntity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "appointmentEntities", ignore = true)
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")
     GpEntity toEntityGp(CreateDoctorDTO createDoctorDTO);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uic", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "appointmentEntities", ignore = true)
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")
     GpEntity toEntityGp(UpdateDoctorDTO updateDoctorDTO, @MappingTarget GpEntity gpEntity);
 

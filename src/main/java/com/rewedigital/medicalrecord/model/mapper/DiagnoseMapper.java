@@ -27,6 +27,7 @@ public interface DiagnoseMapper {
     DiagnoseDTO toDTO(CreateDiagnoseDTO createDiagnoseDTO);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     DiagnoseEntity toEntity(CreateDiagnoseDTO createDiagnoseDTO);
 

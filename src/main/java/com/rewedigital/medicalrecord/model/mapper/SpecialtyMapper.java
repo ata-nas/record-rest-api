@@ -20,6 +20,7 @@ public interface SpecialtyMapper {
     SpecialtyDTO toDTO(CreateSpecialtyDTO createSpecialtyDTO);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     SpecialtyEntity toEntity(CreateSpecialtyDTO createSpecialtyDTO);
 

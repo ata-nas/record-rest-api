@@ -68,7 +68,7 @@ class AppointmentRepositoryTest {
         ReflectionTestUtils.setField(doctorSoftDeleted, "birthDate", LocalDate.of(1990, 1, 1));
         ReflectionTestUtils.setField(doctorSoftDeleted, "deleted", Boolean.TRUE);
 
-        DoctorEntity doctorEntitySoftDeleted = testEntityManager.persistAndFlush(doctorSoftDeleted);
+        testEntityManager.persistAndFlush(doctorSoftDeleted);
 
         // Init Patients
         PatientEntity patient = new PatientEntity();
@@ -85,7 +85,7 @@ class AppointmentRepositoryTest {
         ReflectionTestUtils.setField(patientSoftDeleted, "gp", null);
         ReflectionTestUtils.setField(patientSoftDeleted, "deleted", Boolean.TRUE);
 
-        PatientEntity patientEntitySoftDeleted = testEntityManager.persistAndFlush(patientSoftDeleted);
+        testEntityManager.persistAndFlush(patientSoftDeleted);
 
         // Init Diagnoses
         DiagnoseEntity diagnose = new DiagnoseEntity();
@@ -98,7 +98,7 @@ class AppointmentRepositoryTest {
         ReflectionTestUtils.setField(diagnoseSoftDeleted, "name", "FLU");
         ReflectionTestUtils.setField(diagnoseSoftDeleted, "deleted", Boolean.TRUE);
 
-        DiagnoseEntity diagnoseEntitySoftDeleted = testEntityManager.persistAndFlush(diagnoseSoftDeleted);
+        testEntityManager.persistAndFlush(diagnoseSoftDeleted);
 
         // Init PricingHistory
         PricingHistoryEntity pricing = new PricingHistoryEntity();

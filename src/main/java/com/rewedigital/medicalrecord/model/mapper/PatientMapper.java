@@ -27,10 +27,12 @@ public interface PatientMapper {
     PatientIncomeDTO toDTO(BigDecimal income);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     @Mapping(source = "gpUic", target = "gp", qualifiedByName = "findGpByUicCreateUpdate")
     PatientEntity toEntity(CreatePatientDTO createPatientDTO);
 
     @Mapping(target = "uic", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     @Mapping(source = "updatePatientDTO.gpUic", target = "gp", qualifiedByName = "findGpByUicCreateUpdate")
     PatientEntity toEntity(UpdatePatientDTO updatePatientDTO, @MappingTarget PatientEntity patientEntity);
 
