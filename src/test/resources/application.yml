@@ -1,0 +1,20 @@
+spring:
+  sql:
+    init:
+      mode: never
+#  jpa:
+#    properties:
+#      jakarta:
+#        persistence:
+#          validation:
+#            mode: none
+
+logging:
+  level:
+    blog: WARN
+    org: WARN
+    org.hibernate.orm.jdbc.bind: TRACE
+    sql: DEBUG
+
+#server:
+#  port: 8080

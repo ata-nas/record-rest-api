@@ -21,17 +21,18 @@ Implement the CRUD operations of the patients, doctors, and visits, plus the fol
 
 1. DONE - List of all the patients, who have health insurance 
 2. DONE - The percentage of patients who have no insurance (in accordance of the total number of patients)
-3. The total income of all the visits of all patients to all doctors 
-4. The income from visits fees of a particular doctor 
-5. The number of visits of a given patient 
-6. The number of visits by a diagnosis 
-7. The number of doctors who have income greater than a given one 
-8. The total income of visits, by a given diagnosis 
-9. The total income of patients who have no health insurance 
-10. The income of a concrete doctor of patients who have health insurance
+3. DONE - The total income of all the visits of all patients to all doctors 
+4. DONE - The income from visits fees of a particular doctor 
+5. DONE - The number of visits of a given patient 
+6. DONE - The number of visits by a diagnosis 
+7. DONE - The number of doctors who have income greater than a given one 
+8. DONE - The total income of visits, by a given diagnosis 
+9. DONE - The total income of patients who have no health insurance 
+10. DONE - The income of a concrete doctor of patients who have health insurance
 
 ## IMPORTANT:
 
+(DEPRECATED BELOW)
 - Since we look at the API in the way that the healthcare system is a single instance, I have started to construct
 all parts of it modularly, since I am always expected to be in the domain of this single healthcare system. If that
 is not the case, then the `HealthcareAgencyEntity` can house a lot of info for the particular agency and to have
@@ -47,6 +48,7 @@ so this `HealthcareAgencyEntity` acts only as a "details" table that describes a
 in the Task. PLEASE NOTE: I have made the root uri to be "/api/healthcare/bulgaria/..." it is not dynamic since as I
 explain, we are in the domain of a single healthcare agency!
 
+(DEPRECATED BELOW)
 - The base services: `AppointmentService`, `DiagnoseService`, `DoctorService`, `GpService`, `PatientService`, `HealthcareAgencyService`, `SpecialtyService`
 are created for the only purpose to manage the persistence layer. They are responsible only for queries and persisting entities, CRUD operations, of course also filtering and calculating something if need be.
 Where is needed more than one of these services, like in the appointment functionality, I make
@@ -89,9 +91,13 @@ descendent of `DoctorEntity`.
 
 ## Thoughts
 
-- Making CRUD not based on `id` but `@NaturalId` because is more consistent.
+- Making CRUD not based on `id` but `@NaturalId` because is more consistent, eventhoug `id` is indexed in db and is faster.
+
+(DEPRECATED BELOW)
 - Decided to not make update functionality on `SpecialtyEntity` and `DiagnoseEntity`, do not see the point here as these
 things are static in nature and would probably not be used by end user. If mistake is made, we can delete and create again.
+
+(DEPRECATED BELOW)
 - HealthcareAgency is initialized with the `data.sql`script to be id - 1 and fee 100.00, country - `BULGARIA`, there is no
 functionality to add or delete this , since we consider that this entity is only one and will always exist to keep
 info for our domain.

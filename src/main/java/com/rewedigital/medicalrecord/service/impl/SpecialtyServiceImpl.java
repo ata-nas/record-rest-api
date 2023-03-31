@@ -50,7 +50,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public SpecialtyDTO createSpecialty(CreateSpecialtyDTO createSpecialtyDTO) {
+    public SpecialtyDTO create(CreateSpecialtyDTO createSpecialtyDTO) {
         if (specialtyRepository.findByName(createSpecialtyDTO.getName()).isPresent()) {
             specialtyRepository.softCreate(createSpecialtyDTO.getName());
             return specialtyMapper.toDTO(createSpecialtyDTO);
@@ -61,7 +61,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public void deleteSpecialtyByName(String name) {
+    public void delete(String name) {
         specialtyRepository.softDelete(name);
     }
 

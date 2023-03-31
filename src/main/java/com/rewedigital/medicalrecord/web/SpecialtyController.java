@@ -60,7 +60,7 @@ public class SpecialtyController {
                                 .path("/" + createSpecialtyDTO.getName().toLowerCase())
                                 .build().toUri()
                 )
-                .body(specialtyService.createSpecialty(createSpecialtyDTO));
+                .body(specialtyService.create(createSpecialtyDTO));
     }
 
     @DeleteMapping("/{name}")
@@ -70,7 +70,7 @@ public class SpecialtyController {
             @ExistingSpecialtyNameValidation(message = "Illegal path! Specialty with given {name} does not exist!")
             String name
     ) {
-        specialtyService.deleteSpecialtyByName(name);
+        specialtyService.delete(name);
         return ResponseEntity.noContent().build();
     }
 

@@ -16,8 +16,8 @@ public interface SpecialtyService {
 
     List<SpecialtyDTO> getAllSpecialtiesToDTO();
 
-    SpecialtyDTO createSpecialty(CreateSpecialtyDTO createSpecialtyDTO);
+    SpecialtyDTO create(CreateSpecialtyDTO createSpecialtyDTO);
 
-    void deleteSpecialtyByName(String name);
+    void delete(String name);
 
 }
