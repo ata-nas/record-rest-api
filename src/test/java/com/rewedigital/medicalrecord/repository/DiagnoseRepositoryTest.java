@@ -53,14 +53,14 @@ class DiagnoseRepositoryTest {
     }
 
     @Test
-    public void testFindAllDeletedFalse_ReturnsCollectionContainingDiagnosesWhereDeletedIsFalse(){
+    public void testFindAllByDeletedFalse_ReturnsCollectionContainingDiagnosesWhereDeletedIsFalse(){
         DiagnoseEntity diagnose = new DiagnoseEntity();
         ReflectionTestUtils.setField(diagnose, "name", "HEALTHY");
 
         List<DiagnoseEntity> expected = new ArrayList<>();
         expected.add(diagnose);
 
-        List<DiagnoseEntity> actual = diagnoseRepository.findAllDeletedFalse();
+        List<DiagnoseEntity> actual = diagnoseRepository.findAllByDeletedFalse();
         assertThat(actual.isEmpty()).isFalse();
 
         assertThatCollection(actual).isEqualTo(expected);
@@ -79,6 +79,38 @@ class DiagnoseRepositoryTest {
         assertThat(actual.isEmpty()).isFalse();
 
         assertThatCollection(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void testSoftDelete_UpdatesFieldDeletedToFalseOnDiagnoseWithName() {
+        diagnoseRepository.softDelete("HEALTHY");
+
+        Optional<DiagnoseEntity> actual = diagnoseRepository.findByName("HEALTHY");
+        assertThat(actual.isPresent()).isTrue();
+        assertThat(actual.get().isDeleted()).isTrue();
+    }
+
+    @Test
+    public void testSoftCreate_UpdatesFieldDeletedToTrueOnDiagnoseWithName() {
+        diagnoseRepository.softCreate("FLU");
+
+        Optional<DiagnoseEntity> actual = diagnoseRepository.findByName("FLU");
+        assertThat(actual.isPresent()).isTrue();
+        assertThat(actual.get().isDeleted()).isFalse();
+    }
+
+    @Test
+    public void testCountVisitsByDiagnoseName_ReturnsCountOfVisitsWhereGivenDiagnoseIsChosen() {
+        long expected = 1L;
+        long actual = diagnoseRepository.countVisitsByDiagnoseName("HEALTHY");
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void testGetTotalIncomeOfDiagnoseName_ReturnsTheTotalIncomeMadeWhereGivenDiagnoseIsChosen() {
+        double expected = 10.0;
+        double actual = diagnoseRepository.getTotalIncomeOfDiagnoseName("HEALTHY").doubleValue();
+        assertThat(actual).isEqualTo(expected);
     }
 
     private void initDb() {

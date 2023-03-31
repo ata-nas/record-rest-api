@@ -39,7 +39,7 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
     @Override
     public List<DiagnoseEntity> getAll() {
-        List<DiagnoseEntity> all = diagnoseRepository.findAllDeletedFalse();
+        List<DiagnoseEntity> all = diagnoseRepository.findAllByDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchDiagnoseEntityFoundException("No Diagnoses found!");
         }

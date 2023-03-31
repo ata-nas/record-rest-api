@@ -2,6 +2,7 @@ package com.rewedigital.medicalrecord.repository;
 
 import com.rewedigital.medicalrecord.model.entity.DiagnoseEntity;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,20 +20,18 @@ public interface DiagnoseRepository extends JpaRepository<DiagnoseEntity, Long> 
 
     Optional<DiagnoseEntity> findByNameAndDeletedFalse(String name);
 
-    @Query(
-            "SELECT e FROM DiagnoseEntity e " +
-                    "WHERE e.deleted = false"
-    )
-    List<DiagnoseEntity> findAllDeletedFalse();
+    List<DiagnoseEntity> findAllByDeletedFalse();
 
     Set<DiagnoseEntity> findAllByNameInAndDeletedFalse(Set<String> names);
 
     @Query("UPDATE DiagnoseEntity e SET e.deleted = true WHERE e.name = :name")
-    @Modifying
+    @Modifying(clearAutomatically = true)
+    @Transactional
     void softDelete(String name);
 
     @Query("UPDATE DiagnoseEntity e SET e.deleted = false WHERE e.name = :name")
-    @Modifying
+    @Modifying(clearAutomatically = true)
+    @Transactional
     void softCreate(String name);
 
     /**
