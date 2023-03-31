@@ -8,7 +8,7 @@ import com.rewedigital.medicalrecord.model.dto.stats.DoctorIncomeDTO;
 import com.rewedigital.medicalrecord.model.entity.DoctorEntity;
 import com.rewedigital.medicalrecord.model.entity.GpEntity;
 
-import java.util.List;
+import java.util.Set;
 
 public interface DoctorService {
 
@@ -18,9 +18,9 @@ public interface DoctorService {
 
     DoctorDTO getByUicToDTO(String uic);
 
-    List<DoctorEntity> getAll();
+    Set<DoctorEntity> getAll();
 
-    List<DoctorDTO> getAllToDTO();
+    Set<DoctorDTO> getAllToDTO();
 
     DoctorDTO create(CreateDoctorDTO createDoctorDTO);
 

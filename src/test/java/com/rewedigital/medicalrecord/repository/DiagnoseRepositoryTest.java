@@ -42,7 +42,7 @@ class DiagnoseRepositoryTest {
     }
 
     @Test
-    public void testFindByNameAndDeletedFalse_ReturnsOptionalWIthDiagnoseWithGivenNameIfDeletedFalse(){
+    public void testFindByNameAndDeletedFalse_ReturnsOptionalWithDiagnoseWithGivenNameIfDeletedFalse(){
         String expected = "HEALTHY";
 
         Optional<DiagnoseEntity> optActual = diagnoseRepository.findByNameAndDeletedFalse(expected);
@@ -56,6 +56,7 @@ class DiagnoseRepositoryTest {
     public void testFindAllByDeletedFalse_ReturnsCollectionContainingDiagnosesWhereDeletedIsFalse(){
         DiagnoseEntity diagnose = new DiagnoseEntity();
         ReflectionTestUtils.setField(diagnose, "name", "HEALTHY");
+        ReflectionTestUtils.setField(diagnose, "deleted", Boolean.FALSE);
 
         Set<DiagnoseEntity> expected = new LinkedHashSet<>();
         expected.add(diagnose);
@@ -114,6 +115,19 @@ class DiagnoseRepositoryTest {
     }
 
     private void initDb() {
+        // Init SpecialtyEntity
+        SpecialtyEntity specialty = new SpecialtyEntity();
+        ReflectionTestUtils.setField(specialty, "name", "SURGERY");
+        ReflectionTestUtils.setField(specialty, "deleted", Boolean.FALSE);
+
+        SpecialtyEntity specialtyEntity = testEntityManager.persistAndFlush(specialty);
+
+        SpecialtyEntity specialtySoftDeleted = new SpecialtyEntity();
+        ReflectionTestUtils.setField(specialtySoftDeleted, "name", "CARDIOLOGY");
+        ReflectionTestUtils.setField(specialtySoftDeleted, "deleted", Boolean.TRUE);
+
+        SpecialtyEntity specialtyEntitySoftDeleted = testEntityManager.persistAndFlush(specialtySoftDeleted);
+
         // Init Doctors
         DoctorEntity doctor = new DoctorEntity();
         ReflectionTestUtils.setField(doctor, "uic", "0001");

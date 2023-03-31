@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -55,8 +54,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<DoctorEntity> getAll() {
-        List<DoctorEntity> all = doctorRepository.findAllDeletedFalse();
+    public Set<DoctorEntity> getAll() {
+        Set<DoctorEntity> all = doctorRepository.findAllByDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchDoctorEntityFoundException("No Doctors found!");
         }
@@ -64,7 +63,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<DoctorDTO> getAllToDTO() {
+    public Set<DoctorDTO> getAllToDTO() {
         return doctorMapper.allToDTO(getAll());
     }
 

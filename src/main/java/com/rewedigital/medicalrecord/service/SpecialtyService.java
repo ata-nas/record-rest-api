@@ -4,7 +4,7 @@ import com.rewedigital.medicalrecord.model.dto.specialty.CreateSpecialtyDTO;
 import com.rewedigital.medicalrecord.model.dto.specialty.SpecialtyDTO;
 import com.rewedigital.medicalrecord.model.entity.SpecialtyEntity;
 
-import java.util.List;
+import java.util.Set;
 
 public interface SpecialtyService {
 
@@ -12,9 +12,9 @@ public interface SpecialtyService {
 
     SpecialtyDTO getByNameToDTO(String name);
 
-    List<SpecialtyEntity> getAllSpecialties();
+    Set<SpecialtyEntity> getAllSpecialties();
 
-    List<SpecialtyDTO> getAllSpecialtiesToDTO();
+    Set<SpecialtyDTO> getAllSpecialtiesToDTO();
 
     SpecialtyDTO create(CreateSpecialtyDTO createSpecialtyDTO);
 

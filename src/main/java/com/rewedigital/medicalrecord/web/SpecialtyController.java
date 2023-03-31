@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * This @RestController handles CRUD for SpecialtyEntity.
@@ -41,7 +42,7 @@ public class SpecialtyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SpecialtyDTO>> specialty() {
+    public ResponseEntity<Set<SpecialtyDTO>> specialty() {
         return ResponseEntity.ok(specialtyService.getAllSpecialtiesToDTO());
     }
 

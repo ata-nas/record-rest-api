@@ -14,7 +14,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = MapperUtil.class)
 public interface DoctorMapper {
@@ -47,6 +47,6 @@ public interface DoctorMapper {
     @Mapping(source = "specialtiesNames", target = "specialties", qualifiedByName = "findAllSpecialtiesByNameCreateUpdate")
     GpEntity toEntityGp(UpdateDoctorDTO updateDoctorDTO, @MappingTarget GpEntity gpEntity);
 
-    List<DoctorDTO> allToDTO(List<DoctorEntity> doctorEntities);
+    Set<DoctorDTO> allToDTO(Set<DoctorEntity> doctorEntities);
 
 }

@@ -8,7 +8,7 @@ import com.rewedigital.medicalrecord.model.mapper.util.MapperUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = MapperUtil.class)
 public interface SpecialtyMapper {
@@ -23,6 +23,6 @@ public interface SpecialtyMapper {
     @Mapping(source = "name", target = "name", qualifiedByName = "toUpper")
     SpecialtyEntity toEntity(CreateSpecialtyDTO createSpecialtyDTO);
 
-    List<SpecialtyDTO> allToDTO(List<SpecialtyEntity> specialtyEntity);
+    Set<SpecialtyDTO> allToDTO(Set<SpecialtyEntity> specialtyEntity);
 
 }

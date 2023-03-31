@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -36,8 +37,8 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public List<SpecialtyEntity> getAllSpecialties() {
-        List<SpecialtyEntity> all = specialtyRepository.findAllDeletedFalse();
+    public Set<SpecialtyEntity> getAllSpecialties() {
+        Set<SpecialtyEntity> all = specialtyRepository.findAllByDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchSpecialtyEntityFoundException("No Specialties found!");
         }
@@ -45,7 +46,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public List<SpecialtyDTO> getAllSpecialtiesToDTO() {
+    public Set<SpecialtyDTO> getAllSpecialtiesToDTO() {
         return specialtyMapper.allToDTO(getAllSpecialties());
     }
 
