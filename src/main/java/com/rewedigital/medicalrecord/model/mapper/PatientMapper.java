@@ -12,6 +12,7 @@ import org.mapstruct.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = MapperUtil.class, collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
 public interface PatientMapper {
@@ -33,6 +34,6 @@ public interface PatientMapper {
     @Mapping(source = "updatePatientDTO.gpUic", target = "gp", qualifiedByName = "findGpByUicCreateUpdate")
     PatientEntity toEntity(UpdatePatientDTO updatePatientDTO, @MappingTarget PatientEntity patientEntity);
 
-    List<PatientDTO> allToDTO(List<PatientEntity> patientEntity);
+    Set<PatientDTO> allToDTO(Set<PatientEntity> patientEntity);
 
 }

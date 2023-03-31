@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -64,7 +64,7 @@ public class StatsController {
      * @return list of all the patients, who have health insurance
      */
     @GetMapping("/patients/insured")
-    public ResponseEntity<List<PatientDTO>> patientsCurrentlyInsured() {
+    public ResponseEntity<Set<PatientDTO>> patientsCurrentlyInsured() {
         return ResponseEntity.ok(statsService.getAllPatientsCurrentlyInsured());
     }
 
@@ -73,7 +73,7 @@ public class StatsController {
      * @return list of all the patients, who have no health insurance
      */
     @GetMapping("/patients/not-insured")
-    public ResponseEntity<List<PatientDTO>> patientsCurrentlyNotInsured() {
+    public ResponseEntity<Set<PatientDTO>> patientsCurrentlyNotInsured() {
         return ResponseEntity.ok(statsService.getAllPatientsCurrentlyNotInsured());
     }
 

@@ -2,6 +2,8 @@ package com.rewedigital.medicalrecord.repository;
 
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
@@ -19,20 +21,16 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
 
     Optional<PatientEntity> findByUicAndDeletedFalse(String uic);
 
-    @Query(
-            "SELECT p FROM PatientEntity p " +
-                    "WHERE p.deleted = false"
-    )
-    List<PatientEntity> findAllDeletedFalse();
-
-//    Set<PatientEntity> findAllByUicIn(Set<String> uic);
+    Set<PatientEntity> findAllByDeletedFalse();
 
     @Query("UPDATE PatientEntity p SET p.deleted = true WHERE p.uic = :uic")
-    @Modifying
+    @Modifying(clearAutomatically = true)
+    @Transactional
     void softDelete(String uic);
 
     @Query("UPDATE PatientEntity p SET p.deleted = false WHERE p.uic = :uic")
-    @Modifying
+    @Modifying(clearAutomatically = true)
+    @Transactional
     void softCreate(String uic);
 
     /**
@@ -44,7 +42,7 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
             "SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i " +
                     "WHERE p.deleted = FALSE AND :currDate BETWEEN i.startDate AND i.endDate"
     )
-    List<PatientEntity> findAllCurrentlyInsured(LocalDate currDate);
+    Set<PatientEntity> findAllCurrentlyInsured(LocalDate currDate);
 
     /**
      * All patients that are currently not insured, soft-deleted are excluded!
@@ -55,7 +53,7 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
             "SELECT p FROM PatientEntity p " +
                     "WHERE p.deleted = FALSE AND p NOT IN (SELECT DISTINCT p FROM PatientEntity p JOIN p.insurances i WHERE :currDate BETWEEN i.startDate AND i.endDate)"
     )
-    List<PatientEntity> findAllCurrentlyNotInsured(LocalDate currDate);
+    Set<PatientEntity> findAllCurrentlyNotInsured(LocalDate currDate);
 
     /**
      * Count of all patients that are currently insured, soft-deleted are excluded!

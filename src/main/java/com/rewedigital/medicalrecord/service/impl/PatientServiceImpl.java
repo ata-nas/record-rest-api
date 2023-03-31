@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -33,7 +33,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientEntity getPatientByUic(String uic) {
-        return patientRepository.findByUic(uic)
+        return patientRepository.findByUicAndDeletedFalse(uic)
                 .orElseThrow(() -> new NoSuchPatientEntityFoundException("uic", uic));
     }
 
@@ -43,8 +43,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientEntity> getAllPatients() {
-        List<PatientEntity> all = patientRepository.findAll();
+    public Set<PatientEntity> getAllPatients() {
+        Set<PatientEntity> all = patientRepository.findAllByDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchPatientEntityFoundException("No Patients found!");
         }
@@ -52,7 +52,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientDTO> getAllPatientsToDTO() {
+    public Set<PatientDTO> getAllPatientsToDTO() {
         return patientMapper.allToDTO(getAllPatients());
     }
 
@@ -82,8 +82,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientDTO> getAllPatientsCurrentlyInsured() {
-        List<PatientDTO> all = patientMapper.allToDTO(patientRepository.findAllCurrentlyInsured(LocalDate.now()));
+    public Set<PatientDTO> getAllPatientsCurrentlyInsured() {
+        Set<PatientDTO> all = patientMapper.allToDTO(patientRepository.findAllCurrentlyInsured(LocalDate.now()));
         if (all.isEmpty()) {
             throw new NoSuchPatientEntityFoundException("No Patients currently insured found!");
         }
@@ -91,8 +91,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientDTO> getAllPatientsCurrentlyNotInsured() {
-        List<PatientDTO> all = patientMapper.allToDTO(patientRepository.findAllCurrentlyNotInsured(LocalDate.now()));
+    public Set<PatientDTO> getAllPatientsCurrentlyNotInsured() {
+        Set<PatientDTO> all = patientMapper.allToDTO(patientRepository.findAllCurrentlyNotInsured(LocalDate.now()));
         if (all.isEmpty()) {
             throw new NoSuchPatientEntityFoundException("No Patients currently not insured found!");
         }
@@ -105,7 +105,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     private BigDecimal calculatePercentInsured() {
-        long all = patientRepository.findAllDeletedFalse().size();
+        long all = patientRepository.findAllByDeletedFalse().size();
         long insured = patientRepository.countAllCurrentlyInsured(LocalDate.now());
         return BigDecimal.valueOf(insured)
                 .multiply(BigDecimal.valueOf(100.00))
@@ -119,7 +119,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     private BigDecimal calculatePercentNotInsured() {
-        long all = patientRepository.findAllDeletedFalse().size();
+        long all = patientRepository.findAllByDeletedFalse().size();
         long insured = patientRepository.countAllCurrentlyNotInsured(LocalDate.now());
         return BigDecimal.valueOf(insured)
                 .multiply(BigDecimal.valueOf(100.00))

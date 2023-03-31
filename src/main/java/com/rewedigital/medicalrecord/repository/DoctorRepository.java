@@ -19,10 +19,6 @@ public interface DoctorRepository extends JpaRepository<DoctorEntity, Long> {
 
     Optional<DoctorEntity> findByUicAndDeletedFalse(String uic);
 
-//    @Query(
-//            "SELECT d FROM DoctorEntity d " +
-//                    "WHERE d.deleted = false"
-//    )
     Set<DoctorEntity> findAllByDeletedFalse();
 
     @Query("UPDATE DoctorEntity d SET d.deleted = true WHERE d.uic = :uic")
@@ -50,7 +46,7 @@ public interface DoctorRepository extends JpaRepository<DoctorEntity, Long> {
      */
     @Query(
             "SELECT SUM(a.price.appointmentFees) FROM AppointmentEntity a LEFT JOIN a.price p LEFT JOIN a.patient pa LEFT JOIN pa.insurances i " +
-                    "WHERE a.date BETWEEN i.startDate AND i.endDate AND a.doctor.uic = :uic"
+                    "WHERE (a.date BETWEEN i.startDate AND i.endDate) AND a.doctor.uic = :uic"
     )
     BigDecimal totalIncomeFromInsured(String uic);
 

@@ -4,13 +4,13 @@ import com.rewedigital.medicalrecord.model.dto.patient.PatientDTO;
 import com.rewedigital.medicalrecord.model.dto.stats.*;
 import com.rewedigital.medicalrecord.model.dto.stats.DiagnoseVisitDTO;
 
-import java.util.List;
+import java.util.Set;
 
 public interface StatsService {
 
-    List<PatientDTO> getAllPatientsCurrentlyInsured();
+    Set<PatientDTO> getAllPatientsCurrentlyInsured();
 
-    List<PatientDTO> getAllPatientsCurrentlyNotInsured();
+    Set<PatientDTO> getAllPatientsCurrentlyNotInsured();
 
     PercentageInsuredPatientDTO getPercentageCurrentlyInsured();
 

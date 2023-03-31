@@ -9,6 +9,7 @@ import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PatientService {
 
@@ -16,9 +17,9 @@ public interface PatientService {
 
     PatientDTO getPatientByUicToDTO(String uic);
 
-    List<PatientEntity> getAllPatients();
+    Set<PatientEntity> getAllPatients();
 
-    List<PatientDTO> getAllPatientsToDTO();
+    Set<PatientDTO> getAllPatientsToDTO();
 
     PatientDTO createPatient(CreatePatientDTO createPatientDTO);
 
@@ -26,15 +27,15 @@ public interface PatientService {
 
     void deletePatientByUic(String uic);
 
-    List<PatientDTO> getAllPatientsCurrentlyInsured();
+    Set<PatientDTO> getAllPatientsCurrentlyInsured();
 
-    List<PatientDTO> getAllPatientsCurrentlyNotInsured();
+    Set<PatientDTO> getAllPatientsCurrentlyNotInsured();
 
     PercentageInsuredPatientDTO getPercentageCurrentlyInsured();
 
     PercentageInsuredPatientDTO getPercentageCurrentlyNotInsured();
 
-     PatientVisitDTO getPatientVisitCount(String uic);
+    PatientVisitDTO getPatientVisitCount(String uic);
 
     PatientIncomeDTO getPatientsIncomeFromInsured();
 

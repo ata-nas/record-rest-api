@@ -17,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * This @RestController handles CRUD for PatientEntity.
@@ -43,7 +43,7 @@ public class PatientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PatientDTO>> patients() {
+    public ResponseEntity<Set<PatientDTO>> patients() {
         return ResponseEntity.ok(patientService.getAllPatientsToDTO());
     }
 

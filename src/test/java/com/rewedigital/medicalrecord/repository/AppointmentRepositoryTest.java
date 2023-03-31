@@ -53,19 +53,6 @@ class AppointmentRepositoryTest {
     }
 
     private void initDb() {
-        // Init SpecialtyEntity
-        SpecialtyEntity specialty = new SpecialtyEntity();
-        ReflectionTestUtils.setField(specialty, "name", "SURGERY");
-        ReflectionTestUtils.setField(specialty, "deleted", Boolean.FALSE);
-
-        SpecialtyEntity specialtyEntity = testEntityManager.persistAndFlush(specialty);
-
-        SpecialtyEntity specialtySoftDeleted = new SpecialtyEntity();
-        ReflectionTestUtils.setField(specialtySoftDeleted, "name", "CARDIOLOGY");
-        ReflectionTestUtils.setField(specialtySoftDeleted, "deleted", Boolean.TRUE);
-
-        SpecialtyEntity specialtyEntitySoftDeleted = testEntityManager.persistAndFlush(specialtySoftDeleted);
-
         // Init Doctors
         DoctorEntity doctor = new DoctorEntity();
         ReflectionTestUtils.setField(doctor, "uic", "0001");

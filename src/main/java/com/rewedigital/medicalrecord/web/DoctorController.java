@@ -17,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -86,11 +85,6 @@ public class DoctorController {
     ) {
         doctorService.delete(uic);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/gp")
-    public ResponseEntity<List<DoctorDTO>> doctorsGp() {
-        return null;
     }
 
 }

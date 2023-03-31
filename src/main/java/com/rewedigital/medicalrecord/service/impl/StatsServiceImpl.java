@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * This @Service acts as a binding or orchestration of all other relevant or needed services
@@ -30,12 +30,12 @@ public class StatsServiceImpl implements StatsService {
     private final DiagnoseService diagnoseService;
 
     @Override
-    public List<PatientDTO> getAllPatientsCurrentlyInsured() {
+    public Set<PatientDTO> getAllPatientsCurrentlyInsured() {
         return patientService.getAllPatientsCurrentlyInsured();
     }
 
     @Override
-    public List<PatientDTO> getAllPatientsCurrentlyNotInsured() {
+    public Set<PatientDTO> getAllPatientsCurrentlyNotInsured() {
         return patientService.getAllPatientsCurrentlyNotInsured();
     }
 
