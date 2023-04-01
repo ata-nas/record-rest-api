@@ -92,6 +92,7 @@ class PatientServiceTest {
         assertThatExceptionOfType(NoSuchPatientEntityFoundException.class)
                 .isThrownBy(() -> toTest.getByUicToDTO("wrong value"));
     }
+
     @Test
     public void testGetAll_ReturnsCollectionWithAllPatient() {
         when(patientRepository.findAllByDeletedFalse())
