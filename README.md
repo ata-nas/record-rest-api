@@ -98,6 +98,6 @@ descendent of `DoctorEntity`.
 things are static in nature and would probably not be used by end user. If mistake is made, we can delete and create again.
 
 (DEPRECATED BELOW)
-- HealthcareAgency is initialized with the `data.sql`script to be id - 1 and fee 100.00, country - `BULGARIA`, there is no
+- HealthcareAgency is initialized with the `test_data.sql`script to be id - 1 and fee 100.00, country - `BULGARIA`, there is no
 functionality to add or delete this , since we consider that this entity is only one and will always exist to keep
 info for our domain.

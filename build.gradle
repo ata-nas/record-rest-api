@@ -39,7 +39,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
-    testImplementation 'com.h2database:h2'
+    testImplementation 'org.hsqldb:hsqldb'
 }
 
 tasks.named('test') {
