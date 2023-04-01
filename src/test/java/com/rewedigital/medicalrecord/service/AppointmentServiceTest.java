@@ -33,7 +33,7 @@ class AppointmentServiceTest {
 
     @Mock
     private AppointmentRepository appointmentRepository;
-    @Spy
+    @Mock
     private AppointmentMapperImpl appointmentMapper;
 
     @InjectMocks
@@ -66,12 +66,18 @@ class AppointmentServiceTest {
     }
 
     @Test
-    public void testGetByUicToDTO_ReturnsAppointmentEntity() {
+    public void testGetByUicToDTO_ReturnsAppointmentDTO() {
         AppointmentEntity expected = new AppointmentEntity();
         ReflectionTestUtils.setField(expected,"uic", "1");
 
+        AppointmentDTO appointmentDTO = new AppointmentDTO();
+        ReflectionTestUtils.setField(appointmentDTO,"uic", "1");
+
         when(appointmentRepository.findByUic("1"))
                 .thenReturn(Optional.of(expected));
+
+        when(appointmentMapper.toDTO(appointmentRepository.findByUic("1").get()))
+                .thenReturn(appointmentDTO);
 
         AppointmentDTO actual = toTest.getByUicToDTO("1");
 
@@ -109,6 +115,9 @@ class AppointmentServiceTest {
         when(appointmentRepository.findAll())
                 .thenReturn(List.of(new AppointmentEntity()));
 
+        when(appointmentMapper.allToDTO(appointmentRepository.findAll()))
+                .thenReturn(List.of(new AppointmentDTO()));
+
         List<AppointmentDTO> actual = toTest.getAllToDTO();
 
         assertThatCollection(actual).isNotNull();
@@ -135,13 +144,13 @@ class AppointmentServiceTest {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
         ReflectionTestUtils.setField(appointmentDTO,"uic", "1");
 
-        when(appointmentMapper.toEntity(any(CreateAppointmentDTO.class)))
+        when(appointmentMapper.toEntity(createAppointmentDTO))
                 .thenReturn(appointmentEntity);
 
-        when(appointmentRepository.save(any(AppointmentEntity.class)))
+        when(appointmentRepository.save(appointmentMapper.toEntity(createAppointmentDTO)))
                 .then(AdditionalAnswers.returnsFirstArg());
 
-        when(appointmentMapper.toDTO(any(AppointmentEntity.class)))
+        when(appointmentMapper.toDTO(appointmentRepository.save(appointmentMapper.toEntity(createAppointmentDTO))))
                 .thenReturn(appointmentDTO);
 
         AppointmentDTO actual = toTest.create(createAppointmentDTO);
@@ -161,17 +170,17 @@ class AppointmentServiceTest {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
         ReflectionTestUtils.setField(appointmentDTO,"description", "test");
 
-        when(appointmentMapper.toEntity(any(UpdateAppointmentDTO.class), any(AppointmentEntity.class)))
-                .thenReturn(appointmentEntity);
-
-        when(appointmentRepository.save(any(AppointmentEntity.class)))
-                .then(AdditionalAnswers.returnsFirstArg());
-
-        when(appointmentMapper.toDTO(any(AppointmentEntity.class)))
-                .thenReturn(appointmentDTO);
-
         when(appointmentRepository.findByUic("1"))
                 .thenReturn(Optional.of(appointmentEntity));
+
+        when(appointmentMapper.toEntity(updateAppointmentDTO, appointmentRepository.findByUic("1").get()))
+                .thenReturn(appointmentEntity);
+
+        when(appointmentRepository.save(appointmentMapper.toEntity(updateAppointmentDTO, appointmentEntity)))
+                .then(AdditionalAnswers.returnsFirstArg());
+
+        when(appointmentMapper.toDTO(appointmentRepository.save(appointmentMapper.toEntity(updateAppointmentDTO, appointmentEntity))))
+                .thenReturn(appointmentDTO);
 
         AppointmentDTO actual = toTest.update("1", updateAppointmentDTO);
 
@@ -199,7 +208,7 @@ class AppointmentServiceTest {
         when(appointmentRepository.getTotalIncome())
                 .thenReturn(BigDecimal.TEN);
 
-        when(appointmentMapper.toDTO(any(BigDecimal.class)))
+        when(appointmentMapper.toDTO(appointmentRepository.getTotalIncome()))
                 .thenReturn(totalIncomeDTO);
 
         TotalIncomeDTO actual = toTest.getTotalIncome();
