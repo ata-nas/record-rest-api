@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RequiredArgsConstructor
 public class AppExceptionHandler {
 
-    private final FieldErrorMapper objectErrorMapper;
+    private final FieldErrorMapper fieldErrorMapper;
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
@@ -40,7 +40,7 @@ public class AppExceptionHandler {
                 HttpStatus.BAD_REQUEST,
                 e.getFieldErrors()
                         .stream()
-                        .map(objectErrorMapper::toDTO)
+                        .map(fieldErrorMapper::toDTO)
                         .toList()
         );
     }
