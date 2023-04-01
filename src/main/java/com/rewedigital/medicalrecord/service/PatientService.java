@@ -8,24 +8,23 @@ import com.rewedigital.medicalrecord.model.dto.stats.PercentageInsuredPatientDTO
 import com.rewedigital.medicalrecord.model.dto.patient.UpdatePatientDTO;
 import com.rewedigital.medicalrecord.model.entity.PatientEntity;
 
-import java.util.List;
 import java.util.Set;
 
 public interface PatientService {
 
-    PatientEntity getPatientByUic(String uic);
+    PatientEntity getByUic(String uic);
 
-    PatientDTO getPatientByUicToDTO(String uic);
+    PatientDTO getByUicToDTO(String uic);
 
-    Set<PatientEntity> getAllPatients();
+    Set<PatientEntity> getAll();
 
-    Set<PatientDTO> getAllPatientsToDTO();
+    Set<PatientDTO> getAllToDTO();
 
-    PatientDTO createPatient(CreatePatientDTO createPatientDTO);
+    PatientDTO create(CreatePatientDTO createPatientDTO);
 
-    PatientDTO updatePatient(String uic, UpdatePatientDTO updatePatientDTO);
+    PatientDTO update(String uic, UpdatePatientDTO updatePatientDTO);
 
-    void deletePatientByUic(String uic);
+    void delete(String uic);
 
     Set<PatientDTO> getAllPatientsCurrentlyInsured();
 

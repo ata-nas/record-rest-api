@@ -42,7 +42,7 @@ public class SpecialtyController {
 
     @GetMapping
     public ResponseEntity<Set<SpecialtyDTO>> specialty() {
-        return ResponseEntity.ok(specialtyService.getAllSpecialtiesToDTO());
+        return ResponseEntity.ok(specialtyService.getAllToDTO());
     }
 
     @PostMapping

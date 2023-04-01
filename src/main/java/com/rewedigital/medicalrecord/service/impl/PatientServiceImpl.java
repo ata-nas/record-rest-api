@@ -32,18 +32,18 @@ public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
 
     @Override
-    public PatientEntity getPatientByUic(String uic) {
+    public PatientEntity getByUic(String uic) {
         return patientRepository.findByUicAndDeletedFalse(uic)
                 .orElseThrow(() -> new NoSuchPatientEntityFoundException("uic", uic));
     }
 
     @Override
-    public PatientDTO getPatientByUicToDTO(String uic) {
-        return patientMapper.toDTO(getPatientByUic(uic));
+    public PatientDTO getByUicToDTO(String uic) {
+        return patientMapper.toDTO(getByUic(uic));
     }
 
     @Override
-    public Set<PatientEntity> getAllPatients() {
+    public Set<PatientEntity> getAll() {
         Set<PatientEntity> all = patientRepository.findAllByDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchPatientEntityFoundException("No Patients found!");
@@ -52,15 +52,15 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Set<PatientDTO> getAllPatientsToDTO() {
-        return patientMapper.allToDTO(getAllPatients());
+    public Set<PatientDTO> getAllToDTO() {
+        return patientMapper.allToDTO(getAll());
     }
 
     @Override
-    public PatientDTO createPatient(CreatePatientDTO createPatientDTO) {
+    public PatientDTO create(CreatePatientDTO createPatientDTO) {
         if (patientRepository.findByUic(createPatientDTO.getUic()).isPresent()) {
             patientRepository.softCreate(createPatientDTO.getUic());
-            return updatePatient(createPatientDTO.getUic(), patientMapper.toDTO(createPatientDTO));
+            return update(createPatientDTO.getUic(), patientMapper.toDTO(createPatientDTO));
         }
         return patientMapper.toDTO(
                 patientRepository.save(
@@ -70,14 +70,14 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public PatientDTO updatePatient(String uic, UpdatePatientDTO updatePatientDTO) {
+    public PatientDTO update(String uic, UpdatePatientDTO updatePatientDTO) {
         return patientMapper.toDTO(
-                patientRepository.save(patientMapper.toEntity(updatePatientDTO, getPatientByUic(uic)))
+                patientRepository.save(patientMapper.toEntity(updatePatientDTO, getByUic(uic)))
         );
     }
 
     @Override
-    public void deletePatientByUic(String uic) {
+    public void delete(String uic) {
         patientRepository.softDelete(uic);
     }
 

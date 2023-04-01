@@ -34,7 +34,7 @@ public class PricingHistoryController {
 
     @GetMapping
     public ResponseEntity<List<PricingHistoryDTO>> pricingHistory() {
-        return ResponseEntity.ok(pricingHistoryService.getAllPricingToDTO());
+        return ResponseEntity.ok(pricingHistoryService.getAllToDTO());
     }
 
     @PostMapping
@@ -52,7 +52,7 @@ public class PricingHistoryController {
                                 .path("/" + createPricingHistoryDTO.getIssueNo())
                                 .build().toUri()
                 )
-                .body(pricingHistoryService.createPricing(createPricingHistoryDTO));
+                .body(pricingHistoryService.create(createPricingHistoryDTO));
     }
 
     @PutMapping("/{issueNo}")
@@ -63,7 +63,7 @@ public class PricingHistoryController {
             String issueNo,
             @RequestBody @Valid UpdatePricingHistoryDTO updatePricingHistoryDTO
     ) {
-        return ResponseEntity.ok(pricingHistoryService.updatePricing(issueNo, updatePricingHistoryDTO));
+        return ResponseEntity.ok(pricingHistoryService.update(issueNo, updatePricingHistoryDTO));
     }
 
 }

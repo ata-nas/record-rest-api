@@ -26,13 +26,13 @@ public class PricingHistoryServiceImpl implements PricingHistoryService {
     private final PricingHistoryMapper pricingHistoryMapper;
 
     @Override
-    public PricingHistoryEntity getPricingByIssueNo(String issueNo) {
+    public PricingHistoryEntity getByIssueNo(String issueNo) {
         return pricingHistoryRepository.findByIssueNo(issueNo)
                 .orElseThrow(() -> new NoSuchPricingHistoryEntityFoundException("issueNo", issueNo));
     }
 
     @Override
-    public List<PricingHistoryEntity> getAllPricing() {
+    public List<PricingHistoryEntity> getAll() {
         List<PricingHistoryEntity> all = pricingHistoryRepository.findAll();
         if (all.isEmpty()) {
             throw new NoSuchPricingHistoryEntityFoundException("No Pricing History found!");
@@ -41,12 +41,12 @@ public class PricingHistoryServiceImpl implements PricingHistoryService {
     }
 
     @Override
-    public List<PricingHistoryDTO> getAllPricingToDTO() {
-        return pricingHistoryMapper.allToDTO(getAllPricing());
+    public List<PricingHistoryDTO> getAllToDTO() {
+        return pricingHistoryMapper.allToDTO(getAll());
     }
 
     @Override
-    public PricingHistoryDTO createPricing(CreatePricingHistoryDTO createPricingHistoryDTO) {
+    public PricingHistoryDTO create(CreatePricingHistoryDTO createPricingHistoryDTO) {
         return pricingHistoryMapper.toDTO(
                 pricingHistoryRepository.save(
                         pricingHistoryMapper.toEntity(createPricingHistoryDTO)
@@ -55,10 +55,10 @@ public class PricingHistoryServiceImpl implements PricingHistoryService {
     }
 
     @Override
-    public PricingHistoryDTO updatePricing(String issueNo, UpdatePricingHistoryDTO updatePricingHistoryDTO) {
+    public PricingHistoryDTO update(String issueNo, UpdatePricingHistoryDTO updatePricingHistoryDTO) {
         return pricingHistoryMapper.toDTO(
                 pricingHistoryRepository.save(
-                        pricingHistoryMapper.update(updatePricingHistoryDTO, getPricingByIssueNo(issueNo))
+                        pricingHistoryMapper.toEntity(updatePricingHistoryDTO, getByIssueNo(issueNo))
                 )
         );
     }

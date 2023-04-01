@@ -34,9 +34,9 @@ import static org.mockito.MockitoAnnotations.openMocks;
 @ExtendWith(MockitoExtension.class)
 class DiagnoseServiceTest {
 
-
     @Mock
     private DiagnoseRepository diagnoseRepository;
+
     @Mock
     private DiagnoseMapper diagnoseMapper;
 

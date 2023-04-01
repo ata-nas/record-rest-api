@@ -39,12 +39,12 @@ public class PatientController {
             @ExistingPatientUicValidation(message = "Illegal path! Patient with given {uic} does not exist!")
             String uic
     ) {
-        return ResponseEntity.ok(patientService.getPatientByUicToDTO(uic));
+        return ResponseEntity.ok(patientService.getByUicToDTO(uic));
     }
 
     @GetMapping
     public ResponseEntity<Set<PatientDTO>> patients() {
-        return ResponseEntity.ok(patientService.getAllPatientsToDTO());
+        return ResponseEntity.ok(patientService.getAllToDTO());
     }
 
     @PostMapping
@@ -62,7 +62,7 @@ public class PatientController {
                                 .path("/" + createPatientDTO.getUic().toLowerCase())
                                 .build().toUri()
                 )
-                .body(patientService.createPatient(createPatientDTO));
+                .body(patientService.create(createPatientDTO));
     }
 
     @PutMapping("/{uic}")
@@ -73,7 +73,7 @@ public class PatientController {
             String uic,
             @RequestBody @Valid UpdatePatientDTO updatePatientDTO
     ) {
-        return ResponseEntity.ok(patientService.updatePatient(uic, updatePatientDTO));
+        return ResponseEntity.ok(patientService.update(uic, updatePatientDTO));
     }
 
     @DeleteMapping("/{uic}")
@@ -83,7 +83,7 @@ public class PatientController {
             @ExistingPatientUicValidation(message = "Illegal path! Patient with given {uic} does not exist!")
             String uic
     ) {
-        patientService.deletePatientByUic(uic);
+        patientService.delete(uic);
         return ResponseEntity.noContent().build();
     }
 

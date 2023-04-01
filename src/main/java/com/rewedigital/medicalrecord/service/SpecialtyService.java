@@ -12,9 +12,9 @@ public interface SpecialtyService {
 
     SpecialtyDTO getByNameToDTO(String name);
 
-    Set<SpecialtyEntity> getAllSpecialties();
+    Set<SpecialtyEntity> getAll();
 
-    Set<SpecialtyDTO> getAllSpecialtiesToDTO();
+    Set<SpecialtyDTO> getAllToDTO();
 
     SpecialtyDTO create(CreateSpecialtyDTO createSpecialtyDTO);
 

@@ -36,7 +36,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Set<SpecialtyEntity> getAllSpecialties() {
+    public Set<SpecialtyEntity> getAll() {
         Set<SpecialtyEntity> all = specialtyRepository.findAllByDeletedFalse();
         if (all.isEmpty()) {
             throw new NoSuchSpecialtyEntityFoundException("No Specialties found!");
@@ -45,8 +45,8 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Set<SpecialtyDTO> getAllSpecialtiesToDTO() {
-        return specialtyMapper.allToDTO(getAllSpecialties());
+    public Set<SpecialtyDTO> getAllToDTO() {
+        return specialtyMapper.allToDTO(getAll());
     }
 
     @Override

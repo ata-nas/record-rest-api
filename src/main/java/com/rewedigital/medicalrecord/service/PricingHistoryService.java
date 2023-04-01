@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface PricingHistoryService {
 
-    PricingHistoryEntity getPricingByIssueNo(String issueNo);
+    PricingHistoryEntity getByIssueNo(String issueNo);
 
-    List<PricingHistoryEntity> getAllPricing();
+    List<PricingHistoryEntity> getAll();
 
-    List<PricingHistoryDTO> getAllPricingToDTO();
+    List<PricingHistoryDTO> getAllToDTO();
 
-    PricingHistoryDTO createPricing(CreatePricingHistoryDTO createPricingHistoryDTO);
+    PricingHistoryDTO create(CreatePricingHistoryDTO createPricingHistoryDTO);
 
-    PricingHistoryDTO updatePricing(String issueNo, UpdatePricingHistoryDTO updatePricingHistoryDTO);
+    PricingHistoryDTO update(String issueNo, UpdatePricingHistoryDTO updatePricingHistoryDTO);
 
 }
