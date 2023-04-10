@@ -1,12 +1,5 @@
 # README for MedicalRecord by Atanas Atanasov
 
-First off, a BIG thanks to you Hristina! You are absolutely amazing and this experience was great for me. Will be remembered
-and cherished deeply!
-
-Note: This was actually WAY longer than this, like 5 times, but with finalizing the project, I realize how much has changed
-and now a lot of things here are removed which is cool! My code became really self-explainatory (at least to me it is)
-and I do not feel the need to be endlessly expressive for every detail.
-
 ## Task:
 
 Create REST API to handle the processes that concern patients' visits to doctors
