@@ -69,25 +69,21 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorDTO create(CreateDoctorDTO createDoctorDTO) {
+        if (doctorRepository.findByUic(createDoctorDTO.getUic()).isPresent()) {
+            doctorRepository.softCreate(createDoctorDTO.getUic());
+            return update(createDoctorDTO.getUic(), doctorMapper.toDTO(createDoctorDTO));
+        }
         return createDoctorDTO.isGp() ?
                 createNewDoctorGp(createDoctorDTO) : createNewDoctor(createDoctorDTO);
     }
 
     private DoctorDTO createNewDoctor(CreateDoctorDTO createDoctorDTO) {
-        if (doctorRepository.findByUic(createDoctorDTO.getUic()).isPresent()) {
-            doctorRepository.softCreate(createDoctorDTO.getUic());
-            return updateDoctor(createDoctorDTO.getUic(), doctorMapper.toDTO(createDoctorDTO));
-        }
         return doctorMapper.toDTO(
                 doctorRepository.save(doctorMapper.toEntity(createDoctorDTO))
         );
     }
 
     private DoctorDTO createNewDoctorGp(CreateDoctorDTO createDoctorDTO) {
-        if (gpRepository.findByUic(createDoctorDTO.getUic()).isPresent()) {
-            doctorRepository.softCreate(createDoctorDTO.getUic());
-            return updateDoctorGp(createDoctorDTO.getUic(), doctorMapper.toDTO(createDoctorDTO));
-        }
         return doctorMapper.toDTO(
                 doctorRepository.save(doctorMapper.toEntityGp(createDoctorDTO))
         );
@@ -95,28 +91,11 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorDTO update(String uic, UpdateDoctorDTO updateDoctorDTO) {
-        return doctorIsGp(uic) ?
-                updateDoctorGp(uic, updateDoctorDTO) : updateDoctor(uic, updateDoctorDTO);
-    }
-
-    private DoctorDTO updateDoctor(String uic, UpdateDoctorDTO updateDoctorDTO) {
         return doctorMapper.toDTO(
                 doctorRepository.save(
                         doctorMapper.toEntity(updateDoctorDTO, getByUic(uic))
                 )
         );
-    }
-
-    private DoctorDTO updateDoctorGp(String uic, UpdateDoctorDTO updateDoctorDTO) {
-        return doctorMapper.toDTO(
-                doctorRepository.save(
-                        doctorMapper.toEntityGp(updateDoctorDTO, getByUicGp(uic))
-                )
-        );
-    }
-
-    private boolean doctorIsGp(String uic) {
-        return gpRepository.findByUicAndDeletedFalse(uic).isPresent();
     }
 
     @Override

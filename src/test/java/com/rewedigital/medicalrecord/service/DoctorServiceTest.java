@@ -176,9 +176,6 @@ class DoctorServiceTest {
         DoctorDTO doctorDTO = new DoctorDTO();
         ReflectionTestUtils.setField(doctorDTO, "name", "test");
 
-        when(gpRepository.findByUicAndDeletedFalse("1"))
-                .thenReturn(Optional.empty());
-
         when(doctorRepository.findByUicAndDeletedFalse("1"))
                 .thenReturn(Optional.of(doctorEntity));
 
